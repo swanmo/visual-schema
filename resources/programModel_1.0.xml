@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2012 rel. 2 sp1 (x64) (http://www.altova.com) by 
+	Mathias Malmberg (Jordbruksverket) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://integration.sjv.se/hanteraprogram/programinfo/model/program_1.0"
+	targetNamespace="http://integration.sjv.se/hanteraprogram/programinfo/model/program_1.0"
+	elementFormDefault="qualified">
+	<xs:element name="atgardList">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="tns:atgard" minOccurs="0" maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="atgard" type="tns:atgardType" />
+	<xs:complexType name="atgardType">
+		<xs:complexContent>
+			<xs:extension base="tns:grunddataType">
+				<xs:sequence>
+					<xs:element name="program">
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:extension base="tns:grunddataBasType">
+									<xs:sequence />
+								</xs:extension>
+							</xs:complexContent>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="delatgardList">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="delatgard" type="tns:delatgardType"
+									minOccurs="1" maxOccurs="unbounded" />
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="delatgardType">
+		<xs:complexContent>
+			<xs:extension base="tns:grunddataType">
+				<xs:sequence>
+					<xs:element name="fokusomradenList">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="fokusomradekod" type="xs:string"
+									minOccurs="0" maxOccurs="unbounded" />
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="insatstypList">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="insatstyp" type="tns:insatstypType"
+									minOccurs="1" maxOccurs="unbounded" />
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="insatstypType">
+		<xs:complexContent>
+			<xs:extension base="tns:grunddataType">
+				<xs:sequence>
+					<xs:element name="fokusomradekod" type="xs:string"
+						minOccurs="1" maxOccurs="1" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="fokusomraden" type="tns:fokusomradenType" />
+	<xs:complexType name="fokusomradenType">
+		<xs:sequence>
+			<xs:element name="fokusomradenList">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="fokusomrade" type="tns:fokusomradeType"
+							minOccurs="0" maxOccurs="unbounded" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="fokusomradeType">
+		<xs:complexContent>
+			<xs:extension base="tns:grunddataType">
+				<xs:sequence>
+					<xs:element name="program">
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:extension base="tns:grunddataBasType">
+									<xs:sequence />
+								</xs:extension>
+							</xs:complexContent>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="delatgardList">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="delatgardkod" type="xs:string"
+									minOccurs="0" maxOccurs="unbounded" />
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="insatstypList">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="insatstypkod" type="xs:string"
+									minOccurs="0" maxOccurs="unbounded" />
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="prioritet">
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:extension base="tns:grunddataBasType">
+									<xs:sequence>
+										<xs:element name="program">
+											<xs:complexType>
+												<xs:complexContent>
+													<xs:extension base="tns:grunddataBasType">
+														<xs:sequence />
+													</xs:extension>
+												</xs:complexContent>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:extension>
+							</xs:complexContent>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="kategoriList">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="tns:kategori" minOccurs="0" maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="kategori" type="tns:kategoriType" />
+	<xs:complexType name="foralderkategoriType">
+		<xs:complexContent>
+			<xs:extension base="tns:grunddataType">
+				<xs:sequence>
+					<xs:element name="sokord" type="xs:string" minOccurs="0" />
+					<xs:element ref="tns:kategorityp" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="kategoriType">
+		<xs:complexContent>
+			<xs:extension base="tns:grunddataType">
+				<xs:sequence>
+					<xs:element name="sokord" type="xs:string" minOccurs="0" />
+					<xs:element ref="tns:kategorityp" />
+					<xs:element ref="tns:insatsuppfoljning" />
+					<xs:element name="foralderkategori" type="tns:foralderkategoriType"
+						minOccurs="0" />
+					<xs:element name="underkategoriList">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element ref="tns:kategori" minOccurs="0"
+									maxOccurs="unbounded" />
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="kategoriseradInsatsList">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element ref="tns:kategoriseradInsats" minOccurs="0"
+									maxOccurs="unbounded" />
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="kategoriseradInsats" type="tns:kategoriseradInsatsType" />
+	<xs:complexType name="kategoriseradInsatsType">
+		<xs:complexContent>
+			<xs:extension base="tns:grunddataType">
+				<xs:sequence>
+					<xs:element name="insatstypkod" type="xs:string"
+						minOccurs="1" maxOccurs="1" />
+					<xs:element name="kategorikod" type="xs:string"
+						minOccurs="1" maxOccurs="1" />
+					<xs:element ref="tns:insatsuppfoljning" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="kategorityp" type="tns:kategoritypType" />
+	<xs:complexType name="kategoritypType">
+		<xs:complexContent>
+			<xs:extension base="tns:grunddataBasType">
+				<xs:sequence>
+					<xs:element name="beskrivning" type="xs:string"
+						minOccurs="0" />
+					<xs:element name="sokord" type="xs:string" minOccurs="0" />
+					<xs:element name="niva" type="xs:int" minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="insatsuppfoljning" type="tns:insatsuppfoljningType" />
+	<xs:complexType name="insatsuppfoljningType">
+		<xs:complexContent>
+			<xs:extension base="tns:grunddataType">
+				<xs:sequence />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="grunddataType">
+		<xs:complexContent>
+			<xs:extension base="tns:grunddataBasType">
+				<xs:sequence>
+					<xs:element name="from" type="xs:date" />
+					<xs:element name="tom" type="xs:date" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="grunddataBasType">
+		<xs:sequence>
+			<xs:element name="kod" type="xs:string" />
+			<xs:element name="namn" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
