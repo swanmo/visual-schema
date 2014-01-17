@@ -15,18 +15,20 @@ requirejs.config({
     }
 });
 
-define(['parser', 'model', 'stroller', 'root', 'domsetup', 'xmlSource', 'linker', 'jquery.bootstrap'], function (p, model, stroller, root, domSetup, xmlSource, linker, bootstrap) {
-
-    linker.init(['xs'], ['tns']);     //TODO
-
-    p.parse(xmlSource.getXml());
-
-    linker.link(model.roots);
-    var domElem = stroller.render(model.roots, root);
-
-    domElem.appendTo(root);
-
+define(['domsetup','jquery.bootstrap'],
+function (domSetup, bootstrap) {
     domSetup.setup();
+
+    // linker.init(['xs'], ['tns']);     //TODO
+
+    // p.parse(xmlSource.getXml());
+
+    // linker.link(model.roots);
+    // var domElem = stroller.render(model.roots, root);
+
+    // domElem.appendTo(root);
+
+    // domSetup.setup();
 });
 
 

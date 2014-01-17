@@ -25,7 +25,7 @@
       </div>
 
       <form role="form">
-      <div class="row">
+      <div class="row" id="inputRow">
         <div class="col-sm-12 col-lg-9">
             <div class="form-group">
               <label for="xsdContent">XSD content here</label>
@@ -35,7 +35,11 @@
       </div>
       <div class="row">
         <div class="col-sm-12 col-lg-9" >
-          <button type="submit" class="pull-right btn btn-primary" style="background-color:black"><span class="glyphicon glyphicon-list"></span> Show!</button>
+          <button type="button" id="showXsd" class="pull-right btn btn-primary" style="background-color:black">
+            <span class="glyphicon glyphicon-list"></span> Show!</button>
+
+          <button type="button" id="back" class="pull-right btn btn-primary" style="background-color:black">Back
+          </button>
         </div>
       </div>
     </form>
