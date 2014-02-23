@@ -29,7 +29,7 @@ define(['jquery', 'simpleNodeRenderer'], function($, renderer) {
 				listEntry.append(childrenContainer);
 				console.log("linked");
 
-				this.renderElem(entry.linkedEntry, childrenContainer);	
+				// this.renderElem(entry.linkedEntry, childrenContainer);	
 			}
 		}
 	};

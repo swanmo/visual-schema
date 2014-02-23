@@ -1,6 +1,6 @@
 define(['linker', 'entry'], function(sut, Entry) {
     describe("Linker", function() {
-		var fabricateElement = function(_xsPrefix, _xsName, _name, _type, _ref) {
+		var fabricateElement = function(_xsPrefix, _xsName, _name, _type, _ref, _base) {
 			return {
 				prefix: _xsPrefix,
         		name: _xsName,
@@ -11,7 +11,8 @@ define(['linker', 'entry'], function(sut, Entry) {
         			type: _type,
         			minOccurs: null,
         			maxOccurs: null,
-        			ref: _ref
+        			ref: _ref,
+                    base:_base
 				}
 			};
 		}
@@ -21,7 +22,8 @@ define(['linker', 'entry'], function(sut, Entry) {
 			return {
 				roots: [
 					fabricateElement("x", "element", "test", "testType", null),
-					fabricateElement("x", "complexType", "testType", null, null)
+					fabricateElement("x", "complexType", "testType", null, null),
+                    fabricateElement("x", "complexType", "anotherType", null, null)
 				]
 			};
     	};
@@ -37,8 +39,17 @@ define(['linker', 'entry'], function(sut, Entry) {
             x.roots[0].children.push(x1);
             var x1a = fabricateElement("xs", "sequence", null, null, null);
             x1.children.push(x1a);
+
             var elemWitRef = fabricateElement("xs", "element", "test", "tns:testType", null);
             x1a.children.push(elemWitRef);
+            var elemWitNestedExtension = fabricateElement("xs", "element", "testX", null, null);
+            x1a.children.push(elemWitNestedExtension);
+            var elemWitNestedExtensionCT = fabricateElement("xs", "complexType", null, null, null);
+            elemWitNestedExtension.children.push(elemWitNestedExtensionCT);
+            var elemWitNestedExtensionCC = fabricateElement("xs", "complexContent", null, null, null);
+            elemWitNestedExtensionCT.children.push(elemWitNestedExtensionCC);
+            var elemWitNestedExtensionCC = fabricateElement("xs", "extension", null, null, null);
+            elemWitNestedExtensionCT.children.push(elemWitNestedExtensionCC);
             return x;
         };
 
@@ -67,6 +78,7 @@ define(['linker', 'entry'], function(sut, Entry) {
             var model = fabricateModelWithNs();
             sut.init([], ["tns"]);
             sut.link(model.roots);
+            //           roots[0].children[0=x1].children[0=x1a].children[0..1]
             expect(model.roots[0].children[0].children[0].children[0].linkedEntry).toBe(model.roots[1]);
         });
 

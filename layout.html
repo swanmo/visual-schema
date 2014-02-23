@@ -4,8 +4,10 @@
     <meta charset="utf-8">
     <title>XML parse</title>
 	<link rel="stylesheet" type="text/css" href="resources/css/client-layout.css">
-
+  <script data-main="src/main-layout.js" src="lib/require.js"></script>
   </head>
+
+
 
   <body>
   	<h1>Sample layout</h1>
@@ -13,7 +15,7 @@
 
      <div class="xsd">
         <div>
-          <span>atgardType (complexType)</span>
+          <span><span class="badge">CT</span>atgardType (complexType)</span>
         </div>
 
         <div>
@@ -21,21 +23,59 @@
         </div>
 
         <div class="collapser">
-            +
+            -
         </div>
         
         <div class="marker">
-              <div><span>firstname (string)</span></div>
-              <div><span>lastname (string)</span></div>
-              <div><span>age (int)</span></div>
+              <div><span><span class="badge">E</span>firstname (string)</span></div>
+              <div><span><span class="badge">E</span>lastname (string)</span></div>
+              <div class="optional"><span><span class="badge">E</span>age (int)</span></div>
               <div class="xsd">
-                <span>trashType (complexType)</span>
+                <span><span class="badge">CT</span>trashType</span>
                 <div>
                     <span>...</span>
                 </div>
+                <div class="collapser">
+                  -
+              </div>
                 <div class="marker">
-                  <div>employer (string)</div>
-                  <div>employmentYears (int)</div>
+                  <div><span><span class="badge">E</span>employer <span>(string)</span></span></div>
+                  <div><span><span class="badge">E</span>employmentYears <span>(int)</span></span></div>
+                </div>
+
+              </div>
+        </div>
+      </div>
+
+
+       <div class="xsd">
+        <div>
+          <span><span class="badge">CT</span>atgardType (complexType)</span>
+        </div>
+
+        <div>
+            <span>...</span>
+        </div>
+
+        <div class="collapser">
+            -
+        </div>
+        
+        <div class="marker">
+              <div><span><span class="badge">E</span>firstname (string)</span></div>
+              <div><span><span class="badge">E</span>lastname (string)</span></div>
+              <div class="optional"><span><span class="badge">E</span>age (int)</span></div>
+              <div class="xsd bordered">
+                <span><span class="badge">CT</span>trashType</span>
+                <div>
+                    <span>...</span>
+                </div>
+                <div class="collapser">
+                  -
+              </div>
+                <div class="marker">
+                  <div><span><span class="badge">E</span>employer <span>(string)</span></span></div>
+                  <div><span><span class="badge">E</span>employmentYears <span>(int)</span></span></div>
                 </div>
 
               </div>

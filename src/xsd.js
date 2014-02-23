@@ -8,6 +8,7 @@ function (p,	   model,   stroller,   root,   linker) {
 		    p.parse(xsdValue);
 
 		    linker.link(model.roots);
+		    
 		    var domElem = stroller.render(model.roots, root);
 
 		    domElem.appendTo(root);

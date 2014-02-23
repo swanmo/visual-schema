@@ -20,13 +20,15 @@ define(['jquery'], function($) {
 				listEntry.append($('<span title="extension">').text("X").addClass("icon"));
 			}
 
-			console.log("render: " + entry.name);
-
 			if (entry.attrs && entry.attrs.name) {
-				listEntry.append(entry.attrs.name + " " + entry.linkedEntry);	
+				listEntry.append(entry.attrs.name);	
 			} else {
 				listEntry.append($('<span>').text(entry.prefix).addClass("prefix"));
-				listEntry.append(" " + entry.name + " " + entry.linkedEntry);	
+				listEntry.append(" " + entry.name);	
+				
+			}
+			if (entry.linkedEntry) {
+				listEntry.append(" " + entry.linkedEntry + " (" + entry.linkedEntry.attrs.name + ")");	
 			}
 
 			return listEntry;
