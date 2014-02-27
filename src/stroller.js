@@ -1,4 +1,6 @@
 define(['jquery', 'simpleNodeRenderer'], function($, renderer) {
+	var arrOfColors = ["#efefef", "#e7e7e7", "#dfdfdf", "#d7d7d7", "#d0d0d0", "#c7c7c7"];
+	var colorPos = 0;
 	return {
 		render: function(roots) {
 			var rootElem = $('<ul>');
@@ -14,21 +16,25 @@ define(['jquery', 'simpleNodeRenderer'], function($, renderer) {
 			listEntry.appendTo(domParent);
 
 			var childrenContainer = $('<ul>');
-			console.log(entry);
+			
 
 			if (entry.children && entry.children.length > 0) {
 
 				listEntry.append(childrenContainer);
 				for(var i = 0; i < entry.children.length; i++) {
 					this.renderElem(entry.children[i], childrenContainer);
-				}	
-			}
+				}
 
-			if (entry.linkedEntry) {
-				
+			} else if (entry.linkedEntry) {
+				childrenContainer.css("background-color", arrOfColors[(colorPos++) % arrOfColors.length]);
+
 				listEntry.append(childrenContainer);
+				this.renderElem(entry.linkedEntry, childrenContainer);
+				// listEntry.append(childrenContainer);
 				console.log("linked");
-
+				console.log(entry.linkedEntry);
+				console.log("/linked");
+				colorPos--;
 				// this.renderElem(entry.linkedEntry, childrenContainer);	
 			}
 		}
