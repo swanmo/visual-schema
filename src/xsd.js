@@ -1,7 +1,11 @@
-define(['parser', 'model', 'stroller', 'root', 'linker'],
-function (p,	   model,   stroller,   root,   linker) {
+define(['parser', 'model', 'standardRenderer', 'root', 'linker'],
+function (p,	   model,   renderer,   root,   linker) {
 	return {
 		show: function(xsdValue) {
+
+			root.html("parsing...");
+
+			model.clean();
 
 		    linker.init(['xs'], ['tns']);     //TODO
 
@@ -9,9 +13,9 @@ function (p,	   model,   stroller,   root,   linker) {
 
 		    linker.link(model.roots);
 		    
-		    var domElem = stroller.render(model.roots, root);
+		    var domElem = renderer.render(model.roots, root);
 
-		    domElem.appendTo(root);
+			root.html(domElem);
 		}
 	}
 });

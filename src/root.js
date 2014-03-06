@@ -1,3 +1,3 @@
 define(['jquery'], function($) {
-	return $('body');
+	return $('#graph');
 });

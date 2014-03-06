@@ -1,6 +1,9 @@
 define(['entry', 'parseUtils'], function(Entry, parseUtils) {
 	return {
 		roots: [],
+		clean: function() {
+			this.roots = [];
+		},
 		add: function(node, parent) {
 			var tagName = node.nodeName;
 			var e = new Entry(parseUtils.parsePrefix(tagName),

@@ -162,13 +162,22 @@ define(function() {
         '     <xs:complexType>\n' +
         '       <xs:sequence>\n' +
         '         <xs:element name="firstname" type="xs:string"/>\n' +
+        '         <xs:element name="midname" type="xs:string"/>\n' +
         '         <xs:element name="lastname" type="xs:string"/>\n' +
+        
+        '         <xs:complexType name="trash">\n' +
+        '           <xs:sequence>\n' +
+        '             <xs:element name="whatver" type="xs:string"/>\n' +
+        '             <xs:element name="trash" type="xs:int"/>\n' +
+        '          </xs:sequence>\n' +
+        '         </xs:complexType>\n' +
+
         '       </xs:sequence>\n' +
         '     </xs:complexType>\n' +
         '   </xs:element>\n' +
         '</xs:schema>\n';
     return {
-    	getXml:function() {return complexTypeXml},
+    	getXml:function() {return xml},
         getTestXml:function() {return testXml}
     }
 

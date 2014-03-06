@@ -4,7 +4,6 @@ define(['root', 'model'], function (root, model) {
 
 		elements: function(elem, parentEntry) {
 			var me = this;
-			// console.log(elem.nodeName + " (" + elem.nodeType+ ")");
 
 			var entry = model.add(elem, parentEntry);
 

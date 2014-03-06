@@ -4,7 +4,7 @@ define(['jquery', 'xsd', 'init'], function($, xsd, init) {
 			init.setDefaults();
 
 			$("#showXsd").on("click", function() {
-				xsd.show($("#xsdContent").text());
+				xsd.show($("#xsdContent").val());
 				$("#inputRow").slideUp();
 				$(this).hide();
 				$("#back").show();
