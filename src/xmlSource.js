@@ -26,7 +26,10 @@ define(function() {
         '                    <xs:complexType>\n' +
         '                        <xs:complexContent>\n' +
         '                            <xs:extension base="tns:grunddataBasType">\n' +
-        '                                <xs:sequence />\n' +
+        '                                <xs:sequence>\n' +
+        '                                    <xs:element name="sample-01" minOccurs="0" type="xs:string" maxOccurs="unbounded" />\n' +
+        '                                    <xs:element name="sample-02" minOccurs="0" type="xs:string" />\n' +
+        '                                </xs:sequence>\n' +
         '                            </xs:extension>\n' +
         '                        </xs:complexContent>\n' +
         '                    </xs:complexType>\n' +
@@ -177,7 +180,7 @@ define(function() {
         '   </xs:element>\n' +
         '</xs:schema>\n';
     return {
-    	getXml:function() {return xml},
+    	getXml:function() {return complexTypeXml},
         getTestXml:function() {return testXml}
     }
 

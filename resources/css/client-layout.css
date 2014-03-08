@@ -3,7 +3,8 @@ div.xsd {
 	padding:0 !important;
 	margin:0 !important;
 	padding-left:.4em !important;
-	border:1px solid red;
+	border:3px dotted red;
+	display: block !important;
 }
 
 

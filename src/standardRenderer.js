@@ -4,7 +4,7 @@ define(['jquery'], function($) {
 	return {
 		render: function(roots) {
 			var rootElem = $('<div>');
-			rootElem.addClass('xsd');
+			rootElem.addClass('hasBranch');
 
 			for(var i = 0; i < roots.length; i++) {
 				this.renderElem(roots[i], rootElem);
@@ -13,33 +13,37 @@ define(['jquery'], function($) {
 		},
 		markupForNode: function(entry, parent) {
 			var entries = [];
+			var hasBranching = (entry.children && entry.children.length > 1);
 			
 			var $childContainer;
-			if (entry.name=="complexType") {
-				$childContainer = $('<div>').addClass('xsd');
-				$childContainer.appendTo(parent);
+			
+				var desc;
+				if (entry.name=="element") {
+					desc = "E " + entry.attrs.name;
+				} else {
+					if (entry.attrs.name) {
+						desc = entry.attrs.name + ' (' + entry.name + ')';
+					} else {
+						desc = entry.name;
+					}
+
+				}
+
+
+				$childContainer = $('<div>');
+
 				var $div1 = $('<div>');
-				$div1.append($('<span>').text(entry.attrs.name + ' (complexType)'));
-				$div1.appendTo($childContainer);
-			} else if (entry.name=="element") {
-				var $div1 = $('<div>').text('E ' + entry.attrs.name).addClass('optional');
-				// $div1.append($('<span>'));
+				var $span = $('<span>');
+				$div1.append($span);
+				$div1.append($childContainer);
+				if (hasBranching) {
+					$span.text(desc + ":");
+					$childContainer.addClass('hasBranch');
+				} else {
+					$span.text(desc);
+				}
+			
 				$div1.appendTo(parent);
-			} else if (entry.name=="sequence") {
-				
-
-				var $div1 = $('<div>').text('...').css('display', 'inline-block');
-				$div1.appendTo(parent);
-
-				$childContainer = $('<div>').addClass('marker').css('display', 'inline-block');
-				$childContainer.appendTo(parent);
-
-			} else {
-				var $div1 = $('<div>').text(entry.name);
-				// $div1.append($('<span>'));
-				$div1.appendTo(parent);				
-			}
-
 			/*else if (entry.name=="element") {
 				var $div = $('<div>');
 				$div.append($('<span>').text(entry.attrs.name + " (" + entry.attrs.type + ")"));
