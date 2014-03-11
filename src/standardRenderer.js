@@ -31,10 +31,9 @@ define(['jquery'], function($) {
 				var title = "";
 				if (entry.nsMap) {
  					for (var key in entry.nsMap) {
- 						title += key + " = " + entry.nsMap[key];
+ 						title += key + " = " + entry.nsMap[key] + "\n \n";
  					}
 				}
-
 
 				$childContainer = $('<div>');
 
@@ -42,7 +41,7 @@ define(['jquery'], function($) {
 				var $div1 = $('<div>');
 				var $span = $('<span>');
 				$div1.append($span);
-				$div1.attr("title", title);
+				$span.attr("title", title);
 				$div1.append($childContainer);
 				if (hasBranching) {
 					$span.text(desc + ":");

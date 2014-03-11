@@ -2,6 +2,7 @@ define(['root', 'model'], function (root, model) {
 	return {
 		counter: 0,
 		nsPrefix: "xmlns:",
+		defaultSchemaNs: "xmlns",
 		nsQualifier: "http://www.w3.org/2001/XMLSchema",
 		targetNamespace: "targetNamespace",
 
@@ -11,8 +12,10 @@ define(['root', 'model'], function (root, model) {
 			for (var key in attributes) {
 				var val = attributes[key].name;
 				if (val && val.hasOwnProperty(key)) {
-					if (val.substring(0, this.nsPrefix.length) === this.nsPrefix) {
-						var nsQualifier = attributes[key].value;
+					var nsQualifier = attributes[key].value;
+					if (this.defaultSchemaNs == val) {
+						nsMap[val] = nsQualifier;
+					} else if (val.substring(0, this.nsPrefix.length) === this.nsPrefix) {
 						nsMap[val.substring(this.nsPrefix.length)] = nsQualifier;
 					} else if (this.targetNamespace == val){
 						console.log("adding NS: " + val + " (" + nsQualifier + ")");
@@ -44,12 +47,22 @@ define(['root', 'model'], function (root, model) {
 			var xmlDoc = $.parseXML(xml);
 			var $xml = $(xmlDoc);
 			var me = this;
+			var schemaElemTagName = "schema";
 
-			$xml.find("xs\\:schema > *").each( function(){
-				if (this.nodeType != 3) {
+			$xml.children().each(function() {
+				if (this.nodeType != 3 &&
+					this.tagName.indexOf("schema") >= 0) {
+
 					me.elements(this, null);
 				}
-		    });
+				console.log("top-level: " + this.tagName);
+			});
+			/* $xml.find("xs\\:schema > *").each( function(){
+				if (this.nodeType != 3) {
+					console.log("top-level " + $(this))
+					me.elements(this, null);
+				}
+		    });*/
 		}
 	};
 })
