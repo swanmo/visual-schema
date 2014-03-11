@@ -25,11 +25,12 @@ define(function() {
         this.ref = ref;
     };
 
-    var entry = function(prefix, name, node, parent){
+    var entry = function(prefix, name, node, parent, nsMap){
         var attrs = null;
         this.prefix = prefix;
         this.name = name;
         this.parent = parent;
+        this.nsMap = nsMap;
         this.children = [];
         this.linkedEntry = null;
         var $node = $(node);

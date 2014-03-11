@@ -5,10 +5,12 @@ define(['entry'], function(sut) {
         });
 
         it ("should be possible to set all attributes", function() {
-            var s = new sut("a", "b", {}, "p");
+            var nsMap = {};
+            var s = new sut("a", "b", {}, "p", nsMap);
             expect(s.prefix).toEqual("a");
             expect(s.name).toEqual("b");
             expect(s.parent).toEqual("p");
+            expect(s.nsMap).toEqual(nsMap);
         });
 
         it ("should set the attrs-atribute for an entry with name=element", function() {

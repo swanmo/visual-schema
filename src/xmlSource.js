@@ -2,13 +2,12 @@ define(function() {
 
     var complexTypeXml =
         '<?xml version="1.0" encoding="UTF-8"?>\n' + 
-        '<!-- edited with XMLSpy v2012 rel. 2 sp1 (x64) (http://www.altova.com) by \n' +
-        '    Tore W (blah bla) -->\n' +
+        '<!-- edited with XMLSpy v2012 (http://www.altova.com) by Tore W -->\n' +
         '<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"\n' +
         '    xmlns:tns="http://integration.sjv.se/hanteraprogram/programinfo/model/program_1.0"\n' +
         '    targetNamespace="http://integration.sjv.se/hanteraprogram/programinfo/model/program_1.0"\n' +
         '    elementFormDefault="qualified">\n' +
-        '    <xs:element name="atgardList">\n' +
+        '    <xs:element name="atgardList" xmlns:xs="http://www.w3.org/2001/XMLSchema">\n' +
         '        <xs:complexType>\n' +
         '            <xs:sequence>\n' +
         '                <xs:element ref="tns:atgard" minOccurs="0" maxOccurs="unbounded" />\n' +

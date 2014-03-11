@@ -4,11 +4,7 @@ define(['parseUtils', 'logger'], function(parseUtils, logger) {
 		for (var i = 0; i < roots.length; i++) {
 			if (roots[i].attrs && roots[i].attrs.name) {
 				mapOfNames[parseUtils.parseName(roots[i].attrs.name)] = roots[i];
-				console.log("MAPPING:");
-				console.log(roots[i]);
-			} else {
-				console.log("NOT mapping:");
-				console.log(roots[i]);
+
 			}
 		}
 		return mapOfNames;
@@ -47,16 +43,13 @@ define(['parseUtils', 'logger'], function(parseUtils, logger) {
 		},
 		link:function(roots) {
 			var mapOfRootTypes = getMapByName(roots);
-			console.log("mapByNames");
-			console.log(mapOfRootTypes);
+
 			this.linkItem(roots, mapOfRootTypes);
 		},
 		linkItem:function(roots, entriesByName) {
 			for (var i = 0; i < roots.length; i++) {
 				var reference = null;
-				if (roots[i].attrs.name=="atgardType") {
-					console.log("atgardType");
-				}
+
 
 				if (roots[i].attrs) {
 					if (roots[i].attrs.type) {
@@ -74,9 +67,7 @@ define(['parseUtils', 'logger'], function(parseUtils, logger) {
 						// TODO
 						console.log("Unable to find referenced element '"  + reference + "'");
 					} else {
-						console.log("LINKING!!! " + e);
 						roots[i].linkedEntry = e;
-						console.log(roots[i]);
 					}
 				}
 

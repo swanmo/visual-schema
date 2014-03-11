@@ -4,10 +4,10 @@ define(['entry', 'parseUtils'], function(Entry, parseUtils) {
 		clean: function() {
 			this.roots = [];
 		},
-		add: function(node, parent) {
+		add: function(node, parent, nsMap) {
 			var tagName = node.nodeName;
 			var e = new Entry(parseUtils.parsePrefix(tagName),
-				parseUtils.parseName(tagName), node, parent);
+				parseUtils.parseName(tagName), node, parent, nsMap);
 			if (!parent) {
 				this.roots.push(e);
 			} else {

@@ -31,9 +31,7 @@ define(['jquery', 'simpleNodeRenderer'], function($, renderer) {
 				listEntry.append(childrenContainer);
 				this.renderElem(entry.linkedEntry, childrenContainer);
 				// listEntry.append(childrenContainer);
-				console.log("linked");
-				console.log(entry.linkedEntry);
-				console.log("/linked");
+
 				colorPos--;
 				// this.renderElem(entry.linkedEntry, childrenContainer);	
 			}
