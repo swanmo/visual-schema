@@ -1,4 +1,4 @@
-define(['root', 'model'], function (root, model) {
+define(['model'], function (model) {
 	return {
 		counter: 0,
 		nsPrefix: "xmlns:",
@@ -18,7 +18,6 @@ define(['root', 'model'], function (root, model) {
 					} else if (val.substring(0, this.nsPrefix.length) === this.nsPrefix) {
 						nsMap[val.substring(this.nsPrefix.length)] = nsQualifier;
 					} else if (this.targetNamespace == val){
-						console.log("adding NS: " + val + " (" + nsQualifier + ")");
 						nsMap[val] = nsQualifier;
 						nsMap["tns"] = nsQualifier;
 					}
@@ -54,15 +53,9 @@ define(['root', 'model'], function (root, model) {
 					this.tagName.indexOf("schema") >= 0) {
 
 					me.elements(this, null);
+
 				}
-				console.log("top-level: " + this.tagName);
 			});
-			/* $xml.find("xs\\:schema > *").each( function(){
-				if (this.nodeType != 3) {
-					console.log("top-level " + $(this))
-					me.elements(this, null);
-				}
-		    });*/
 		}
 	};
 })
