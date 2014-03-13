@@ -9,7 +9,6 @@ function (p,	   model,   renderer,   root,   linker) {
 
 		    p.parse(xsdValue);
 
-		    linker.init(['xs'], ['tns']);     //TODO
 		    linker.link(model.roots);
 		    
 		    var domElem = renderer.render(model.roots, root);
