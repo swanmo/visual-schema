@@ -1,79 +1,37 @@
 define(function() {
 
 
-    var testXml =
+    var xsdWithMultipleRoots =
         '<?xml version="1.0" encoding="UTF-8"?>\n' + 
-        '<!-- edited with XMLSpy v2012 rel. 2 sp1 (x64) (http://www.altova.com) by \n' +
-        '    Tore W (blah bla) -->\n' +
+        '<!-- komentar -->\n' +
         '<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"\n' +
-        '    xmlns:tns="http://integration.sjv.se/hanteraprogram/programinfo/model/program_1.0"\n' +
-        '    targetNamespace="http://integration.sjv.se/hanteraprogram/programinfo/model/program_1.0"\n' +
-        '    elementFormDefault="qualified">\n' +
-        '    <xs:element name="atgardList">\n' +
-        '        <xs:complexType>\n' +
-        '            <xs:sequence>\n' +
-        '                <xs:element ref="tns:atgard" minOccurs="0" maxOccurs="unbounded" />\n' +
-        '            </xs:sequence>\n' +
-        '        </xs:complexType>\n' +
-        '    </xs:element>\n\n' +
+        '    xmlns:tns="http://test.org/sample/program_1.1"\n' +
+        '    targetNamespace="http://test.org/sample/program_1.1">\n' +
+        '<xs:element name="birdList">\n' +
+        '    <xs:complexType>\n' +
+        '        <xs:sequence>\n' +
+        '            <xs:element ref="tns:bird" minOccurs="0" maxOccurs="unbounded" />\n' +
+        '        </xs:sequence>\n' +
+        '    </xs:complexType>\n' +
+        '</xs:element>\n' +
 
-        '<xs:element name="atgard" type="tns:atgardType" />\n' +
-
-        '<xs:complexType name="atgardType">\n' +
+        '<xs:element name="bird" type="tns:birdType" />\n' +
+        '<xs:complexType name="birdType">\n' +
         '    <xs:complexContent>\n' +
-        '        <xs:extension base="tns:grunddataType">\n' +
-        '            <xs:sequence>\n' +
-        '                <xs:element name="program">\n' +
-        '                    <xs:complexType>\n' +
-        '                        <xs:complexContent>\n' +
-        '                            <xs:extension base="tns:grunddataBasType">\n' +
-        '                                <xs:sequence />\n' +
-        '                            </xs:extension>\n' +
-        '                        </xs:complexContent>\n' +
-        '                    </xs:complexType>\n' +
-        '                </xs:element>\n' +
-        '                <xs:element name="delatgardList">\n' +
-        '                    <xs:complexType>\n' +
-        '                        <xs:sequence>\n' +
-        '                            <xs:element name="delatgard" type="tns:delatgardType"\n' +
-        '                                minOccurs="1" maxOccurs="unbounded" />\n' +
-        '                        </xs:sequence>\n' +
-        '                    </xs:complexType>\n' +
-        '                </xs:element>\n' +
-        '            </xs:sequence>\n' +
-        '        </xs:extension>\n' +
+        '        <xs:sequence>\n' +
+        '            <xs:element name="colors">\n' +
+        '                <xs:complexType>\n' +
+        '                    <xs:sequence>\n' +
+        '                        <xs:element name="predominantColor" type="xs:string" minOccurs="1" maxOccurs="1" />\n' +
+        '                        <xs:element name="secondaryColor" type="xs:string" minOccurs="0" maxOccurs="unbounded" />\n' +
+        '                    </xs:sequence>\n' +
+        '                </xs:complexType>\n' +
+        '            </xs:element>\n' +
+        '            <xs:element name="population" type="xs:int" />\n' +
+        '            <xs:element name="taxonomy" type="xs:string" />\n' +
+        '        </xs:sequence>\n' +
         '    </xs:complexContent>\n' +
         '</xs:complexType>\n\n' +
-        '<xs:complexType name="delatgardType">\n' +
-        '    <xs:complexContent>\n' +
-        '        <xs:extension base="tns:grunddataType">\n' +
-        '            <xs:sequence>\n' +
-        '                <xs:element name="fokusomradenList">\n' +
-        '                    <xs:complexType>\n' +
-        '                        <xs:sequence>\n' +
-        '                            <xs:element name="fokusomradekod" type="xs:string"\n' +
-        '                                minOccurs="0" maxOccurs="unbounded" />\n' +
-        '                        </xs:sequence>\n' +
-        '                    </xs:complexType>\n' +
-        '                </xs:element>\n' +
-        '                <xs:element name="insatstypList">\n' +
-        '                    <xs:complexType>\n' +
-        '                        <xs:sequence>\n' +
-        '                            <xs:element name="insatstyp" type="tns:insatstypType"\n' +
-        '                                minOccurs="1" maxOccurs="unbounded" />\n' +
-        '                        </xs:sequence>\n' +
-        '                    </xs:complexType>\n' +
-        '                </xs:element>\n' +
-        '            </xs:sequence>\n' +
-        '        </xs:extension>\n' +
-        '    </xs:complexContent>\n' +
-        '</xs:complexType>\n\n' +
-        '<xs:complexType name="grunddataBasType">\n' +
-        '<xs:sequence>\n' +
-        '    <xs:element name="kod" type="xs:string" />\n' +
-        '    <xs:element name="namn" type="xs:string" />\n' +
-        '</xs:sequence>\n' +
-        '</xs:complexType>\n' +
         '</xs:schema>\n';
     var schemaWithoutNs = '<?xml version="1.0" encoding="UTF-8"?>\n' +
         '<schema targetNamespace="http://test.org/ghandi"' +
@@ -92,7 +50,10 @@ define(function() {
         '</xs:schema>\n';
     return {
         getEmptySchemaWithNs:function() {return emptySchemaWithNs},
-        getUnqualifiedSchema:function() {return schemaWithoutNs}
+        getUnqualifiedSchema:function() {return schemaWithoutNs},
+        getXsdWithMultipleRoots:function() {return xsdWithMultipleRoots}
+
+        
     }
 
 
