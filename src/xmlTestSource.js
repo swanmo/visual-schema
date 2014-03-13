@@ -75,31 +75,13 @@ define(function() {
         '</xs:sequence>\n' +
         '</xs:complexType>\n' +
         '</xs:schema>\n';
-    var xml = '<?xml version="1.0" encoding="UTF-8"?>\n' +
-        '<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"' +
-        '   xmlns:tns="http://integration.sjv.se/hanteraprogram/programinfo/model/program_1.0"' +
-        '   targetNamespace="http://integration.sjv.se/hanteraprogram/programinfo/model/program_1.0"' +
-        '   elementFormDefault="qualified">\n' +
-        '   <xs:elem>sample-a</xs:elem>\n' +
-        '   <xs:elem>sample-b</xs:elem>\n' +
-        '   <xs:element name="employee">\n' +
-        '     <xs:complexType>\n' +
-        '       <xs:sequence>\n' +
-        '         <xs:element name="firstname" type="xs:string"/>\n' +
-        '         <xs:element name="midname" type="xs:string"/>\n' +
-        '         <xs:element name="lastname" type="xs:string"/>\n' +
-        
-        '         <xs:complexType name="trash">\n' +
-        '           <xs:sequence>\n' +
-        '             <xs:element name="whatver" type="xs:string"/>\n' +
-        '             <xs:element name="trash" type="xs:int"/>\n' +
-        '          </xs:sequence>\n' +
-        '         </xs:complexType>\n' +
-
-        '       </xs:sequence>\n' +
-        '     </xs:complexType>\n' +
-        '   </xs:element>\n' +
-        '</xs:schema>\n';
+    var schemaWithoutNs = '<?xml version="1.0" encoding="UTF-8"?>\n' +
+        '<schema targetNamespace="http://test.org/ghandi"' +
+        '   xmlns="http://www.w3.org/2001/XMLSchema"' +
+        '   elementFormDefault="unqualified">\n' +
+        '   <element name="teresa" type="string">\n' +
+        '   </element>\n' +
+        '</schema>\n';
 
     var emptySchemaWithNs = '<?xml version="1.0" encoding="UTF-8"?>\n' +
         '<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"' +
@@ -109,7 +91,8 @@ define(function() {
         '   elementFormDefault="qualified">\n' +
         '</xs:schema>\n';
     return {
-        getEmptySchemaWithNs:function() {return emptySchemaWithNs}
+        getEmptySchemaWithNs:function() {return emptySchemaWithNs},
+        getUnqualifiedSchema:function() {return schemaWithoutNs}
     }
 
 
