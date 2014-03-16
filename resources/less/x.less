@@ -1,15 +1,18 @@
+@symbolColor: #88c;
+@borderColor: #aaa;
+
 div.x {
-
-		div {
-		display: inline;
-		padding: 0 2px 0 10px;
-
+	div {
+		display: inline-block;
+		border-collapse: collapse;
+		margin:0;
+		padding: 0;
 		vertical-align: middle;
 	}
 
 	div.hasBranch {
 		display: inline-block;
-		border:3px solid #888;
+		border:3px solid @symbolColor;
 	    -webkit-border-radius: 5px;
 		-moz-border-radius: 5px;
 		border-radius: 5px;
@@ -29,6 +32,79 @@ div.x {
 	}
 
 	div.hasBranch>div+div {
-		
+		margin:0;
+	}
+	div.ctContainer {
+		>div {
+			>span {
+				>span {
+					vertical-align: top;
+					padding: 3px;
+
+					border:3px solid @borderColor;
+					-webkit-border-radius: 5px;
+					-moz-border-radius: 5px;
+					border-left: none;
+					border-top: none;
+					border-top-right-radius: 0;
+					border-bottom-left-radius: 0;
+				}
+				display:block;
+				vertical-align: top;
+			}
+			>div {
+				padding:5px 2px 2px 5px;
+			}
+		}
+
+		border:3px solid @borderColor;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+		margin:34px;
+	}
+
+	span.element.optional {
+		border:3px dashed @symbolColor;
+	}
+
+	span.element {
+		border:3px solid @symbolColor;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+		border-top-right-radius: 5px;
+		border-bottom-right-radius: 5px;
+		border-bottom-left-radius: 18px;
+		border-top-left-radius: 18px;
+		padding: 5px 5px 9px 3px;
+	}
+
+	div.e {
+		background: @symbolColor;
+		color:#fff;
+		border:3px solid @symbolColor;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+		border-top-right-radius: 5px;
+		border-bottom-right-radius: 5px;
+		border-bottom-left-radius: 14px;
+		border-top-left-radius: 14px;
+
+		padding: 1px 4px 1px 9px;
+
+		/* background: -moz-linear-gradient(left, #b8e1fc 0%, #a9d2f3 10%, #90bae4 25%, #90bcea 37%, #90bff0 50%, #6ba8e5 51%, #a2daf5 83%, #bdf3fd 100%); /* FF3.6+ */
+		/* background: -webkit-gradient(linear, left top, right top, color-stop(0%,#b8e1fc), color-stop(10%,#a9d2f3), color-stop(25%,#90bae4), color-stop(37%,#90bcea), color-stop(50%,#90bff0), color-stop(51%,#6ba8e5), color-stop(83%,#a2daf5), color-stop(100%,#bdf3fd)); /* Chrome,Safari4+ */
+		/* background: -webkit-linear-gradient(left, #b8e1fc 0%,#a9d2f3 10%,#90bae4 25%,#90bcea 37%,#90bff0 50%,#6ba8e5 51%,#a2daf5 83%,#bdf3fd 100%); /* Chrome10+,Safari5.1+ */
+		/* background: -o-linear-gradient(left, #b8e1fc 0%,#a9d2f3 10%,#90bae4 25%,#90bcea 37%,#90bff0 50%,#6ba8e5 51%,#a2daf5 83%,#bdf3fd 100%); /* Opera 11.10+ */
+		/* background: -ms-linear-gradient(left, #b8e1fc 0%,#a9d2f3 10%,#90bae4 25%,#90bcea 37%,#90bff0 50%,#6ba8e5 51%,#a2daf5 83%,#bdf3fd 100%); /* IE10+ */
+		/* background: linear-gradient(to right, #b8e1fc 0%,#a9d2f3 10%,#90bae4 25%,#90bcea 37%,#90bff0 50%,#6ba8e5 51%,#a2daf5 83%,#bdf3fd 100%); /* W3C */
+		/* filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b8e1fc', endColorstr='#bdf3fd',GradientType=1 ); /* IE6-9 */
+	}
+
+	div.s {
+		margin: 0 10px 0 10px;
+		color:#000;
+		border:3px solid @symbolColor;
+		-webkit-border-radius: 4px;
+		-moz-border-radius: 4px;
 	}
 }

@@ -14,12 +14,30 @@ define(['jquery'], function($) {
 		markupForNode: function(entry, parent) {
 			var entries = [];
 			var hasBranching = (entry.children && entry.children.length > 1);
+			var addWrapperContainer = false;
 			
 			var $childContainer;
 			
 				var desc;
+				var css;
 				if (entry.name=="element") {
-					desc = "E " + entry.attrs.name;
+					desc = "<div class='e'>E</div> " + entry.attrs.name;
+					css = "element";
+					if (entry.attrs.minOccurs == "0") {
+						css += " optional";
+					}
+				} else if (entry.name=="sequence") {
+					desc = "<div class='s'>...</div> ";
+				} else if (entry.name=="complexContent") {
+					return parent;
+				} else if (entry.name=="complexType") {
+					if (entry.attrs.name) {
+						desc = "<span class='ctBadge'>" + entry.attrs.name + "</span> ";	
+					} else {
+						desc = "<span class='ctBadge'>complexType</span> ";
+					}
+
+					addWrapperContainer = true;
 				} else {
 					if (entry.attrs.name) {
 						desc = entry.attrs.name + ' (' + entry.name + ')';
@@ -37,20 +55,29 @@ define(['jquery'], function($) {
 
 				$childContainer = $('<div>');
 
-
 				var $div1 = $('<div>');
 				var $span = $('<span>');
 				$div1.append($span);
 				$span.attr("title", title);
 				$div1.append($childContainer);
+
 				if (hasBranching) {
-					$span.text(desc + ":");
+					$span.html(desc);
 					$childContainer.addClass('hasBranch');
 				} else {
-					$span.text(desc);
+					$span.html(desc);
 				}
-			
-				$div1.appendTo(parent);
+				$span.addClass(css);
+
+				if (addWrapperContainer) {
+					$wrapperDiv = $('<div>');
+					$wrapperDiv.appendTo(parent);
+					$wrapperDiv.addClass('ctContainer')
+					$div1.appendTo($wrapperDiv);	
+				} else {
+					$div1.appendTo(parent);	
+				}
+
 			/*else if (entry.name=="element") {
 				var $div = $('<div>');
 				$div.append($('<span>').text(entry.attrs.name + " (" + entry.attrs.type + ")"));

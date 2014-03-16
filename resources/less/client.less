@@ -1,5 +1,7 @@
-@topline: #3e4d4a;
-@textInverted: #fff;
+@xtopline: #3e4d4a;
+@topline: #444248;
+@topaccent: #e95644;
+@textInverted: #aaa;
 
 body {
 	margin:0;
@@ -10,8 +12,15 @@ body {
 div.headline {
 	width:100%;
 	background-color:@topline;
+	padding:1em;
 	
 	h1 {
+		display: inline;
+		color:@topaccent;
+	}
+
+	h2 {
+		margin-left:1em;
 		display: inline;
 		color:@textInverted;
 	}

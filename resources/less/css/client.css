@@ -4,9 +4,15 @@ body {
 }
 div.headline {
   width: 100%;
-  background-color: #3e4d4a;
+  background-color: #444248;
+  padding: 1em;
 }
 div.headline h1 {
   display: inline;
-  color: #ffffff;
+  color: #e95644;
+}
+div.headline h2 {
+  margin-left: 1em;
+  display: inline;
+  color: #aaaaaa;
 }
