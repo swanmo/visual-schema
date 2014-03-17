@@ -11,18 +11,32 @@ define(['jquery'], function($) {
 			}
 			return rootElem;
 		},
-		markupForNode: function(entry, parent) {
+		childrenForNode: function(entry) {
+			var kids = [];
+			if (entry.children) {
+				for (var i = 0; i < entry.children.length; i++) {
+					kids.push(entry.children[i]);
+				}
+			}
+			if (entry.linkedEntry) {
+				kids.push(entry.linkedEntry);
+			}
+			return kids;
+		},
+		markupForNode: function(entry, parent, children) {
 			var entries = [];
-			var hasBranching = (entry.children && entry.children.length > 1);
+			var hasBranching = (children.length > 1);
 			var addWrapperContainer = false;
 			
 			var $childContainer;
-			
+			var $div1 = $('<div>');
+
 				var desc;
 				var css;
 				if (entry.name=="element") {
 					desc = "<div class='e'>E</div> " + entry.attrs.name;
 					css = "element";
+					$div1.addClass("padded");
 					if (entry.attrs.minOccurs == "0") {
 						css += " optional";
 					}
@@ -39,6 +53,9 @@ define(['jquery'], function($) {
 
 					addWrapperContainer = true;
 				} else {
+					if (!entry.attrs) {
+						console.log("no attrs");
+					}
 					if (entry.attrs.name) {
 						desc = entry.attrs.name + ' (' + entry.name + ')';
 					} else {
@@ -55,7 +72,7 @@ define(['jquery'], function($) {
 
 				$childContainer = $('<div>');
 
-				var $div1 = $('<div>');
+				
 				var $span = $('<span>');
 				$div1.append($span);
 				$span.attr("title", title);
@@ -99,18 +116,17 @@ define(['jquery'], function($) {
 		},
 		renderElem: function(entry, domParent) {
 			// ToDo
-
-			var container = this.markupForNode(entry, domParent);
+			var entryChildren = entry.children; //this.childrenForNode(entry);
+			console.log("kids: " + entryChildren.length);
+			var container = this.markupForNode(entry, domParent, entryChildren);
 			if (!container) {
 				container = domParent;
 			}
 
-			if (entry.children && entry.children.length > 0) {
-				for(var i = 0; i < entry.children.length; i++) {
-					this.renderElem(entry.children[i], container);
-				}
-
-			} 
+			
+			for(var i = 0; i < entryChildren.length; i++) {
+				this.renderElem(entryChildren[i], container);
+			}
 		}
 	};
 });

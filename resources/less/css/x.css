@@ -20,14 +20,14 @@ div.x div.hasBranch {
 div.x div.hasBranch > div {
   display: block;
 }
-div.x div.hasBranch > div + div {
-  margin: 0;
+div.x div.padded {
+  margin: 10px 10px 10px 0;
 }
 div.x div.ctContainer {
   border: 3px solid #aaaaaa;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
-  margin: 34px;
+  margin: .2em;
 }
 div.x div.ctContainer > div > span {
   display: block;
@@ -48,10 +48,10 @@ div.x div.ctContainer > div > div {
   padding: 5px 2px 2px 5px;
 }
 div.x span.element.optional {
-  border: 3px dashed #8888cc;
+  border: 2px dashed #8888cc;
 }
 div.x span.element {
-  border: 3px solid #8888cc;
+  border: 2px solid #8888cc;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-top-right-radius: 5px;
@@ -68,8 +68,8 @@ div.x div.e {
   -moz-border-radius: 5px;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
-  border-bottom-left-radius: 14px;
-  border-top-left-radius: 14px;
+  border-bottom-left-radius: 13px;
+  border-top-left-radius: 13px;
   padding: 1px 4px 1px 9px;
   /* background: -moz-linear-gradient(left, #b8e1fc 0%, #a9d2f3 10%, #90bae4 25%, #90bcea 37%, #90bff0 50%, #6ba8e5 51%, #a2daf5 83%, #bdf3fd 100%); /* FF3.6+ */
 
