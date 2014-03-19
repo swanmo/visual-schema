@@ -73,7 +73,7 @@ define(['parseUtils', 'logger'], function(parseUtils, logger) {
 			if (hasNsMapping) {
 				arrNamespacesMaps.unshift(entry.nsMap);	
 			}
-			console.log("linkItem: " + entry.name);
+
 			if (entry.attrs) {
 				if (entry.attrs.type) {
 					reference = entry.attrs.type;
@@ -85,7 +85,7 @@ define(['parseUtils', 'logger'], function(parseUtils, logger) {
 			}
 			if (reference) {
 				var _isNotXsdPrefixed = isNotXsdPrefixed(reference, arrNamespacesMaps);
-				console.log(reference + " is Xsd prefixed: " + (!_isNotXsdPrefixed));
+				// console.log(reference + " is Xsd prefixed: " + (!_isNotXsdPrefixed));
 			}
 
 			if (reference && isNotXsdPrefixed(reference, arrNamespacesMaps)) {

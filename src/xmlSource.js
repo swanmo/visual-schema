@@ -47,7 +47,7 @@ define(function() {
         '</xs:complexType>\n\n' +
         '<xs:complexType name="delatgardType">\n' +
         '    <xs:complexContent>\n' +
-        '        <xs:extension base="tns:grunddataType">\n' +
+        '        <xs:extension base="tns:grunddataBasType">\n' +
         '            <xs:sequence>\n' +
         '                <xs:element name="fokusomradenList">\n' +
         '                    <xs:complexType>\n' +
@@ -97,16 +97,9 @@ define(function() {
 
         '<xs:complexType name="atgardType">\n' +
         '    <xs:complexContent>\n' +
-        '        <xs:extension base="tns:grunddataType">\n' +
+        '        <xs:extension base="tns:grunddataBasType">\n' +
         '            <xs:sequence>\n' +
-        '                <xs:element name="program">\n' +
-        '                    <xs:complexType>\n' +
-        '                        <xs:complexContent>\n' +
-        '                            <xs:extension base="tns:grunddataBasType">\n' +
-        '                                <xs:sequence />\n' +
-        '                            </xs:extension>\n' +
-        '                        </xs:complexContent>\n' +
-        '                    </xs:complexType>\n' +
+        '                <xs:element name="program" type="xs:string">\n' +
         '                </xs:element>\n' +
         '                <xs:element name="delatgardList">\n' +
         '                    <xs:complexType>\n' +
@@ -122,7 +115,7 @@ define(function() {
         '</xs:complexType>\n\n' +
         '<xs:complexType name="delatgardType">\n' +
         '    <xs:complexContent>\n' +
-        '        <xs:extension base="tns:grunddataType">\n' +
+        '        <xs:extension base="tns:grunddataBasType">\n' +
         '            <xs:sequence>\n' +
         '                <xs:element name="fokusomradenList">\n' +
         '                    <xs:complexType>\n' +

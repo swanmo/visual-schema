@@ -11,21 +11,23 @@ define(['jquery'], function($) {
 			}
 			return rootElem;
 		},
-		childrenForNode: function(entry) {
+		hasBranching: function(entry) {
 			var kids = [];
 			if (entry.children) {
 				for (var i = 0; i < entry.children.length; i++) {
 					kids.push(entry.children[i]);
 				}
 			}
+			if (entry.attrs && entry.attrs.name == "delatgard") {
+				console.log("asdfkj");
+			}
 			if (entry.linkedEntry) {
 				kids.push(entry.linkedEntry);
 			}
-			return kids;
+			return kids.length > 1;
 		},
-		markupForNode: function(entry, parent, children) {
+		markupForNode: function(entry, parent, hasBranching) {
 			var entries = [];
-			var hasBranching = (children.length > 1);
 			var addWrapperContainer = false;
 			
 			var $childContainer;
@@ -41,12 +43,15 @@ define(['jquery'], function($) {
 						css += " optional";
 					}
 				} else if (entry.name=="sequence") {
-					desc = "<div class='s'>...</div> ";
+					desc = "<div class='s' title='sequence'>...</div> ";
 				} else if (entry.name=="complexContent") {
 					return parent;
+				} else if (entry.name=="extension") {
+					desc = "<span class='ctBadge'>extension base " + entry.attrs.base + "</span>";
+					addWrapperContainer = true;
 				} else if (entry.name=="complexType") {
 					if (entry.attrs.name) {
-						desc = "<span class='ctBadge'>" + entry.attrs.name + "</span> ";	
+						desc = "<span class='ctBadge' title='complexType'>" + entry.attrs.name + "</span> ";	
 					} else {
 						desc = "<span class='ctBadge'>complexType</span> ";
 					}
@@ -115,17 +120,20 @@ define(['jquery'], function($) {
 			return $childContainer;
 		},
 		renderElem: function(entry, domParent) {
-			// ToDo
-			var entryChildren = entry.children; //this.childrenForNode(entry);
-			console.log("kids: " + entryChildren.length);
-			var container = this.markupForNode(entry, domParent, entryChildren);
+			var hasBranching = this.hasBranching(entry);
+			var container = this.markupForNode(entry, domParent, hasBranching);
 			if (!container) {
 				container = domParent;
 			}
+			var protectedContainerRef = container;
+			if (entry.linkedEntry) {
+				this.renderElem(entry.linkedEntry, container);
+			}
 
-			
-			for(var i = 0; i < entryChildren.length; i++) {
-				this.renderElem(entryChildren[i], container);
+			if (entry.children) {
+				for (var i = 0; i < entry.children.length; i++) {
+					this.renderElem(entry.children[i], protectedContainerRef);
+				}
 			}
 		}
 	};
