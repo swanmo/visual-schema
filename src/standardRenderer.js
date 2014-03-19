@@ -60,9 +60,6 @@ define(['jquery'], function($) {
 
 				addWrapperContainer = true;
 			} else {
-				if (!entry.attrs) {
-					console.log("no attrs");
-				}
 				if (entry.attrs.name) {
 					desc = entry.attrs.name + ' (' + entry.name + ')';
 				} else {
@@ -72,9 +69,9 @@ define(['jquery'], function($) {
 
 			var title = "";
 			if (entry.nsMap) {
-					for (var key in entry.nsMap) {
-						title += key + " = " + entry.nsMap[key] + "\n \n";
-					}
+				for (var key in entry.nsMap) {
+					title += key + " = " + entry.nsMap[key] + "\n \n";
+				}
 			}
 
 			$childContainer = $('<div>');
@@ -96,7 +93,6 @@ define(['jquery'], function($) {
 				$wrapperDiv = $('<div>');
 				$wrapperDiv.appendTo(parent);
 				if (isExtensionBase) {
-					console.log("marking xb")
 					$wrapperDiv.addClass('xb');
 				} else {
 					$wrapperDiv.addClass('ctContainer')	;
