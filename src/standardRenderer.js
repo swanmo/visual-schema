@@ -11,6 +11,11 @@ define(['jquery'], function($) {
 			}
 			return rootElem;
 		},
+		isExtensionBase: function(entry, parentEntry) {
+			return parentEntry && 
+				(parentEntry.name == "extension") &&
+				parentEntry.linkedEntry == entry;
+		},
 		hasBranching: function(entry) {
 			var kids = [];
 			if (entry.children) {
@@ -18,15 +23,13 @@ define(['jquery'], function($) {
 					kids.push(entry.children[i]);
 				}
 			}
-			if (entry.attrs && entry.attrs.name == "delatgard") {
-				console.log("asdfkj");
-			}
+
 			if (entry.linkedEntry) {
 				kids.push(entry.linkedEntry);
 			}
 			return kids.length > 1;
 		},
-		markupForNode: function(entry, parent, hasBranching) {
+		markupForNode: function(entry, parent, hasBranching, isExtensionBase) {
 			var entries = [];
 			var addWrapperContainer = false;
 			
@@ -94,7 +97,13 @@ define(['jquery'], function($) {
 				if (addWrapperContainer) {
 					$wrapperDiv = $('<div>');
 					$wrapperDiv.appendTo(parent);
-					$wrapperDiv.addClass('ctContainer')
+					if (isExtensionBase) {
+						console.log("marking xb")
+						$wrapperDiv.addClass('xb');
+					} else {
+						$wrapperDiv.addClass('ctContainer')	;
+					}
+					
 					$div1.appendTo($wrapperDiv);	
 				} else {
 					$div1.appendTo(parent);	
@@ -119,20 +128,21 @@ define(['jquery'], function($) {
 
 			return $childContainer;
 		},
-		renderElem: function(entry, domParent) {
+		renderElem: function(entry, domParent, parentEntry) {
 			var hasBranching = this.hasBranching(entry);
-			var container = this.markupForNode(entry, domParent, hasBranching);
+			var isExtensionBase = this.isExtensionBase(entry, parentEntry);
+
+			var container = this.markupForNode(entry, domParent, hasBranching, isExtensionBase);
 			if (!container) {
 				container = domParent;
 			}
-			var protectedContainerRef = container;
 			if (entry.linkedEntry) {
-				this.renderElem(entry.linkedEntry, container);
+				this.renderElem(entry.linkedEntry, container, entry);
 			}
 
 			if (entry.children) {
 				for (var i = 0; i < entry.children.length; i++) {
-					this.renderElem(entry.children[i], protectedContainerRef);
+					this.renderElem(entry.children[i], container, entry);
 				}
 			}
 		}
