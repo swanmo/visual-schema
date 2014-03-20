@@ -1,5 +1,19 @@
-define(['jquery'], function($) {
+define(['jquery', 'parseUtils'], function($, parseUtils) {
+	var toggleDisplay = function() {
+		var element = $(this).next();
+		var label = $(this).text();
 
+		if (label == "-") {
+			element.slideUp( "slow", function() {element.css('display', 'none')});
+			$(this).text("+");
+		} else {
+			// element.css('display', 'inline-block');
+			element.slideDown();
+			$(this).text("-");
+		}
+
+		// element.css("display", newDisplayProp);
+	}
 	return {
 		render: function(roots) {
 			var rootElem = $('<div>');
@@ -39,6 +53,10 @@ define(['jquery'], function($) {
 			var css;
 			if (entry.name=="element") {
 				desc = "<div class='e'>E</div> " + entry.attrs.name;
+				if (entry.attrs.type) {
+					desc += " <span class='et'>: " + parseUtils.parseName(entry.attrs.type) + "</span>";
+				}
+
 				css = "element";
 				$div1.addClass("padded");
 				if (entry.attrs.minOccurs == "0") {
@@ -57,7 +75,6 @@ define(['jquery'], function($) {
 				} else {
 					desc = "<span class='ctBadge'>complexType</span> ";
 				}
-
 				addWrapperContainer = true;
 			} else {
 				if (entry.attrs.name) {
@@ -79,14 +96,23 @@ define(['jquery'], function($) {
 			var $span = $('<span>');
 			$div1.append($span);
 			$span.attr("title", title);
-			$div1.append($childContainer);
+
+			if (entry.linkedEntry) {
+				var $mini = $('<div>');
+				$mini.addClass('expander');
+				$mini.html('-');
+				$mini.on('click', toggleDisplay);
+				$div1.append($mini);
+			}
 
 			if (hasBranching) {
+				$div1.append($childContainer);
 				$span.html(desc);
 				$childContainer.addClass('hasBranch');
 			} else {
 				$span.html(desc);
 			}
+			$div1.append($childContainer);
 			$span.addClass(css);
 
 			if (addWrapperContainer) {

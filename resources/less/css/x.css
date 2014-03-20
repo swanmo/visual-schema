@@ -1,3 +1,18 @@
+div.x {
+  width: 4000px;
+}
+div.x div.expander {
+  border: 2px solid #aaaaaa;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  padding: 0 6px 0 6px;
+  margin: 4px;
+  cursor: pointer;
+}
+div.x span.et {
+  color: #888;
+}
 div.x div {
   display: inline-block;
   border-collapse: collapse;
