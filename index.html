@@ -1,60 +1,51 @@
-<!DOCTYPE html>
+<div<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
     <title>Xbuddy</title>
-    <script data-main="src/main.js" src="lib/require.js"></script>
-    
+    <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css' />
     <link rel="stylesheet" type="text/css" href="resources/less/css/client.css">
     <link rel="stylesheet" type="text/css" href="resources/less/css/x.css">
-
     <link rel="stylesheet" type="text/css" href="resources/css/bootstrap.css">
   </head>
 
   <body>
-    <div class="headline"><h1>XML Schema</h1><h2>Paste xsd content below</h2>
-
-<svg width="200" height="160">
-  <rect x="5" y="5" rx="20" ry="20" width="150" height="50" style="fill:#444248;stroke:#e95644;stroke-width:5;opacity:0.5">
-  Sorry, your browser does not support inline SVG.
-</svg>
-
-
-<!--svg width="300" height="200">
-  <polygon points="100,10 40,180 190,60 10,60 160,180"
-  style="fill:lime;stroke:purple;stroke-width:5;fill-rule:evenodd;" />
-</svg-->
+    <div id="headRow">
+        <div>
+          <span class="glyphicon glyphicon-eye-open"></span>
+          <h1>eyeXSD</h1>
+        </div>
+        <label for="xsdContent"><span class="glyphicon glyphicon-list"></span> Paste XSD content below</label>
     </div>
+    <div>
+      <div style="clear:both"></div>
+      <div id="leftCol">
+          <div class="lmenu" id="optXsd"><span class="glyphicon glyphicon-file"></span></div>
+          <div class="lmenu" id="optSettings"><span class="glyphicon glyphicon-cog"></span></div>
+          <div class="lmenu" id="optAbout"><span class="glyphicon glyphicon-comment"></span></div>
+      </div>
+      </div><div>
+      <div id="rightCol">
 
+          <form role="form">
+            <div id="inputRow">
+                <textarea class="form-control" id="xsdContent" placeholder="Paste here" style="height:460px"></textarea>
 
-
-    <div class="container">
-      <h3 class="text-muted">XML Schema</h3>
-
-      <form role="form">
-      <div class="row" id="inputRow">
-        <div class="col-sm-12 col-lg-9">
-            <div class="form-group">
-              <label for="xsdContent">XSD content here</label>
-              <textarea class="form-control" id="xsdContent" placeholder="Paste here" style="height:460px"></textarea>
             </div>
-        </div>
+            <div>
+                <button type="button" id="showXsd" class="pull-right btn btn-primary" style="background-color:black">
+                  <span class="glyphicon glyphicon-list"></span> Show!</button>
+
+                <button type="button" id="back" class="pull-right btn btn-primary" style="background-color:black">Back
+                </button>
+            </div>
+          </form>
+
+          <div id="graph"></div>
       </div>
-      <div class="row">
-        <div class="col-sm-12 col-lg-9">
-          <button type="button" id="showXsd" class="pull-right btn btn-primary" style="background-color:black">
-            <span class="glyphicon glyphicon-list"></span> Show!</button>
-
-          <button type="button" id="back" class="pull-right btn btn-primary" style="background-color:black">Back
-          </button>
-        </div>
       </div>
-    </form>
+    
 
-    </div> <!-- /container -->
-
-    <div class="x">
-      <div id="graph"></div>
-    </div>
+    <script data-main="src/main.js" src="lib/require.js"></script>
   </body>
 </html>

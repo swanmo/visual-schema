@@ -12,7 +12,8 @@ function (p,	   model,   renderer,   root,   linker) {
 		    linker.link(model.roots);
 		    
 		    var domElem = renderer.render(model.roots, root);
-
+			
+			root.addClass('x');
 			root.html(domElem);
 		}
 	}

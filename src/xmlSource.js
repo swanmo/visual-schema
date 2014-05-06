@@ -1,4 +1,78 @@
 define(function() {
+    var sample = "<?xml version='1.0' encoding='utf-8' ?>\n" +
+"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'>\n" +
+"  <xs:element name='Root'>\n" +
+"    <xs:complexType>\n" +
+"      <xs:sequence>\n" +
+"        <xs:element name='Customers'>\n" +
+"          <xs:complexType>\n" +
+"            <xs:sequence>\n" +
+"              <xs:element name='Customer' type='CustomerType' minOccurs='0' maxOccurs='unbounded' />\n" +
+"            </xs:sequence>\n" +
+"          </xs:complexType>\n" +
+"        </xs:element>\n" +
+"        <xs:element name='Orders'>\n" +
+"          <xs:complexType>\n" +
+"            <xs:sequence>\n" +
+"              <xs:element name='Order' type='OrderType' minOccurs='0' maxOccurs='unbounded' />\n" +
+"            </xs:sequence>\n" +
+"          </xs:complexType>\n" +
+"        </xs:element>\n" +
+"      </xs:sequence>\n" +
+"    </xs:complexType>\n" +
+"    <xs:key name='CustomerIDKey'>\n" +
+"      <xs:selector xpath='Customers/Customer'/>\n" +
+"      <xs:field xpath='@CustomerID'/>\n" +
+"    </xs:key>\n" +
+"    <xs:keyref name='CustomerIDKeyRef' refer='CustomerIDKey'>\n" +
+"      <xs:selector xpath='Orders/Order'/>\n" +
+"      <xs:field xpath='CustomerID'/>\n" +
+"    </xs:keyref>\n" +
+"  </xs:element>\n" +
+"  <xs:complexType name='CustomerType'>\n" +
+"    <xs:sequence>\n" +
+"      <xs:element name='CompanyName' type='xs:string'/>\n" +
+"      <xs:element name='ContactName' type='xs:string'/>\n" +
+"      <xs:element name='ContactTitle' type='xs:string'/>\n" +
+"      <xs:element name='Phone' type='xs:string'/>\n" +
+"      <xs:element name='Fax' minOccurs='0' type='xs:string'/>\n" +
+"      <xs:element name='FullAddress' type='AddressType'/>\n" +
+"    </xs:sequence>\n" +
+"    <xs:attribute name='CustomerID' type='xs:token'/>\n" +
+"  </xs:complexType>\n" +
+"  <xs:complexType name='AddressType'>\n" +
+"    <xs:sequence>\n" +
+"      <xs:element name='Address' type='xs:string'/>\n" +
+"      <xs:element name='City' type='xs:string'/>\n" +
+"      <xs:element name='Region' type='xs:string'/>\n" +
+"      <xs:element name='PostalCode' type='xs:string' />\n" +
+"      <xs:element name='Country' type='xs:string'/>\n" +
+"    </xs:sequence>\n" +
+"    <xs:attribute name='CustomerID' type='xs:token'/>\n" +
+"  </xs:complexType>\n" +
+"  <xs:complexType name='OrderType'>\n" +
+"    <xs:sequence>\n" +
+"      <xs:element name='CustomerID' type='xs:token'/>\n" +
+"      <xs:element name='EmployeeID' type='xs:token'/>\n" +
+"      <xs:element name='OrderDate' type='xs:dateTime'/>\n" +
+"      <xs:element name='RequiredDate' type='xs:dateTime'/>\n" +
+"      <xs:element name='ShipInfo' type='ShipInfoType'/>\n" +
+"    </xs:sequence>\n" +
+"  </xs:complexType>\n" +
+"  <xs:complexType name='ShipInfoType'>\n" +
+"    <xs:sequence>\n" +
+"      <xs:element name='ShipVia' type='xs:integer'/>\n" +
+"      <xs:element name='Freight' type='xs:decimal'/>\n" +
+"      <xs:element name='ShipName' type='xs:string'/>\n" +
+"      <xs:element name='ShipAddress' type='xs:string'/>\n" +
+"      <xs:element name='ShipCity' type='xs:string'/>\n" +
+"      <xs:element name='ShipRegion' type='xs:string'/>\n" +
+"      <xs:element name='ShipPostalCode' type='xs:string'/>\n" +
+"      <xs:element name='ShipCountry' type='xs:string'/>\n" +
+"    </xs:sequence>\n" +
+"    <xs:attribute name='ShippedDate' type='xs:dateTime'/>\n" +
+"  </xs:complexType>\n" +
+"</xs:schema>";
 
     var complexTypeXml =
         '<?xml version="1.0" encoding="UTF-8"?>\n' + 
@@ -143,7 +217,7 @@ define(function() {
         '    <xs:element name="namn" type="xs:string" />\n' +
         '</xs:sequence>\n' +
         '</xs:complexType>\n' +
-        '</xs:schema>\n';
+        '</xs:schema>';
 
 
     var xml = '<?xml version="1.0" encoding="UTF-8"?>\n' +
@@ -172,7 +246,7 @@ define(function() {
         '   </xs:element>\n' +
         '</xs:schema>\n';
     return {
-    	getXml:function() {return complexTypeXml},
+    	getXml:function() {return sample},
         getTestXml:function() {return testXml}
     }
 

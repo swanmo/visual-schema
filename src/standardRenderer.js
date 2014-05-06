@@ -4,13 +4,14 @@ define(['jquery', 'parseUtils'], function($, parseUtils) {
 		var label = $(this).text();
 
 		if (label == "-") {
-			element.slideUp( "slow", function() {element.css('display', 'none')});
+			// element.slideUp( "slow", function() {element.css('display', 'none')});
 			$(this).text("+");
 		} else {
 			// element.css('display', 'inline-block');
-			element.slideDown();
+			// element.slideDown();
 			$(this).text("-");
 		}
+		element.slideToggle();
 
 		// element.css("display", newDisplayProp);
 	}
@@ -100,31 +101,49 @@ define(['jquery', 'parseUtils'], function($, parseUtils) {
 			if (entry.linkedEntry) {
 				var $mini = $('<div>');
 				$mini.addClass('expander');
-				$mini.html('-');
+				$mini.html('+');
 				$mini.on('click', toggleDisplay);
 				$div1.append($mini);
+				$childContainer.css('display', 'none');
 			}
+			
+			//Flytta denna innanför if-sats och ta bort kommentar nedanför för att återställa.
+			$div1.append($childContainer);
+
 
 			if (hasBranching) {
-				$div1.append($childContainer);
 				$span.html(desc);
 				$childContainer.addClass('hasBranch');
+
 			} else {
 				$span.html(desc);
 			}
-			$div1.append($childContainer);
+			// $div1.append($childContainer);
 			$span.addClass(css);
 
 			if (addWrapperContainer) {
 				$wrapperDiv = $('<div>');
-				$wrapperDiv.appendTo(parent);
 				if (isExtensionBase) {
 					$wrapperDiv.addClass('xb');
 				} else {
-					$wrapperDiv.addClass('ctContainer')	;
+					$wrapperDiv.addClass('ctContainer');
+				}
+				$div1.appendTo($wrapperDiv);
+				if (isExtensionBase) {
+					var $extDiv = $('<div>');
+					var $expansionDiv = $('<div>');
+					$expansionDiv.addClass('expander');
+					$expansionDiv.html('+');
+					$expansionDiv.on('click', toggleDisplay);
+					$wrapperDiv.css('display', 'none');
+
+					$extDiv.append($expansionDiv);
+					$extDiv.append($wrapperDiv);
+					$extDiv.appendTo(parent);
+				} else {
+					$wrapperDiv.appendTo(parent);	
 				}
 				
-				$div1.appendTo($wrapperDiv);	
 			} else {
 				$div1.appendTo(parent);	
 			}

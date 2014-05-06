@@ -20,6 +20,7 @@ div.x div {
   padding: 0;
   vertical-align: middle;
 }
+
 div.x div.hasBranch {
   display: inline-block;
   border: 3px solid #8888cc;
@@ -38,6 +39,10 @@ div.x div.hasBranch > div {
 div.x div.padded {
   margin: 10px 10px 10px 0;
 }
+div.x div.ctContainer > div > div.hasBranch {
+  border: none !important;
+}
+
 div.x div.ctContainer,
 div.x div.xb {
   border: 3px solid #aaaaaa;
