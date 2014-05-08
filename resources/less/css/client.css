@@ -44,6 +44,12 @@ body {
   }
 }
 
+@media (min-width: 1270) {
+  #rightCol {
+    width:1165px;
+  }
+}
+
 #rightCol {
   padding:6px 0 0 2px;
   float:left;
@@ -82,6 +88,9 @@ body {
   padding:30px 0 0 90px;
   font-size:26px;
 }
+#headRow div span {
+  font-size:46px;
+}
 #headRow {
   background:#ccc;
   width:100%;
@@ -97,17 +106,81 @@ body {
   background: -ms-linear-gradient(top, #5c5c5c 0%,#818181 50%,#757575 51%,#b3b3b3 100%); /* IE10+ */
   background: linear-gradient(to bottom, #5c5c5c 0%,#818181 50%,#757575 54%,#b3b3b3 100%); /* W3C */
 }
-/*div.headline {
-  width: 100%;
-  background-color: #444248;
-  padding: 1em;
+
+
+
+
+
+
+
+@font-face {
+  font-family: 'eyexsd';
+  src:url('../../fonts/eyexsd.eot?-cbl5g3');
+  src:url('../../fonts/eyexsd.eot?#iefix-cbl5g3') format('embedded-opentype'),
+    url('../../fonts/eyexsd.woff?-cbl5g3') format('woff'),
+    url('../../fonts/eyexsd.ttf?-cbl5g3') format('truetype'),
+    url('../../fonts/eyexsd.svg?-cbl5g3#eyexsd') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
-div.headline h1 {
-  display: inline;
-  color: #e95644;
+
+[class^="icon-"], [class*=" icon-"] {
+  font-family: 'eyexsd';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
-div.headline h2 {
-  margin-left: 1em;
-  display: inline;
-  color: #aaaaaa;
-}*/
+
+.icon-xsd:before {
+  content: "\e600";
+}
+.icon-eye:before {
+  content: "\e601";
+}
+.icon-star:before {
+  content: "\e602";
+}
+.icon-star2:before {
+  content: "\e603";
+}
+.icon-smiley:before {
+  content: "\e604";
+}
+.icon-notification:before {
+  content: "\e605";
+}
+.icon-question:before {
+  content: "\e606";
+}
+.icon-info:before {
+  content: "\e607";
+}
+.icon-info2:before {
+  content: "\e608";
+}
+.icon-blocked:before {
+  content: "\e609";
+}
+.icon-cancel-circle:before {
+  content: "\e60a";
+}
+.icon-close:before {
+  content: "\e60b";
+}
+.icon-checkmark:before {
+  content: "\e60c";
+}
+.icon-checkmark2:before {
+  content: "\e60d";
+}
+.icon-file-xml:before {
+  content: "\e60e";
+}
+
