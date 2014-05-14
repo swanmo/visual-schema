@@ -1,5 +1,16 @@
 define(function() {
-    var sample = "<?xml version='1.0' encoding='utf-8' ?>\n" +
+
+var emptyWithRestriction = '<xs:element name="product">' +
+'<xs:complexType>' +
+'    <xs:complexContent>' +
+'      <xs:restriction base="xs:integer">' +
+'        <xs:attribute name="prodid" type="xs:positiveInteger"/>' +
+'      </xs:restriction>' +
+'    </xs:complexContent>' +
+'  </xs:complexType>' +
+'</xs:element>';
+
+var sample = "<?xml version='1.0' encoding='utf-8' ?>\n" +
 "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'>\n" +
 "  <xs:element name='Root'>\n" +
 "    <xs:complexType>\n" +

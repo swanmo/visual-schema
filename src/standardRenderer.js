@@ -58,11 +58,52 @@ define(['jquery', 'parseUtils'], function($, parseUtils) {
 					desc += " <span class='et'>: " + parseUtils.parseName(entry.attrs.type) + "</span>";
 				}
 
-				css = "element";
+				css = "element-e";
 				$div1.addClass("padded");
 				if (entry.attrs.minOccurs == "0") {
 					css += " optional";
 				}
+			} else if (entry.name=="key" || entry.name=="keyref") {
+
+				if (entry.attrs.type) {
+					desc += " <span class='et'>: " + parseUtils.parseName(entry.attrs.type) + "</span>";
+				}
+
+				css = "element-e";
+				$div1.addClass("padded");
+				if (entry.attrs.minOccurs == "0") {
+					css += " optional";
+				}
+				desc = "<div class='e'><span class='icon-key2'></span></div> " + entry.attrs.name;
+				if (entry.attrs.type) {
+					desc += " <span class='et'>: " + parseUtils.parseName(entry.attrs.type) + "</span>";
+				}
+
+				css = "element-e";
+				$div1.addClass("padded");
+				if (entry.attrs.minOccurs == "0") {
+					css += " optional";
+				}
+
+			} else if (entry.name=="attribute") {
+				desc = "<div class='a'>A</div> " + entry.attrs.name;
+
+				if (entry.attrs.type) {
+					desc += " <span class='et'>: " + parseUtils.parseName(entry.attrs.type) + "</span>";
+				}
+				css = "element-a";
+				$div1.addClass("padded");
+
+				if (entry.attrs.minOccurs == "0") {
+					css += " optional";
+				}
+			} else if (entry.name=="selector" || entry.name=="field") {
+				var symbol = (entry.name=="field") ? "@" : "x";
+
+				desc = "<div class='a'>" +symbol+ "</div> " + entry.name;
+				desc += " <span class='et'>: " + entry.attrs.nodeMap.xpath + "</span>";
+				css = "element-a";
+				$div1.addClass("padded");
 			} else if (entry.name=="sequence") {
 				desc = "<div class='s' title='sequence'>...</div> ";
 			} else if (entry.name=="complexContent") {
@@ -116,7 +157,7 @@ define(['jquery', 'parseUtils'], function($, parseUtils) {
 				$childContainer.addClass('hasBranch');
 
 			} else {
-				$span.html(desc);
+				$span.html(desc);	
 			}
 			// $div1.append($childContainer);
 			$span.addClass(css);

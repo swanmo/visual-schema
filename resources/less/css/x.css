@@ -77,7 +77,14 @@ div.x div.xb {
 div.x span.element.optional {
   border: 2px dashed #8888cc;
 }
-div.x span.element {
+div.x span.element-e {
+  border: 2px solid #8888cc;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  padding: 7px 5px 9px 3px;
+}
+div.x span.element-a {
   border: 2px solid #8888cc;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -85,9 +92,20 @@ div.x span.element {
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 18px;
   border-top-left-radius: 18px;
-  padding: 5px 5px 9px 3px;
+  padding: 7px 5px 9px 3px;
 }
 div.x div.e {
+  background: #8888cc;
+  color: #fff;
+  border: 3px solid #8888cc;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding: 1px 6px 1px 6px;
+}
+
+div.x div.a {
   background: #8888cc;
   color: #fff;
   border: 3px solid #8888cc;
@@ -111,7 +129,6 @@ div.x div.e {
   /* background: linear-gradient(to right, #b8e1fc 0%,#a9d2f3 10%,#90bae4 25%,#90bcea 37%,#90bff0 50%,#6ba8e5 51%,#a2daf5 83%,#bdf3fd 100%); /* W3C */
 
   /* filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b8e1fc', endColorstr='#bdf3fd',GradientType=1 ); /* IE6-9 */
-
 }
 div.x div.s {
   margin: 0 10px 0 10px;

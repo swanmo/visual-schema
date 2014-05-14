@@ -17,7 +17,9 @@ define(['jquery', 'xsd', 'init'], function($, xsd, init) {
 
 			$("#showXsd").on("click", function() {
 				xsd.show($("#xsdContent").val());
-				$("#headRow").slideUp(800);
+				$("#headRow").slideUp(800, function() {
+					$("#logn").slideToggle();	
+				});
 				$("#inputRow").slideUp();
 				
 				$(this).hide();

@@ -3,6 +3,11 @@ body {
   padding: 0;
 }
 
+.lmenu-top {
+  padding: 10px 0 60px 5px;
+  font-size:20px;
+}
+
 .lmenu{
   padding:3px 10px 0 10px;
   font-size:40px;
@@ -58,7 +63,7 @@ body {
 }
 #leftCol {
   float:left;
-  padding:60px 6px 0 10px;
+  padding:0 6px 0 10px;
   height:100%;
   background:#eee;
   background: -moz-linear-gradient(left, #eee 0%, #eee 50%, #f6f6fa 100%);
@@ -137,21 +142,26 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 .icon-xsd:before {
   content: "\e600";
 }
+.icon-tag:before {
+  content: "\e60f";
+}
+.icon-key:before {
+  content: "\e610";
+}
+.icon-key2:before {
+  content: "\e611";
+}
+.icon-wrench:before {
+  content: "\e612";
+}
+.icon-cog:before {
+  content: "\e613";
+}
 .icon-eye:before {
   content: "\e601";
-}
-.icon-star:before {
-  content: "\e602";
-}
-.icon-star2:before {
-  content: "\e603";
-}
-.icon-smiley:before {
-  content: "\e604";
 }
 .icon-notification:before {
   content: "\e605";
@@ -177,10 +187,6 @@ body {
 .icon-checkmark:before {
   content: "\e60c";
 }
-.icon-checkmark2:before {
-  content: "\e60d";
-}
 .icon-file-xml:before {
   content: "\e60e";
 }
-

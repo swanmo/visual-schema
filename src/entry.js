@@ -1,5 +1,5 @@
 define(function() {
-    var Attrs = function(name, type, minOccurs, maxOccurs, ref, base, use) {
+    var Attrs = function(name, type, minOccurs, maxOccurs, ref, base, use, nodeMap) {
         this.name = name;
         this.type = type;
         this.minOccurs = minOccurs;
@@ -7,6 +7,7 @@ define(function() {
         this.ref = ref;
         this.base = base;
         this.use = ref;
+        this.nodeMap = nodeMap;
     };
 
     var AttrsElement = function(name, type, minOccurs, maxOccurs, ref, base) {
@@ -40,7 +41,7 @@ define(function() {
                 $node.attr('type'),
                 $node.attr('minOccurs'),
                 $node.attr('maxOccurs'),
-                $node.attr('ref'),
+                $node.attr('ref') | $node.attr('refer'),
                 $node.attr('base')
                 );
         } else if (name == "sequence") {
@@ -51,6 +52,13 @@ define(function() {
                 $node.attr('ref')
                 );
         } else {
+            var nodeMap = {};
+            
+            $.each($node[0].attributes, function(i, attrib){
+                nodeMap[attrib.name] = attrib.value;
+            });
+            
+
             attrs = new Attrs(
                 $node.attr('name'),
                 $node.attr('type'),
@@ -58,7 +66,8 @@ define(function() {
                 $node.attr('maxOccurs'),
                 $node.attr('ref'),
                 $node.attr('base'),
-                $node.attr('use')
+                $node.attr('use'),
+                nodeMap
                 );
         }
         this.attrs = attrs;
