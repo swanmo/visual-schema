@@ -53,7 +53,7 @@ define(['jquery', 'parseUtils'], function($, parseUtils) {
 			var desc;
 			var css;
 			if (entry.name=="element") {
-				desc = "<div class='e'>E</div> " + entry.attrs.name;
+				desc = "<div class='e' title='element'>E</div> " + entry.attrs.name;
 				if (entry.attrs.type) {
 					desc += " <span class='et'>: " + parseUtils.parseName(entry.attrs.type) + "</span>";
 				}
@@ -74,7 +74,7 @@ define(['jquery', 'parseUtils'], function($, parseUtils) {
 				if (entry.attrs.minOccurs == "0") {
 					css += " optional";
 				}
-				desc = "<div class='e'><span class='icon-key2'></span></div> " + entry.attrs.name;
+				desc = "<div class='e' title='" + entry.name + "'><span class='icon-key2'></span></div> " + entry.attrs.name;
 				if (entry.attrs.type) {
 					desc += " <span class='et'>: " + parseUtils.parseName(entry.attrs.type) + "</span>";
 				}
@@ -86,7 +86,7 @@ define(['jquery', 'parseUtils'], function($, parseUtils) {
 				}
 
 			} else if (entry.name=="attribute") {
-				desc = "<div class='a'>A</div> " + entry.attrs.name;
+				desc = "<div class='a' title='attribute'>A</div> " + entry.attrs.name;
 
 				if (entry.attrs.type) {
 					desc += " <span class='et'>: " + parseUtils.parseName(entry.attrs.type) + "</span>";

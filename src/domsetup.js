@@ -1,4 +1,4 @@
-define(['jquery', 'xsd', 'init'], function($, xsd, init) {
+define(['jquery', 'xsd', 'init', 'root'], function($, xsd, init, $root) {
 	return {
 		setupButtons:function() {
 			$("#optXsd").on("click", function() {
@@ -16,20 +16,27 @@ define(['jquery', 'xsd', 'init'], function($, xsd, init) {
 			init.setDefaults();
 
 			$("#showXsd").on("click", function() {
-				xsd.show($("#xsdContent").val());
-				$("#headRow").slideUp(800, function() {
-					$("#logn").slideToggle();	
+
+				$("#headRow").addClass("closed").removeClass("semi-open");
+
+				
+				$("#inputRow").slideUp(function() {
+					$("#leftie").slideToggle("fast");
 				});
-				$("#inputRow").slideUp();
 				
 				$(this).hide();
-				$("#back").show();
+				
+				$root.show();
+				xsd.show($("#xsdContent").val());
 			});
 
-			$("#back").on("click", function() {
+			$("#undo").on("click", function() {
+				$root.hide();
+				$("#leftie").slideToggle("fast");
+				$("#headRow").addClass("semi-open").removeClass("closed");
 				$("#inputRow").slideDown();
-				$(this).hide();
 				$("#showXsd").show();
+			
 			});
 
 			$('.collapser').on("click", function() {

@@ -57,7 +57,6 @@ define(function() {
             $.each($node[0].attributes, function(i, attrib){
                 nodeMap[attrib.name] = attrib.value;
             });
-            
 
             attrs = new Attrs(
                 $node.attr('name'),

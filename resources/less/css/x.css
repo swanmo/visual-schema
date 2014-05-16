@@ -20,6 +20,9 @@ div.x div {
   padding: 0;
   vertical-align: middle;
 }
+div.x>div.hasBranch {
+  border: none !important;
+}
 
 div.x div.hasBranch {
   display: inline-block;
@@ -31,7 +34,7 @@ div.x div.hasBranch {
   border-top: none;
   border-bottom: none;
   padding: 0px 2px 3px 10px;
-  margin: 3px 0 3px 0;
+  margin: 3px 0 3px 5px;
 }
 div.x div.hasBranch > div {
   display: block;
@@ -106,9 +109,9 @@ div.x div.e {
 }
 
 div.x div.a {
-  background: #8888cc;
+  background: #999999;
   color: #fff;
-  border: 3px solid #8888cc;
+  border: 3px solid #999999;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-top-right-radius: 5px;
@@ -131,7 +134,7 @@ div.x div.a {
   /* filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b8e1fc', endColorstr='#bdf3fd',GradientType=1 ); /* IE6-9 */
 }
 div.x div.s {
-  margin: 0 10px 0 10px;
+  margin: 0 5px 0 10px;
   color: #000;
   border: 3px solid #8888cc;
   -webkit-border-radius: 4px;

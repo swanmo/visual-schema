@@ -2,51 +2,70 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>XML parse</title>
-    <script data-main="src/main.js" src="lib/require.js"></script>
-	<link rel="stylesheet" type="text/css" href="resources/css/client.css">
-	<link rel="stylesheet" type="text/css" href="resources/css/client-layout.css">
+    <title>eye on visual test</title>
+    <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="resources/less/css/client.css">
+    <link rel="stylesheet" type="text/css" href="resources/less/css/x.css">
+    <link rel="stylesheet" type="text/css" href="resources/css/bootstrap.css">
+    <style type="text/css">
+#divContainer {
+    width: 100%;
+    height: 100%;
+}
+#divHeader {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    height: 28px;
+    background:grey;
+}
+#divContentArea {
+    position: absolute;
+    left: 0px;
+    top: 30px;
+    right: 0px;
+    bottom: 30px;
+}
+#divContentLeft {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100px;
+    bottom: 0px;
+    background:red;
+    border:3px solid red;
+}
+#divContentRight {
+    position: absolute;
+    top: 0px;
+    left: 254px;
+    right: 0px;
+    bottom: 0px;
+    background:blue;
+}
+#divFooter {
+    position: absolute;
+    height: 28px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    background:green;
+}
+    </style>
   </head>
 
   <body>
-  	<h1>Parse XML with a Karma and require.js setup</h1>
-
-
-
-
-     <div class="xsd">
-        <div>
-          <span>atgardType (complexType)</span>
-        </div>
-
-        <div>
-            <span>...</span>
-        </div>
-
-        <div class="collapser">
-            +
-        </div>
-        
-        <div class="marker">
-              <div><span>firstname (string)</span></div>
-              <div><span>lastname (string)</span></div>
-              <div><span>age (int)</span></div>
-              <div class="xsd">
-                <span>trashType (complexType)</span>
-                <div>
-                    <span>...</span>
-                </div>
-                <div class="marker">
-                  <div>employer (string)</div>
-                  <div>employmentYears (int)</div>
-                </div>
-
-              </div>
-        </div>
+    <div class="container" style="width:100%">
+    <div class="row">
+      <div class="col-sm-12" style="background:red">sadfsdf</div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4" style="background:blue;">
+        <div style="position:absolute;top:0px;bottom:0px">sdfsd</div>
       </div>
-
-
-
-
+      <div class="col-sm-8" style="background:grey;">aa</div>
+    </div>
+    </div>
   </body>
 </html>

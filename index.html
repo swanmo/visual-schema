@@ -10,24 +10,23 @@
   </head>
 
   <body>
-    <div id="headRow">
+    <div id="headRow" class="slider">
         <div>
           <span class="icon-xsd"></span>
           <h1>eyeXSD</h1>
         </div>
         <label for="xsdContent">Paste XSD content below</label>
+        <span id="mm" class="icon-menu"></span>
     </div>
-    <div>
-      <div style="clear:both"></div>
+    
       <div id="leftCol">
-          <div class="lmenu-top"><span id="logn" style="display:none" class="icon-xsd"></span></div>
-          <div class="lmenu" id="optXsd"><span class="glyphicon glyphicon-file"></span></div>
-          <div class="lmenu" id="optSettings"><span class="glyphicon glyphicon-cog"></span></div>
-          <div class="lmenu" id="optAbout"><span class="glyphicon glyphicon-comment"></span></div>
+          <div id="leftie" style="display:none">
+            <div class="lmenu-top"><span id="logn" class="icon-xsd"></span></div>
+            <div class="lmenu" title="Go back"><span id="undo" class="icon-undo"></span></div>
+          </div>
       </div>
-      </div><div>
+    
       <div id="rightCol">
-
           <form role="form">
             <div id="inputRow">
                 <textarea class="form-control" id="xsdContent" placeholder="Paste here" style="height:460px"></textarea>
@@ -35,15 +34,12 @@
             </div>
             <div style="margin-top:5px">
                 <button type="button" id="showXsd" class="pull-right btn btn-default">Show!</button>
-                <button type="button" id="back" class="pull-right btn btn-default">Back</button>
             </div>
           </form>
 
           <div id="graph"></div>
+        </div>
       </div>
-      </div>
-    
-
     <script data-main="src/main.js" src="lib/require.js"></script>
   </body>
 </html>
