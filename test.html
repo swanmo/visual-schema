@@ -2,70 +2,88 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>eye on visual test</title>
+    <title>test on visual XSD</title>
     <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css' />
     <link rel="stylesheet" type="text/css" href="resources/less/css/client.css">
     <link rel="stylesheet" type="text/css" href="resources/less/css/x.css">
     <link rel="stylesheet" type="text/css" href="resources/css/bootstrap.css">
+
+    <link rel="stylesheet" type="text/css" href="resources/css/default.css">
+    <link rel="stylesheet" type="text/css" href="resources/css/component.css">
+    <script src="js/modernizr.custom.js"></script>
+    <script src="lib/classie.js"></script>
     <style type="text/css">
-#divContainer {
-    width: 100%;
-    height: 100%;
-}
-#divHeader {
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    right: 0px;
-    height: 28px;
-    background:grey;
-}
-#divContentArea {
-    position: absolute;
-    left: 0px;
-    top: 30px;
-    right: 0px;
-    bottom: 30px;
-}
-#divContentLeft {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 100px;
-    bottom: 0px;
-    background:red;
-    border:3px solid red;
-}
-#divContentRight {
-    position: absolute;
-    top: 0px;
-    left: 254px;
-    right: 0px;
-    bottom: 0px;
-    background:blue;
-}
-#divFooter {
-    position: absolute;
-    height: 28px;
-    left: 0px;
-    bottom: 0px;
-    right: 0px;
-    background:green;
-}
+        .md-perspective,
+        .md-perspective body {
+            height: 100%;
+            overflow: hidden;
+        }
+         
+        .md-perspective body  {
+            background: #222;
+            perspective: 600px;
+        }
+         
+        .container {
+            background: #e74c3c;
+            min-height: 100%;
+        }
     </style>
   </head>
 
   <body>
-    <div class="container" style="width:100%">
-    <div class="row">
-      <div class="col-sm-12" style="background:red">sadfsdf</div>
+    <div id="headRow" class="slider">
+        <div>
+          <span class="icon-xsd"></span>
+          <h1>eyeXSD</h1>
+        </div>
+        <label for="xsdContent">Paste XSD content below</label>
+        <span id="mm" class="icon-menu"></span>
     </div>
-    <div class="row">
-      <div class="col-sm-4" style="background:blue;">
-        <div style="position:absolute;top:0px;bottom:0px">sdfsd</div>
+    
+      <div id="leftCol">
+          <div id="leftie" style="display:none">
+            <div class="lmenu-top"><span id="logn" class="icon-xsd"></span></div>
+            <div class="lmenu" title="Go back"><span id="undo" class="icon-undo"></span></div>
+          </div>
       </div>
-      <div class="col-sm-8" style="background:grey;">aa</div>
+    
+      <div id="rightCol">
+          <form role="form">
+            <div id="inputRow">
+                <textarea class="form-control" id="xsdContent" placeholder="Paste here" style="height:460px"></textarea>
+
+            </div>
+            <div style="margin-top:5px">
+                <button type="button" id="showXsd" class="pull-right btn btn-default">Show!</button>
+            </div>
+          </form>
+
+          <div id="graph"></div>
+      </div>
+
+    
+
+
+
+
+    <div class="md-modal md-effect-17" id="modal-1">
+        <div class="md-content">
+            <h3>Modal Dialog</h3>
+            <div>
+                <p>This is a modal window. You can do the following things with it:</p>
+                <ul>
+                    <li><strong>Read:</strong> Modal windows will probably tell you something important so don't forget to read what it says.</li>
+                    <li><strong>Look:</strong> modal windows enjoy a certain kind of attention; just look at it and appreciate its presence.</li>
+                    <li><strong>Close:</strong> click on the button below to close the modal.</li>
+                </ul>
+                <button class="md-close">Close me!</button>
+            </div>
+        </div>
     </div>
-    </div>
+    <button class="md-trigger md-setperspective" data-modal="modal-1">Let me in</button>
+    <div class="md-overlay"></div><!-- the overlay element -->
+    <script data-main="src/main.js" src="lib/require.js"></script>
+    <script src="lib/modalEffects.js"></script>
   </body>
 </html>

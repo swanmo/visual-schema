@@ -19,13 +19,13 @@ define(['jquery', 'xsd', 'init', 'root'], function($, xsd, init, $root) {
 
 				$("#headRow").addClass("closed").removeClass("semi-open");
 
-				
+
 				$("#inputRow").slideUp(function() {
 					$("#leftie").slideToggle("fast");
 				});
-				
+
 				$(this).hide();
-				
+
 				$root.show();
 				xsd.show($("#xsdContent").val());
 			});
@@ -36,7 +36,6 @@ define(['jquery', 'xsd', 'init', 'root'], function($, xsd, init, $root) {
 				$("#headRow").addClass("semi-open").removeClass("closed");
 				$("#inputRow").slideDown();
 				$("#showXsd").show();
-			
 			});
 
 			$('.collapser').on("click", function() {
