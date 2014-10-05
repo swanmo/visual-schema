@@ -1,0 +1,21 @@
+{
+  "name": "eye",
+  "version": "0.0.0",
+  "description": "xsd visual",
+  "main": "karma.conf.js",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/swanmo/visual-schema.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/swanmo/visual-schema/issues"
+  },
+  "devDependencies": {
+    "http-server": "~0.7.1"
+  }
+}
