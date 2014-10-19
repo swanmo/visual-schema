@@ -53,9 +53,12 @@ define(['jquery', 'parseUtils'], function($, parseUtils) {
 			var desc;
 			var css;
 			if (entry.name=="element") {
-				desc = "<div class='e' title='element'>E</div> " + entry.attrs.name;
+				var name = entry.attrs.name || '<span style="color:#bbb">&lt;empty&gt;</span>'
+				desc = "<div class='e' title='element'>E</div> " + name;
 				if (entry.attrs.type) {
 					desc += " <span class='et'>: " + parseUtils.parseName(entry.attrs.type) + "</span>";
+				} else if (entry.attrs.nodeMap.ref) {
+					desc += " <span class='et'>: " + entry.attrs.nodeMap.ref + "</span>";
 				}
 
 				css = "element-e";
@@ -111,6 +114,9 @@ define(['jquery', 'parseUtils'], function($, parseUtils) {
 			} else if (entry.name=="extension") {
 				desc = "<span class='ctBadge'>extension base " + entry.attrs.base + "</span>";
 				addWrapperContainer = true;
+			} else if (entry.name=="restriction") {
+				desc = "<span class='rBadge'>restriction base " + entry.attrs.base + "</span>";
+				addWrapperContainer = true;
 			} else if (entry.name=="complexType") {
 				if (entry.attrs.name) {
 					desc = "<span class='ctBadge' title='complexType'>" + entry.attrs.name + "</span> ";	
@@ -118,6 +124,30 @@ define(['jquery', 'parseUtils'], function($, parseUtils) {
 					desc = "<span class='ctBadge'>complexType</span> ";
 				}
 				addWrapperContainer = true;
+			} else if (entry.name=="simpleType") {
+				if (entry.attrs.name) {
+					desc = "<span class='stBadge' title='simpleType'>" + entry.attrs.name + "</span> ";	
+				} else {
+					desc = "<span class='stBadge'>simpleType</span> ";
+				}
+				addWrapperContainer = true;
+			} else if (entry.name==='enumeration' || entry.name==='fractionDigits' || entry.name==='length' ||
+					entry.name==='maxExclusive' || entry.name==='maxInclusive' || entry.name==='maxLength' ||
+					entry.name==='minExclusive' || entry.name==='minInclusive' || entry.name==='minLength' ||
+					entry.name==='pattern' || entry.name==='totalDigits' || entry.name==='whiteSpace') {
+
+				if (entry.name==='enumeration') {
+					desc = "<div class='a' title='attribute'><span class='glyphicon glyphicon-th-list'></span></div> " + entry.name;
+				} else {
+					desc = "<div class='a' title='attribute'><span class='glyphicon glyphicon-ban-circle'></span></div> " + entry.name;
+				}
+
+				if (entry.attrs.nodeMap.value) {
+					desc += " <span class='et'>: " + entry.attrs.nodeMap.value + "</span>";
+				}
+				css = "element-a";
+				$div1.addClass("padded");
+
 			} else {
 				if (entry.attrs.name) {
 					desc = entry.attrs.name + ' (' + entry.name + ')';
