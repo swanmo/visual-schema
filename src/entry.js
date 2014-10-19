@@ -10,20 +10,22 @@ define(function() {
         this.nodeMap = nodeMap;
     };
 
-    var AttrsElement = function(name, type, minOccurs, maxOccurs, ref, base) {
+    var AttrsElement = function(name, type, minOccurs, maxOccurs, ref, base, nodeMap) {
         this.name = name;
         this.type = type;
         this.minOccurs = minOccurs;
         this.maxOccurs = maxOccurs;
         this.ref = ref;
         this.base = base;
+        this.nodeMap = nodeMap;
     };
 
-    var AttrsAttribute = function(name, type, use, ref) {
+    var AttrsAttribute = function(name, type, use, ref, nodeMap) {
         this.name = name;
         this.type = type;
         this.use = use;
         this.ref = ref;
+        this.nodeMap = nodeMap;
     };
 
     var entry = function(prefix, name, node, parent, nsMap){
@@ -35,6 +37,12 @@ define(function() {
         this.children = [];
         this.linkedEntry = null;
         var $node = $(node);
+
+        var nodeMap = {};
+        $.each($node[0].attributes, function(i, attrib){
+            nodeMap[attrib.name] = attrib.value;
+        });
+
         if (name == "element") {
             attrs = new AttrsElement(
                 $node.attr('name'),
@@ -42,21 +50,19 @@ define(function() {
                 $node.attr('minOccurs'),
                 $node.attr('maxOccurs'),
                 $node.attr('ref') | $node.attr('refer'),
-                $node.attr('base')
+                $node.attr('base'),
+                nodeMap
                 );
         } else if (name == "sequence") {
             attrs = new AttrsAttribute(
                 $node.attr('name'),
                 $node.attr('type'),
                 $node.attr('use'),
-                $node.attr('ref')
+                $node.attr('ref'),
+                nodeMap
                 );
         } else {
-            var nodeMap = {};
             
-            $.each($node[0].attributes, function(i, attrib){
-                nodeMap[attrib.name] = attrib.value;
-            });
 
             attrs = new Attrs(
                 $node.attr('name'),
