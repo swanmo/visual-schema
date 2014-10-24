@@ -1,4 +1,5 @@
 define(['jquery', 'parseUtils'], function($, parseUtils) {
+	
 	var toggleDisplay = function() {
 		var element = $(this).next();
 		var label = $(this).text();
@@ -16,6 +17,9 @@ define(['jquery', 'parseUtils'], function($, parseUtils) {
 		// element.css("display", newDisplayProp);
 	}
 	return {
+		isExpanded: function(entry) {
+			return (entry.name === 'extension' || entry.name === 'restriction');
+		},
 		render: function(roots) {
 			var rootElem = $('<div>');
 			rootElem.addClass('hasBranch');
@@ -177,12 +181,19 @@ define(['jquery', 'parseUtils'], function($, parseUtils) {
 			$span.attr("title", title);
 
 			if (entry.linkedEntry) {
+				var isExpanded = this.isExpanded(entry);
 				var $mini = $('<div>');
 				$mini.addClass('expander');
-				$mini.html('+');
+				if (isExpanded) {
+					$mini.html('-');
+				} else {
+					$mini.html('+');
+					$childContainer.css('display', 'none');
+				}
+				
 				$mini.on('click', toggleDisplay);
 				$div1.append($mini);
-				$childContainer.css('display', 'none');
+				
 			}
 			
 			//Flytta denna innanför if-sats och ta bort kommentar nedanför för att återställa.
@@ -211,9 +222,9 @@ define(['jquery', 'parseUtils'], function($, parseUtils) {
 					var $extDiv = $('<div>');
 					var $expansionDiv = $('<div>');
 					$expansionDiv.addClass('expander');
-					$expansionDiv.html('++');
+					$expansionDiv.html('-');
 					$expansionDiv.on('click', toggleDisplay);
-					$wrapperDiv.css('display', 'none');
+					// $wrapperDiv.css('display', 'none');
 
 					$extDiv.append($expansionDiv);
 					$extDiv.append($wrapperDiv);
