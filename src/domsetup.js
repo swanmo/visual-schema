@@ -34,7 +34,7 @@ define(['jquery', 'xsd', 'init', 'root'], function($, xsd, init, $root) {
 				$root.hide();
 				$("#leftie").slideToggle("fast");
 				$("#headRow").addClass("semi-open").removeClass("closed");
-				$("#inputRow").slideDown();
+				$("#inputRow").slideDown(resizeBox);
 				$("#showXsd").show();
 			});
 
@@ -47,6 +47,16 @@ define(['jquery', 'xsd', 'init', 'root'], function($, xsd, init, $root) {
 					var $current = $(this);
 				});
 			});
+			var resizeBox = function() {
+				var proposedHeight = $(window).height() - 240;
+				if (proposedHeight < 250) {
+					proposedHeight = 250;
+				}
+				console.log(proposedHeight, $(window).height());
+			  	$('#xsdContent').height(proposedHeight);
+			}
+			resizeBox();
+			$(window).resize(resizeBox);
 		}
 	};
 });

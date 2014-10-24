@@ -20,10 +20,9 @@ div.x div {
   padding: 0;
   vertical-align: middle;
 }
-div.x>div.hasBranch {
+div.x > div.hasBranch {
   border: none !important;
 }
-
 div.x div.hasBranch {
   display: inline-block;
   border: 3px solid #8888cc;
@@ -45,7 +44,6 @@ div.x div.padded {
 div.x div.ctContainer > div > div.hasBranch {
   border: none !important;
 }
-
 div.x div.ctContainer,
 div.x div.xb {
   border: 3px solid #aaaaaa;
@@ -77,9 +75,6 @@ div.x div.xb > div > div {
 div.x div.xb {
   color: #999;
 }
-div.x span.element.optional {
-  border: 2px dashed #8888cc;
-}
 div.x span.element-e {
   border: 2px solid #8888cc;
   -webkit-border-radius: 5px;
@@ -87,6 +82,13 @@ div.x span.element-e {
   border-radius: 5px;
   padding: 7px 5px 9px 3px;
 }
+div.x span.element-e.optional {
+  border-style: dotted !important;
+}
+div.x span.element-e.unimportant {
+  border-color: #ccd !important;
+}
+
 div.x span.element-a {
   border: 2px solid #8888cc;
   -webkit-border-radius: 5px;
@@ -107,7 +109,6 @@ div.x div.e {
   border-bottom-right-radius: 5px;
   padding: 1px 6px 1px 6px;
 }
-
 div.x div.a {
   background: #999999;
   color: #fff;
@@ -132,6 +133,7 @@ div.x div.a {
   /* background: linear-gradient(to right, #b8e1fc 0%,#a9d2f3 10%,#90bae4 25%,#90bcea 37%,#90bff0 50%,#6ba8e5 51%,#a2daf5 83%,#bdf3fd 100%); /* W3C */
 
   /* filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b8e1fc', endColorstr='#bdf3fd',GradientType=1 ); /* IE6-9 */
+
 }
 div.x div.s {
   margin: 0 5px 0 10px;

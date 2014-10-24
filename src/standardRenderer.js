@@ -53,7 +53,10 @@ define(['jquery', 'parseUtils'], function($, parseUtils) {
 			var desc;
 			var css;
 			if (entry.name=="element") {
+				var isUnimportant = (entry.attrs.name === undefined && entry.linkedEntry);
+				
 				var name = entry.attrs.name || '<span style="color:#bbb">&lt;empty&gt;</span>'
+
 				desc = "<div class='e' title='element'>E</div> " + name;
 				if (entry.attrs.type) {
 					desc += " <span class='et'>: " + parseUtils.parseName(entry.attrs.type) + "</span>";
@@ -66,6 +69,10 @@ define(['jquery', 'parseUtils'], function($, parseUtils) {
 				if (entry.attrs.minOccurs == "0") {
 					css += " optional";
 				}
+				if (isUnimportant) {
+					css += " unimportant";
+				}
+				
 			} else if (entry.name=="key" || entry.name=="keyref") {
 
 				if (entry.attrs.type) {
@@ -204,7 +211,7 @@ define(['jquery', 'parseUtils'], function($, parseUtils) {
 					var $extDiv = $('<div>');
 					var $expansionDiv = $('<div>');
 					$expansionDiv.addClass('expander');
-					$expansionDiv.html('+');
+					$expansionDiv.html('++');
 					$expansionDiv.on('click', toggleDisplay);
 					$wrapperDiv.css('display', 'none');
 

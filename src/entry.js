@@ -49,7 +49,7 @@ define(function() {
                 $node.attr('type'),
                 $node.attr('minOccurs'),
                 $node.attr('maxOccurs'),
-                $node.attr('ref') | $node.attr('refer'),
+                $node.attr('ref') || $node.attr('refer'),
                 $node.attr('base'),
                 nodeMap
                 );
