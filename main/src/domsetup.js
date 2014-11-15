@@ -52,7 +52,6 @@ define(['jquery', 'xsd', 'init', 'root'], function($, xsd, init, $root) {
 				if (proposedHeight < 250) {
 					proposedHeight = 250;
 				}
-				console.log(proposedHeight, $(window).height());
 			  	$('#xsdContent').height(proposedHeight);
 			}
 			resizeBox();

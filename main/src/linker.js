@@ -37,7 +37,6 @@ define(['parseUtils', 'logger'], function(parseUtils, logger) {
 
 	var findByNameAndPrefix = function(refName, mapByName, arrNamespacesMaps) {
 		var lookupName = parseUtils.parseName(refName);
-		console.log("looking up: " + lookupName);
 
 		var entry = mapByName[lookupName];
 		var isCorrectPrefix = false;
