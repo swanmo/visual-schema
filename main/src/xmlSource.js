@@ -10,7 +10,7 @@ var emptyWithRestriction = '<xs:element name="product">' +
 '  </xs:complexType>' +
 '</xs:element>';
 
-var sample = "<?xml version='1.0' encoding='utf-8' ?>\n" +
+var sampleWithKey = "<?xml version='1.0' encoding='utf-8' ?>\n" +
 "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'>\n" +
 "  <xs:element name='Root'>\n" +
 "    <xs:complexType>\n" +
@@ -85,7 +85,7 @@ var sample = "<?xml version='1.0' encoding='utf-8' ?>\n" +
 "  </xs:complexType>\n" +
 "</xs:schema>";
 
-    var complexTypeXml =
+    var sample =
         '<?xml version="1.0" encoding="UTF-8"?>\n' + 
         '<!-- edited with XMLSpy v2012 (http://www.altova.com) by Tore W -->\n' +
         '<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"\n' +

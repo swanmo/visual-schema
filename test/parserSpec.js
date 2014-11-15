@@ -24,7 +24,6 @@ define(['parser', 'model', 'xmlTestSource'], function(sut, model, xmlSource) {
 			expect(model.roots.length).toEqual(1);
 			expect(model.roots[0].children.length).toEqual(1);
 			expect(model.roots[0].children[0].attrs.name).toEqual('teresa');
-
 		});
 
 		it("should recognize multiple elements", function() {

@@ -1,0 +1,711 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:element name="dmodule">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="idstatus"/>
+                <xs:element ref="content"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="modelic" type="modelicType"/>
+    <xs:element name="supeqvc" type="supeqvcType"/>
+    <xs:element name="ecscs" type="ecscsType"/>
+    <xs:element name="eidc" type="eidcType"/>
+    <xs:element name="cidc" type="cidcType"/>
+    <xs:element name="discode" type="discodeType"/>
+    <xs:element name="discodev" type="discodevType"/>
+    <xs:element name="incode" type="incodeType"/>
+    <xs:element name="incodev" type="incodevType"/>
+    <xs:element name="itemloc" type="itemlocType"/>
+
+    <xs:element name="techname" type="xs:string"/>
+    <xs:element name="infoname" type="xs:string"/>
+
+    <xs:element name="issno">
+        <xs:complexType>
+            <xs:attribute name="issno" type="issnovalueType" use="required"/>
+            <xs:attribute name="type" type="issnotypeType" default="new"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="issdate">
+        <xs:complexType>
+            <xs:attribute name="year" type="YEAR" use="required"/>
+            <xs:attribute name="month" type="MONTH" use="required"/>
+            <xs:attribute name="day" type="DAY" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="language">
+        <xs:complexType>
+            <xs:attribute name="language" type="languagetypeType" use="required"/>
+            <xs:attribute name="country" type="countryType"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="security">
+        <xs:complexType>
+            <xs:attribute ref="class" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="rpc">
+        <xs:complexType mixed="true">
+            <xs:attribute name="rpcname" type="xs:string"/>
+            <xs:attribute name="id" type="xs:ID"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="orig">
+        <xs:complexType mixed="true">
+            <xs:attribute name="origname" type="xs:string"/>
+            <xs:attribute name="id" type="xs:ID"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="applic">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="type" minOccurs="0"/>
+                <xs:element ref="model" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID"/>
+            <xs:attribute name="level" type="xs:NMTOKEN"/>
+            <xs:attribute name="mark" type="xs:NMTOKEN"/>
+            <xs:attribute ref="change"/>
+            <xs:attribute name="rfc" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="type" type="xs:string"/>
+
+    <xs:element name="model">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="version" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="mfc" minOccurs="0"/>
+                <xs:element ref="batchno" minOccurs="0"/>
+                <xs:element ref="moduleno" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="serialno" minOccurs="0"/>
+                <xs:element ref="pnr" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="nsn" minOccurs="0"/>
+                <xs:element ref="customer" minOccurs="0"/>
+                <xs:element ref="softprog" minOccurs="0"/>
+                <xs:element ref="config" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="model" type="xs:string" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="version">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="versrank" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="version" type="xs:string" use="required"/>
+            <xs:attribute name="id" type="xs:ID"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="unverif">
+        <xs:complexType/>
+    </xs:element>
+
+    <xs:element name="firstver">
+        <xs:complexType>
+            <xs:attribute name="type" type="firstvertypeType" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="sbc">
+        <xs:complexType mixed="true">
+            <xs:attribute name="id" type="xs:ID"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="content">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="refs"/>
+                <xs:element ref="acrw"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="refs">
+        <xs:complexType>
+            <xs:choice>
+                <xs:element ref="norefs"/>
+                <xs:element ref="rdandrt"/>
+                <xs:element ref="refdms"/>
+                <xs:element ref="reftp"/>
+            </xs:choice>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="refdms">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="refdm" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="refdm">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="applic" minOccurs="0"/>
+                <xs:choice>
+                    <xs:element ref="age"/>
+                    <xs:element ref="avee"/>
+                </xs:choice>
+                <xs:element ref="issno" minOccurs="0"/>
+                <xs:element ref="dmtitle" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="target" type="xs:string"/>
+            <xs:attribute name="id" type="xs:ID"/>
+            <xs:attribute name="level" type="xs:NMTOKEN"/>
+            <xs:attribute name="mark" type="xs:NMTOKEN"/>
+            <xs:attribute ref="change"/>
+            <xs:attribute name="rfc" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="xref">
+        <xs:complexType mixed="true">
+            <xs:sequence>
+                <xs:element ref="applic" minOccurs="0"/>
+                <xs:choice minOccurs="0" maxOccurs="unbounded">
+                    <xs:element ref="subscrpt"/>
+                    <xs:element ref="supscrpt"/>
+                </xs:choice>
+            </xs:sequence>
+            <xs:attribute name="xrefid" type="xs:IDREF"/>
+            <xs:attribute ref="xidtype"/>
+            <xs:attribute name="target" type="xs:string"/>
+            <xs:attribute name="destitle" type="xs:string"/>
+            <xs:attribute name="pretext" type="xs:string"/>
+            <xs:attribute name="posttext" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="symbol">
+        <xs:complexType mixed="true">
+            <xs:sequence>
+                <xs:element ref="applic" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="boardno" type="xs:ENTITY" use="required"/>
+            <xs:attribute name="id" type="xs:ID"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="acrw">
+        <xs:complexType>
+            <xs:choice>
+                <xs:element ref="frc"/>
+                <xs:element ref="descacrw"/>
+            </xs:choice>
+            <xs:attribute name="id" type="xs:ID"/>
+            <xs:attribute ref="class"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="title">
+        <xs:complexType mixed="true">
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+
+                <xs:element ref="xref"/>
+                <xs:element ref="indxflag"/>
+                <xs:element ref="change"/>
+                <xs:element ref="emphasis"/>
+                <xs:element ref="symbol"/>
+                <xs:element ref="subscrpt"/>
+                <xs:element ref="supscrpt"/>
+                <xs:element ref="refdm"/>
+                <xs:element ref="reftp"/>
+                <xs:element ref="capgrp"/>
+                <xs:element ref="caption"/>
+            </xs:choice>
+            <xs:attribute ref="class"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="graphic">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="hotspot" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="boardno" type="xs:ENTITY" use="required"/>
+            <xs:attribute name="id" type="xs:ID"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="hotspot">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="applic" minOccurs="0"/>
+                <xs:choice minOccurs="0" maxOccurs="unbounded">
+                    <xs:element ref="hotspot"/>
+                    <xs:element ref="xref"/>
+                </xs:choice>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID"/>
+            <xs:attribute name="apsid" type="xs:string"/>
+            <xs:attribute name="apsname" type="xs:string"/>
+            <xs:attribute name="type" type="xs:string"/>
+            <xs:attribute name="title" type="xs:string"/>
+            <xs:attribute name="descript" type="xs:string"/>
+            <xs:attribute name="coords" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="para">
+        <xs:complexType mixed="true">
+            <xs:sequence>
+                <xs:element ref="applic" minOccurs="0"/>
+                <xs:choice maxOccurs="unbounded">
+                    <xs:choice minOccurs="0">
+
+                        <xs:element ref="xref"/>
+                        <xs:element ref="indxflag"/>
+                        <xs:element ref="change"/>
+                        <xs:element ref="emphasis"/>
+                        <xs:element ref="symbol"/>
+                        <xs:element ref="subscrpt"/>
+                        <xs:element ref="supscrpt"/>
+                        <xs:element ref="refdm"/>
+                        <xs:element ref="reftp"/>
+                        <xs:element ref="capgrp"/>
+                        <xs:element ref="caption"/>
+                    </xs:choice>
+                    <xs:choice>
+                        <xs:element ref="seqlist"/>
+                        <xs:element ref="randlist"/>
+                        <xs:element ref="deflist"/>
+                    </xs:choice>
+                </xs:choice>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID"/>
+            <xs:attribute name="level" type="xs:NMTOKEN"/>
+            <xs:attribute name="mark" type="xs:NMTOKEN"/>
+            <xs:attribute ref="change"/>
+            <xs:attribute name="rfc" type="xs:string"/>
+            <xs:attribute ref="class"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="item">
+        <xs:complexType mixed="true">
+            <xs:sequence>
+                <xs:element ref="applic" minOccurs="0"/>
+                <xs:choice maxOccurs="unbounded">
+                    <xs:element ref="para"/>
+                    <xs:choice maxOccurs="unbounded">
+                        <xs:choice minOccurs="0">
+
+                            <xs:element ref="xref"/>
+                            <xs:element ref="indxflag"/>
+                            <xs:element ref="change"/>
+                            <xs:element ref="emphasis"/>
+                            <xs:element ref="symbol"/>
+                            <xs:element ref="subscrpt"/>
+                            <xs:element ref="supscrpt"/>
+                            <xs:element ref="refdm"/>
+                            <xs:element ref="reftp"/>
+                            <xs:element ref="capgrp"/>
+                            <xs:element ref="caption"/>
+                        </xs:choice>
+                        <xs:choice>
+                            <xs:element ref="seqlist"/>
+                            <xs:element ref="randlist"/>
+                            <xs:element ref="deflist"/>
+                        </xs:choice>
+                    </xs:choice>
+                </xs:choice>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID"/>
+            <xs:attribute name="level" type="xs:NMTOKEN"/>
+            <xs:attribute name="mark" type="xs:NMTOKEN"/>
+            <xs:attribute ref="change"/>
+            <xs:attribute name="rfc" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="deflist">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:sequence minOccurs="0">
+                    <xs:element ref="applic" minOccurs="0"/>
+                    <xs:element ref="title"/>
+                </xs:sequence>
+                <xs:sequence maxOccurs="unbounded">
+                    <xs:element ref="term"/>
+                    <xs:element ref="def"/>
+                </xs:sequence>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID"/>
+            <xs:attribute name="level" type="xs:NMTOKEN"/>
+            <xs:attribute name="mark" type="xs:NMTOKEN"/>
+            <xs:attribute ref="change"/>
+            <xs:attribute name="rfc" type="xs:string"/>
+            <xs:attribute ref="class"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="term">
+        <xs:complexType mixed="true">
+            <xs:sequence>
+                <xs:element ref="applic" minOccurs="0"/>
+                <xs:choice minOccurs="0" maxOccurs="unbounded">
+
+                    <xs:element ref="xref"/>
+                    <xs:element ref="indxflag"/>
+                    <xs:element ref="change"/>
+                    <xs:element ref="emphasis"/>
+                    <xs:element ref="symbol"/>
+                    <xs:element ref="subscrpt"/>
+                    <xs:element ref="supscrpt"/>
+                    <xs:element ref="refdm"/>
+                    <xs:element ref="reftp"/>
+                    <xs:element ref="capgrp"/>
+                    <xs:element ref="caption"/>
+                </xs:choice>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID"/>
+            <xs:attribute name="level" type="xs:NMTOKEN"/>
+            <xs:attribute name="mark" type="xs:NMTOKEN"/>
+            <xs:attribute ref="change"/>
+            <xs:attribute name="rfc" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="def">
+        <xs:complexType mixed="true">
+            <xs:sequence>
+                <xs:element ref="applic" minOccurs="0"/>
+                <xs:choice maxOccurs="unbounded">
+                    <xs:element ref="para"/>
+                    <xs:choice maxOccurs="unbounded">
+                        <xs:choice minOccurs="0">
+
+                            <xs:element ref="xref"/>
+                            <xs:element ref="indxflag"/>
+                            <xs:element ref="change"/>
+                            <xs:element ref="emphasis"/>
+                            <xs:element ref="symbol"/>
+                            <xs:element ref="subscrpt"/>
+                            <xs:element ref="supscrpt"/>
+                            <xs:element ref="refdm"/>
+                            <xs:element ref="reftp"/>
+                            <xs:element ref="capgrp"/>
+                            <xs:element ref="caption"/>
+                        </xs:choice>
+                        <xs:choice>
+                            <xs:element ref="seqlist"/>
+                            <xs:element ref="randlist"/>
+                            <xs:element ref="deflist"/>
+                        </xs:choice>
+                    </xs:choice>
+                </xs:choice>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID"/>
+            <xs:attribute name="level" type="xs:NMTOKEN"/>
+            <xs:attribute name="mark" type="xs:NMTOKEN"/>
+            <xs:attribute ref="change"/>
+            <xs:attribute name="rfc" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="drill">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:sequence>
+                    <xs:element ref="applic" minOccurs="0"/>
+                    <xs:element ref="title" minOccurs="0"/>
+                    <xs:element ref="tabtitle" minOccurs="0"/>
+                    <xs:sequence>
+                        <xs:element ref="warning" minOccurs="0" maxOccurs="unbounded"/>
+                        <xs:element ref="caution" minOccurs="0" maxOccurs="unbounded"/>
+                        <xs:element ref="note" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                    <xs:element ref="crew" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:choice minOccurs="0" maxOccurs="unbounded">
+                        <xs:element ref="para"/>
+                        <xs:choice>
+                            <xs:element ref="figure"/>
+                            <xs:element ref="table"/>
+                            <xs:element ref="foldout"/>
+                        </xs:choice>
+                    </xs:choice>
+                </xs:sequence>
+                <xs:choice minOccurs="0" maxOccurs="unbounded">
+                    <xs:choice maxOccurs="unbounded">
+                        <xs:element ref="step"/>
+                        <xs:choice>
+                            <xs:sequence>
+                                <xs:element ref="if"/>
+                                <xs:element ref="elseif" minOccurs="0" maxOccurs="unbounded"/>
+                            </xs:sequence>
+                            <xs:element ref="case"/>
+                        </xs:choice>
+                    </xs:choice>
+                    <xs:element ref="subdrill" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:choice>
+                <xs:element ref="endmattr" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute ref="drilltyp" default="none"/>
+            <xs:attribute ref="ordered" default="on"/>
+            <xs:attribute name="id" type="xs:ID"/>
+            <xs:attribute name="level" type="xs:NMTOKEN"/>
+            <xs:attribute name="mark" type="xs:NMTOKEN"/>
+            <xs:attribute ref="change"/>
+            <xs:attribute name="rfc" type="xs:string"/>
+            <xs:attribute ref="class"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="step">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:sequence>
+                    <xs:element ref="applic" minOccurs="0"/>
+                    <xs:sequence>
+                        <xs:element ref="warning" minOccurs="0" maxOccurs="unbounded"/>
+                        <xs:element ref="caution" minOccurs="0" maxOccurs="unbounded"/>
+                        <xs:element ref="note" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                        <xs:element ref="para"/>
+                        <xs:element ref="note" minOccurs="0" maxOccurs="unbounded"/>
+                        <xs:choice minOccurs="0">
+                            <xs:element ref="figure"/>
+                            <xs:element ref="table"/>
+                            <xs:element ref="foldout"/>
+                        </xs:choice>
+                    </xs:sequence>
+                    <xs:choice>
+                        <xs:sequence>
+                            <xs:element ref="crew" minOccurs="0" maxOccurs="unbounded"/>
+                            <xs:element ref="procd"/>
+                            <xs:choice minOccurs="0">
+                                <xs:element ref="figure"/>
+                                <xs:element ref="table"/>
+                                <xs:element ref="foldout"/>
+                            </xs:choice>
+                        </xs:sequence>
+                        <xs:sequence>
+                            <xs:element ref="challeng"/>
+                            <xs:sequence maxOccurs="unbounded">
+                                <xs:element ref="crew" minOccurs="0" maxOccurs="unbounded"/>
+                                <xs:element ref="response"/>
+                            </xs:sequence>
+                        </xs:sequence>
+                    </xs:choice>
+                    <xs:element ref="note" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+                <xs:choice minOccurs="0" maxOccurs="unbounded">
+                    <xs:element ref="step"/>
+                    <xs:choice>
+                        <xs:sequence>
+                            <xs:element ref="if"/>
+                            <xs:element ref="elseif" minOccurs="0" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                        <xs:element ref="case"/>
+                    </xs:choice>
+                </xs:choice>
+            </xs:sequence>
+            <xs:attribute name="label" type="xs:string"/>
+            <xs:attribute name="id" type="xs:ID"/>
+            <xs:attribute name="level" type="xs:NMTOKEN"/>
+            <xs:attribute name="mark" type="xs:NMTOKEN"/>
+            <xs:attribute ref="change"/>
+            <xs:attribute name="rfc" type="xs:string"/>
+            <xs:attribute ref="memorize" default="no"/>
+            <xs:attribute ref="dotline" default="dot"/>
+            <xs:attribute ref="ordered" default="on"/>
+            <xs:attribute ref="class"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="procd">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="applic" minOccurs="0"/>
+                <xs:element ref="para"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="figure">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:sequence>
+                    <xs:element ref="applic" minOccurs="0"/>
+                    <xs:element ref="title"/>
+                </xs:sequence>
+                <xs:choice>
+                    <xs:sequence>
+                        <xs:element ref="graphic"/>
+                        <xs:element ref="rfa" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                    <xs:sequence maxOccurs="unbounded">
+                        <xs:element ref="sheet"/>
+                        <xs:element ref="graphic"/>
+                        <xs:element ref="rfa" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:choice>
+                <xs:element ref="legend" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID"/>
+            <xs:attribute name="level" type="xs:NMTOKEN"/>
+            <xs:attribute name="mark" type="xs:NMTOKEN"/>
+            <xs:attribute ref="change"/>
+            <xs:attribute name="rfc" type="xs:string"/>
+            <xs:attribute ref="class"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="legend">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="deflist"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="descacrw">
+        <xs:complexType>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:sequence>
+                    <xs:sequence>
+                        <xs:element ref="warning" minOccurs="0" maxOccurs="unbounded"/>
+                        <xs:element ref="caution" minOccurs="0" maxOccurs="unbounded"/>
+                        <xs:element ref="note" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                    <xs:element ref="para0" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+                <xs:choice>
+                    <xs:element ref="figure"/>
+                    <xs:element ref="table"/>
+                    <xs:element ref="foldout"/>
+                </xs:choice>
+            </xs:choice>
+            <xs:attribute ref="class"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="para0">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:sequence>
+                    <xs:sequence>
+                        <xs:element ref="applic" minOccurs="0"/>
+                        <xs:element ref="title" minOccurs="0"/>
+                    </xs:sequence>
+                    <xs:sequence>
+                        <xs:choice minOccurs="0" maxOccurs="unbounded">
+                            <xs:element ref="specpara"/>
+                            <xs:element ref="para"/>
+                            <xs:choice minOccurs="0">
+                                <xs:element ref="figure"/>
+                                <xs:element ref="table"/>
+                                <xs:element ref="foldout"/>
+                            </xs:choice>
+                        </xs:choice>
+                        <xs:element ref="drill" minOccurs="0"/>
+                    </xs:sequence>
+                </xs:sequence>
+                <xs:element ref="subpara1" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID"/>
+            <xs:attribute name="level" type="xs:NMTOKEN"/>
+            <xs:attribute name="mark" type="xs:NMTOKEN"/>
+            <xs:attribute ref="change"/>
+            <xs:attribute name="rfc" type="xs:string"/>
+            <xs:attribute ref="class"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:simpleType name="modelicType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Za-z0-9]{2,14}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="discodeType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Za-z0-9]{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="discodevType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Za-z0-9]{1,3}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="incodeType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Za-z0-9]{3}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="incodevType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Za-z0-9]{1}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="itemlocType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Za-z0-9]{1}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="sdcType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Za-z0-9]{1,4}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="issnovalueType">
+        <xs:restriction base="xs:nonNegativeInteger">
+            <xs:pattern value="\d{3}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:attribute name="xidtype">
+        <xs:simpleType>
+            <xs:restriction base="xs:token">
+                <xs:enumeration value="figure"/>
+                <xs:enumeration value="table"/>
+                <xs:enumeration value="supply"/>
+                <xs:enumeration value="supequip"/>
+                <xs:enumeration value="spares"/>
+                <xs:enumeration value="para"/>
+                <xs:enumeration value="step"/>
+                <xs:enumeration value="sheet"/>
+                <xs:enumeration value="hotspot"/>
+                <xs:enumeration value="other"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:attribute>
+
+<xs:complexType name="AddressType">
+  <xs:sequence>
+    <xs:element name="Address1" type="xs:string"/>
+    <xs:element name="Address2" type="xs:string"/>
+    <xs:element name="zip" type="xs:string"/>
+  </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="InternalAddressType">
+   <xs:complexContent>
+     <xs:restriction base="AddressType">
+       <xs:sequence>
+         <xs:element name="Address1" type="xs:string" />
+         <xs:element name="zip" type="xs:string" />
+       </xs:sequence>
+     </xs:restriction>
+   </xs:complexContent>
+</xs:complexType>
+
+
+
+</xs:schema>

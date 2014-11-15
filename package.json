@@ -1,21 +1,21 @@
 {
-  "name": "eye",
-  "version": "0.0.0",
-  "description": "xsd visual",
-  "main": "karma.conf.js",
-  "directories": {
-    "test": "test"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/swanmo/visual-schema.git"
-  },
-  "author": "",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/swanmo/visual-schema/issues"
-  },
+  "name": "jorden-gui",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {},
   "devDependencies": {
-    "http-server": "~0.7.1"
+    "grunt": "~0.4.5",
+    "grunt-bower-task": "^0.4.0",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-concat": "^0.5.0",
+    "grunt-contrib-copy": "^0.5.0",
+    "grunt-contrib-cssmin": "^0.10.0",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-requirejs": "~0.4.4",
+    "grunt-contrib-uglify": "^0.5.1",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-env": "^0.4.1",
+    "grunt-exec": "^0.4.6",
+    "grunt-processhtml": "~0.3.3"
   }
 }
