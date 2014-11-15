@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>eye on visual XSD</title>
+    <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="resources/less/css/client.css">
+    <link rel="stylesheet" type="text/css" href="resources/less/css/x.css">
+    <link rel="stylesheet" type="text/css" href="resources/css/bootstrap.css">
+    <link rel="icon" href="favicon.ico">
+  </head>
+
+  <body>
+    <div id="headRow" class="slider">
+        <div>
+          <span class="icon-xsd"></span>
+          <h1>eyeXSD</h1>
+        </div>
+        <label for="xsdContent">Paste XSD content below</label>
+        <a href="what.html" rel="about">
+          <span id="mm" class="icon-menu"></span>
+        </a>
+    </div>
+
+      <div id="leftCol">
+          <div id="leftie" style="display:none">
+            <div class="lmenu-top"><span id="logn" class="icon-xsd"></span></div>
+            <div class="lmenu" title="Go back"><span id="undo" class="icon-undo"></span></div>
+          </div>
+      </div>
+
+      <div id="rightCol">
+          <form role="form">
+            <div id="inputRow">
+                <textarea class="form-control" id="xsdContent" placeholder="Paste here" style="height:460px"></textarea>
+
+            </div>
+            <div style="margin-top:5px">
+                <button type="button" id="showXsd" class="pull-right btn btn-default">Show!</button>
+            </div>
+          </form>
+
+          <div id="graph"></div>
+        </div>
+      </div>
+
+      <div id="menuContainer" class="menu menuContainerHidden" style="display:none">
+        <div class="tl"><a class="x"><span id="optXsd" class="icon-xsd"></span></a></div>
+        <div class="tr"><a class="x"><span id="optSettings" class="icon-cog"></span></a></div>
+        <div class="bl"><a class="x"><span id="optAbout" class="icon-question"></span></a></div>
+        <div class="br"><a class="x"><span id="optClose" class="icon-close"></span></a></div>
+      </div>
+
+    <script src="main.js"></script>
+
+    <!-- built 2014-11-15(0.0.1) -->
+    
+  </body>
+</html>
