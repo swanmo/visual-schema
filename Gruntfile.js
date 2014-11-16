@@ -16,11 +16,17 @@ module.exports = function (grunt) {
     requirejs: {
       compile: {
         options: {
-          baseUrl: ".",
-          name: 'main/lib/vendor/almond/almond.js',
-          mainConfigFile: "main/src/main.js",
-          out: "dist/optimized.js",
-          wrap:true
+          baseUrl: 'main/src',
+ 
+          out: 'dist/main.js',
+          optimize: 'uglify2',
+         
+          name: '../lib/vendor/almond/almond',
+          include: ['main'],
+         
+          paths: {
+            jquery: '../lib/jquery'
+          }
         }
       }
     },
@@ -109,7 +115,9 @@ module.exports = function (grunt) {
   grunt.registerTask('build', ['copy:dist', 'requirejs:compile']);
 
   grunt.registerTask('make-dist', [
+    'clean:dist',
     'copy:dist',
+    'requirejs:compile',
     'processhtml:dist'
   ]);
 };
