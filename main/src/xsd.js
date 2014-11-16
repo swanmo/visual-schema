@@ -7,14 +7,21 @@ function (p,	   model,   renderer,   root,   linker) {
 
 			model.clean();
 
-		    p.parse(xsdValue);
+			var errors = p.getValidationError(xsdValue);
 
-		    linker.link(model.roots);
-		    
-		    var domElem = renderer.render(model.roots, root);
-			
-			root.addClass('x');
-			root.html(domElem);
+			if (errors !== null) {
+				root.html('<h2>Error when parsing xsd...</h2>' + errors);
+			} else {
+
+			    p.parse(xsdValue);
+
+			    linker.link(model.roots);
+			    
+			    var domElem = renderer.render(model.roots, root);
+				
+				root.addClass('x');
+				root.html(domElem);
+			}
 		}
 	}
 });

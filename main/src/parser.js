@@ -36,15 +36,48 @@ define(['model'], function (model) {
 
 			$elem.contents()
 				.filter(function() {
-			      return this.nodeType != 3;
-			    })
+					return this.nodeType != 3;
+				})
 				.each(function() {
 					me.elements(this, entry);
 				});
 		},
+		getValidationError: function(xmlStr) {
+			
+			var oParser = new DOMParser();
+			var oDOM = oParser.parseFromString(xmlStr, "text/xml");
+			return this.getParserError(oDOM.documentElement)
+		},
+		getParserError:function(item) {
+			console.log('D: ', item);
+			if (item.nodeName === 'parsererror') {
+				 // andra raden innehåller felmeddelande...
+				return item.childNodes[1].innerHTML;
+			}
+			if (item.childNodes) {
+				for (var i = 0; i < item.childNodes.length; i++) {
+					var returnValue = this.getParserError(item.childNodes[i]);
+					if (returnValue !== null) {
+						return returnValue;
+					}
+				}
+			}
+			return null;
+		},
+		evalu:function(item, level) {
+			var offset = '';
+			for (var i=0; i < level; i++) {
+				offset += '  ';
+			}
+			for(var x in item) {
+				console.log('*' + offset, x + '=', item[x]);
+			}
+		},
 		parse: function(xml) {
 			var xmlDoc = $.parseXML(xml);
+			console.log(xmlDoc);
 			var $xml = $(xmlDoc);
+			console.log($xml);
 			var me = this;
 			var schemaElemTagName = "schema";
 
