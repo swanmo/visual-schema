@@ -43,13 +43,13 @@ define(['model'], function (model) {
 				});
 		},
 		getValidationError: function(xmlStr) {
-			
 			var oParser = new DOMParser();
 			var oDOM = oParser.parseFromString(xmlStr, "text/xml");
+			validator.validateXsd(oDOM);
 			return this.getParserError(oDOM.documentElement)
 		},
 		getParserError:function(item) {
-			console.log('D: ', item);
+
 			if (item.nodeName === 'parsererror') {
 				 // andra raden innehåller felmeddelande...
 				return item.childNodes[1].innerHTML;
@@ -75,9 +75,9 @@ define(['model'], function (model) {
 		},
 		parse: function(xml) {
 			var xmlDoc = $.parseXML(xml);
-			console.log(xmlDoc);
+			// console.log(xmlDoc);
 			var $xml = $(xmlDoc);
-			console.log($xml);
+			// console.log($xml);
 			var me = this;
 			var schemaElemTagName = "schema";
 

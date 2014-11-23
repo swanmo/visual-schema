@@ -14,8 +14,9 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-        {pattern: 'lib/**/*.js', included: false},
-        {pattern: 'src/**/*.js', included: false},
+        {pattern: 'main/lib/vendor/jasmine/lib/jasmine-core/jasmine.js', included: false},
+        {pattern: 'main/lib/static/jquery.js', included: true},
+        {pattern: 'main/src/**/*.js', included: false},
         {pattern: 'test/**/*Spec.js', included: false},
 
         'test/test-main.js',
@@ -24,7 +25,7 @@ module.exports = function(config) {
 
     // list of files to exclude
     exclude: [
-        'src/main.js'
+        'main/src/main.js'
     ],
 
 

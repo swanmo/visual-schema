@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "main": "main/index.html",
   "dependencies": {
-    "almond": "0.3.0"
+    "almond": "0.3.0",
+    "jasmine":"2.1.2"
   }
 }

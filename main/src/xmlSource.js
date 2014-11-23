@@ -21,6 +21,4 @@ define(function() {
     	getXml:function() {return sample},
         getTestXml:function() {return sample}
     }
-
-
 });

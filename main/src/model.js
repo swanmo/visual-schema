@@ -11,7 +11,6 @@ define(['entry', 'parseUtils'], function(Entry, parseUtils) {
 			if (!parent) {
 				this.roots.push(e);
 			} else {
-
 				parent.addChild(e);
 			}
 			return e;

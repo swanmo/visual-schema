@@ -39,9 +39,11 @@ define(function() {
         var $node = $(node);
 
         var nodeMap = {};
-        $.each($node[0].attributes, function(i, attrib){
-            nodeMap[attrib.name] = attrib.value;
-        });
+        if ($node[0] && $node[0].attributes) {
+            $.each($node[0].attributes, function(i, attrib){
+                nodeMap[attrib.name] = attrib.value;
+            });
+        }
 
         if (name == "element") {
             attrs = new AttrsElement(
@@ -62,8 +64,6 @@ define(function() {
                 nodeMap
                 );
         } else {
-            
-
             attrs = new Attrs(
                 $node.attr('name'),
                 $node.attr('type'),
