@@ -1,18 +1,12 @@
 define(['validators/util'], function (util) {
     var contentElements = [
       'annotation',
-      'attribute',
-      'attributeGroup',
-      'complexType',
+      'any',
+      'choice',
       'element',
       'group',
-      'import',
-      'include',
-      'notation',
-      'redefine',
-      'simpleType',
+      'sequence'
      ];
-
 
     return {
         getValidationErrors: function(schemaElement) {
