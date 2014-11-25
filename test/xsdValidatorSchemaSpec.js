@@ -5,7 +5,7 @@ define(['xsdValidator'], function(sut) {
 
         '<xs:element name="note">' +
         '  <xs:complexType>' +
-        '    <xs:sequence askja="asd">' +
+        '    <xs:sequence>' +
         '      <xs:element name="to" type="xs:string"/>' +
         '      <xs:element name="from" type="xs:string"/>' +
         '      <xs:element name="heading" type="xs:string"/>' +

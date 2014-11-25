@@ -15,6 +15,7 @@ define([], function () {
           return elementTagName;
         },
         validateChildren: function(element, validContentElements) {
+            // https://developer.mozilla.org/en-US/docs/Web/API/Element
             var results = undefined;
             if (element.children.length) {
                 for (var i = 0; i < element.children.length; i++) {

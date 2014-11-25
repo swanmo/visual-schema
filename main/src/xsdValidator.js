@@ -2,7 +2,7 @@ define(['validatorFactory', 'validators/util'], function (validatorFactory, vali
     var validators = validatorFactory('xs');
 
     var getTnsPrefix = function(element) {
-
+        // https://developer.mozilla.org/en-US/docs/Web/API/Attr
         for (var i = 0; i < element.attributes.length; i++) {
             if (element.attributes.item(i).value === 'http://www.w3.org/2001/XMLSchema') {
                 return validatorUtil.getInstance().withoutNs(element.attributes.item(i).name);
@@ -32,6 +32,7 @@ define(['validatorFactory', 'validators/util'], function (validatorFactory, vali
 
     return {
         getValidationErrors:function(xmlStr) {
+          // https://developer.mozilla.org/en-US/docs/Web/API/document
           var oParser = new DOMParser();
           var oDOM = oParser.parseFromString(xmlStr, "text/xml");
           var errorMessages = [];
