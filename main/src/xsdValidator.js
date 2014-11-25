@@ -22,8 +22,6 @@ define(['validatorFactory', 'validators/util'], function (validatorFactory, vali
         }
     };
 
-    
-
     var all = function(elem, errormessages) {
         apply(elem, errormessages);
 
