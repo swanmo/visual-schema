@@ -21,6 +21,22 @@ define(['xsdValidator'], function(sut) {
         '  </xs:whatever>' +
         '</xs:schema>'; 
 
+    var xsdCTwithCC = '<?xml version="1.0"?>' +
+        '<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">' +
+        '<xs:complexType name="fullpersoninfo">' +
+        '  <xs:complexContent>' +
+        '    <xs:extension base="personinfo">' +
+        '      <xs:sequence>' +
+        '        <xs:element name="address" type="xs:string"/>' +
+        '        <xs:element name="city" type="xs:string"/>' +
+        '        <xs:element name="country" type="xs:string"/>' +
+        '      </xs:sequence>' +
+        '    </xs:extension>' +
+        '  </xs:complexContent>' +
+        '</xs:complexType>'
+        '</xs:schema>'; 
+
+
     describe("xsdValidator", function() {
         it ("should accept xsd, from xsdComplexType", function() {
             expect(sut.getValidationErrors(xsdComplexType)).toBeUndefined();
@@ -30,5 +46,10 @@ define(['xsdValidator'], function(sut) {
             expect(sut.getValidationErrors(xsdWhateverType)).toBeDefined();
             expect(sut.getValidationErrors(xsdWhateverType).length).toBe(1);
         });
+
+        it ("should accept xsd (from xsdCTwithCC)", function() {
+            expect(sut.getValidationErrors(xsdCTwithCC)).toBeDefined();
+        });
+        
     });
 });

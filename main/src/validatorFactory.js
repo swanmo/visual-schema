@@ -5,6 +5,8 @@ define(['validators/schema',
 		'validators/element',
 		'validators/localElement',
 		'validators/annotation',
+		'validators/complexType',
+		'validators/complexContent',
 		'validators/empty'],
 function (
 		schema,
@@ -14,6 +16,8 @@ function (
 		element,
 		localElement,
 		annotation,
+		complexType,
+		complexContent,
 		empty) {
 
 	return function(xsPrefix) {
@@ -29,6 +33,8 @@ function (
     				return element;
     			} else if (elementName.tagName === xsPrefix + ':element') {
     				return localElement;
+				} else if (elementName.tagName === xsPrefix + ':complexType') {
+    				return complexType;
     			} else if (elementName.tagName === xsPrefix + ':choice') {
 	    			return choice;
     			} else if (elementName.tagName === xsPrefix + ':annotation') {

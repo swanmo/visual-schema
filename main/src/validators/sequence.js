@@ -13,8 +13,7 @@ define(['validators/util'], function (util) {
 
     return {
         getValidationErrors: function(schemaElement) {
-          console.log('validating sequence', schemaElement);
-            return util.getInstance().validateChildren(schemaElement, contentElements);
+          return util.getInstance().validateChildren(schemaElement, contentElements);
         }
     };
 });
