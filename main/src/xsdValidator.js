@@ -12,9 +12,9 @@ define(['validatorFactory', 'validators/util'], function (validatorFactory, vali
         
     };
 
-    var apply = function(e, errormessages) {
-        var validator = validators.get(e);
-        var errors = validator.getValidationErrors(e);
+    var apply = function(element, parent, errormessages) {
+        var validator = validators.get(element, parent);
+        var errors = validator.getValidationErrors(element);
         if (errors) {
             for (var i = 0; i < errors.length; i++) {
                 errormessages.push(errors[i]);
@@ -22,11 +22,11 @@ define(['validatorFactory', 'validators/util'], function (validatorFactory, vali
         }
     };
 
-    var all = function(elem, errormessages) {
-        apply(elem, errormessages);
+    var all = function(elem, parentElem, errormessages) {
+        apply(elem, parentElem, errormessages);
 
         for(var i = 0; i < elem.children.length; i++) {
-            all(elem.children[i], errormessages);
+            all(elem.children[i], elem, errormessages);
         }
     };
 
@@ -37,10 +37,10 @@ define(['validatorFactory', 'validators/util'], function (validatorFactory, vali
           var oDOM = oParser.parseFromString(xmlStr, "text/xml");
           var errorMessages = [];
           var tnsPrefix = getTnsPrefix(oDOM.documentElement);
-          console.log('tnsPrefix', tnsPrefix);
+
           validators = validatorFactory(tnsPrefix);
 
-          all(oDOM.documentElement, errorMessages);
+          all(oDOM.documentElement, undefined, errorMessages);
           return (errorMessages.length > 0) ? errorMessages : undefined;
         }
     };
