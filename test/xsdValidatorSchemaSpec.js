@@ -33,11 +33,26 @@ define(['xsdValidator'], function(sut) {
         '      </xs:sequence>' +
         '    </xs:extension>' +
         '  </xs:complexContent>' +
-        '</xs:complexType>'
-        '</xs:schema>'; 
+        '</xs:complexType>' +
+        '</xs:schema>';
+    var xsdWithSimpleTypeAndRestriction =
+        '<?xml version="1.0"?>' +
+        '<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">' +
+        '<xs:element name="car" type="carType"/>' +
+        '<xs:simpleType name="carType">' +
+        '  <xs:restriction base="xs:string">' +
+        '    <xs:enumeration value="Audi"/>' +
+        '    <xs:enumeration value="Golf"/>' +
+        '    <xs:enumeration value="BMW"/>' +
+        '  </xs:restriction>' +
+        '</xs:simpleType>' +
+        '</xs:schema>';
 
 
     describe("xsdValidator", function() {
+        beforeEach(function() {
+        });
+
         it ("should accept xsd, from xsdComplexType", function() {
             expect(sut.getValidationErrors(xsdComplexType)).toBeUndefined();
         });
@@ -48,7 +63,11 @@ define(['xsdValidator'], function(sut) {
         });
 
         it ("should accept xsd (from xsdCTwithCC)", function() {
-            expect(sut.getValidationErrors(xsdCTwithCC)).toBeDefined();
+            expect(sut.getValidationErrors(xsdCTwithCC)).toBeUndefined();
+        });
+
+        it ("should accept xsd with restriction  (from xsdWithSimpleTypeAndRestriction)", function() {
+            expect(sut.getValidationErrors(xsdWithSimpleTypeAndRestriction)).toBeUndefined();
         });
         
     });

@@ -1,7 +1,7 @@
-define([], function () {
+define(['validators/util'], function (util) {
     return {
         getValidationErrors: function(schemaElement) {
-            return undefined;
+            return util.getInstance().validateChildren(schemaElement, []);
         }
     };
 });
