@@ -48,6 +48,12 @@ define(['xsdValidator'], function(sut) {
         '</xs:simpleType>' +
         '</xs:schema>';
 
+    var xsdWithAttribute =
+        '<?xml version="1.0"?>' +
+        '<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">' +
+        '<xs:element name="name" type="xs:string"/>' +
+        '</xs:schema>';
+
 
     describe("xsdValidator", function() {
         beforeEach(function() {
@@ -69,6 +75,12 @@ define(['xsdValidator'], function(sut) {
         it ("should accept xsd with restriction  (from xsdWithSimpleTypeAndRestriction)", function() {
             expect(sut.getValidationErrors(xsdWithSimpleTypeAndRestriction)).toBeUndefined();
         });
+
+        it ("should accept xsd with attribute-tag  (from xsdWithSimpleTypeAndRestriction)", function() {
+            expect(sut.getValidationErrors(xsdWithAttribute)).toBeUndefined();
+        });
+
+        
         
     });
 });

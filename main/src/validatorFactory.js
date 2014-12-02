@@ -1,4 +1,6 @@
 define(['validators/schema',
+		'validators/attribute',
+		'validators/attributeLocal',
 		'validators/group',
 		'validators/sequence',
 		'validators/choice',
@@ -14,6 +16,8 @@ define(['validators/schema',
 		'validators/empty'],
 function (
 		schema,
+		attribute,
+		attributeLocal,
 		group,
 		sequence,
 		choice,
@@ -42,6 +46,11 @@ function (
     				return element;
     			} else if (elementName.tagName === xsPrefix + ':element') {
     				return localElement;
+				} else if (elementName.tagName === xsPrefix + ':attribute' && parentElementName &&
+    					parentElementName.tagName === xsPrefix + ':schema') {
+    				return attribute;
+				} else if (elementName.tagName === xsPrefix + ':attribute') {
+    				return attributeLocal;
 				} else if (elementName.tagName === xsPrefix + ':complexType') {
     				return complexType;
     			} else if (elementName.tagName === xsPrefix + ':complexContent') {
