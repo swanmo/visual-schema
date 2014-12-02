@@ -1,4 +1,4 @@
-define(['model'], function (model) {
+define(['model', 'xsdValidator'], function (model, xsdValidator) {
 	return {
 		counter: 0,
 		nsPrefix: "xmlns:",
@@ -43,26 +43,7 @@ define(['model'], function (model) {
 				});
 		},
 		getValidationError: function(xmlStr) {
-			var oParser = new DOMParser();
-			var oDOM = oParser.parseFromString(xmlStr, "text/xml");
-			validator.validateXsd(oDOM);
-			return this.getParserError(oDOM.documentElement)
-		},
-		getParserError:function(item) {
-
-			if (item.nodeName === 'parsererror') {
-				 // andra raden innehåller felmeddelande...
-				return item.childNodes[1].innerHTML;
-			}
-			if (item.childNodes) {
-				for (var i = 0; i < item.childNodes.length; i++) {
-					var returnValue = this.getParserError(item.childNodes[i]);
-					if (returnValue !== null) {
-						return returnValue;
-					}
-				}
-			}
-			return null;
+			return xsdValidator.getValidationErrors(xmlStr);
 		},
 		evalu:function(item, level) {
 			var offset = '';

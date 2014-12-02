@@ -3,6 +3,7 @@ define(['validatorFactory', 'validators/util'], function (validatorFactory, vali
 
     var getTnsPrefix = function(element) {
         // https://developer.mozilla.org/en-US/docs/Web/API/Attr
+
         for (var i = 0; i < element.attributes.length; i++) {
             if (element.attributes.item(i).value === 'http://www.w3.org/2001/XMLSchema') {
                 return validatorUtil.getInstance().withoutNs(element.attributes.item(i).name);
@@ -30,13 +31,28 @@ define(['validatorFactory', 'validators/util'], function (validatorFactory, vali
         }
     };
 
+    var findParseErrors = function(elem, errormessages) {
+        if (elem.tagName === 'parsererror') {
+          errormessages.push(elem.childNodes[1].innerHTML);
+        }
+        for(var i = 0; i < elem.children.length; i++) {
+            if (errormessages.length > 0) {
+              return;
+            }
+            findParseErrors(elem.children[i], errormessages);
+        }
+    };
+
     return {
         getValidationErrors:function(xmlStr) {
           // https://developer.mozilla.org/en-US/docs/Web/API/document
+           
           var oParser = new DOMParser();
           var oDOM = oParser.parseFromString(xmlStr, "text/xml");
           var errorMessages = [];
           var tnsPrefix = getTnsPrefix(oDOM.documentElement);
+
+          findParseErrors(oDOM.documentElement, errorMessages);
 
           validators = validatorFactory(tnsPrefix);
 

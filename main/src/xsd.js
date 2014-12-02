@@ -9,7 +9,7 @@ function (p,	   model,   renderer,   root,   linker) {
 
 			var errors = p.getValidationError(xsdValue);
 
-			if (errors !== null) {
+			if (errors !== null && errors !== undefined) {
 				root.html('<h2>Error when parsing xsd...</h2>' + errors);
 			} else {
 

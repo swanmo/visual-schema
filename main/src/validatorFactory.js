@@ -13,7 +13,8 @@ define(['validators/schema',
 		'validators/simpleContent',
 		'validators/restriction',
 		'validators/extension',
-		'validators/empty'],
+		'validators/empty',
+		'validators/parsererror'],
 function (
 		schema,
 		attribute,
@@ -30,7 +31,8 @@ function (
 		simpleContent,
 		restriction,
 		extension,
-		empty) {
+		empty,
+		parsererror) {
 
 	return function(xsPrefix) {
 		return {
@@ -67,6 +69,8 @@ function (
 	    			return restriction;
 	    		} else if (elementName.tagName === xsPrefix + ':extension') {
 	    			return extension;
+				} else if (elementName.tagName === 'parsererror') {
+	    			return parsererror;
 	    		} else {
 	    			return empty;
 	    		}

@@ -78,9 +78,7 @@ define(['xsdValidator'], function(sut) {
 
         it ("should accept xsd with attribute-tag  (from xsdWithSimpleTypeAndRestriction)", function() {
             expect(sut.getValidationErrors(xsdWithAttribute)).toBeUndefined();
-        });
-
-        
+        });        
         
     });
 });
