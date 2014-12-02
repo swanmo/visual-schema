@@ -13,6 +13,8 @@ define(['validators/schema',
 		'validators/simpleContent',
 		'validators/restriction',
 		'validators/extension',
+		'validators/key',
+		'validators/keyref',
 		'validators/empty',
 		'validators/parsererror'],
 function (
@@ -31,6 +33,8 @@ function (
 		simpleContent,
 		restriction,
 		extension,
+		key,
+		keyref,
 		empty,
 		parsererror) {
 
@@ -69,6 +73,10 @@ function (
 	    			return restriction;
 	    		} else if (elementName.tagName === xsPrefix + ':extension') {
 	    			return extension;
+    			} else if (elementName.tagName === xsPrefix + ':key') {
+	    			return key;
+    			} else if (elementName.tagName === xsPrefix + ':keyref') {
+	    			return keyref;
 				} else if (elementName.tagName === 'parsererror') {
 	    			return parsererror;
 	    		} else {
