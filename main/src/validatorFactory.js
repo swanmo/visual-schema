@@ -18,6 +18,7 @@ define(['validators/schema',
 		'validators/keyref',
 		'validators/enumeration',
 		'validators/all',
+		'validators/import',
 		'validators/empty',
 		'validators/parsererror'],
 function (
@@ -41,6 +42,7 @@ function (
 		_keyref,
 		_enumeration,
 		_all,
+		_import,
 		_empty,
 		_parsererror) {
 
@@ -93,6 +95,8 @@ function (
 	    			return _keyref;
     			} else if (is(element, 'enumeration')) {
 	    			return _enumeration;
+	    		} else if (is(element, 'import')) {
+	    			return _import;
 				} else if (element.tagName === 'parsererror') {
 	    			return _parsererror;
 	    		} else {
