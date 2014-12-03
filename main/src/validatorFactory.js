@@ -17,6 +17,7 @@ define(['validators/schema',
 		'validators/key',
 		'validators/keyref',
 		'validators/enumeration',
+		'validators/all',
 		'validators/empty',
 		'validators/parsererror'],
 function (
@@ -39,6 +40,7 @@ function (
 		key,
 		keyref,
 		enumeration,
+		all,
 		empty,
 		parsererror) {
 
@@ -85,6 +87,8 @@ function (
 	    			return extension;
     			} else if (is(elementName, 'key')) {
 	    			return key;
+	    		} else if (	is(elementName, 'all')) {
+	    			return all;
     			} else if (is(elementName, 'keyref')) {
 	    			return keyref;
     			} else if (is(elementName, 'enumeration')) {
