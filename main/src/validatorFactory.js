@@ -19,6 +19,7 @@ define(['validators/schema',
 		'validators/enumeration',
 		'validators/all',
 		'validators/import',
+		'validators/include',
 		'validators/empty',
 		'validators/parsererror'],
 function (
@@ -43,6 +44,7 @@ function (
 		_enumeration,
 		_all,
 		_import,
+		_include,
 		_empty,
 		_parsererror) {
 
