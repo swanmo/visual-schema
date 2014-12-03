@@ -20,6 +20,7 @@ define(['validators/schema',
 		'validators/all',
 		'validators/import',
 		'validators/include',
+		'validators/notation',
 		'validators/empty',
 		'validators/parsererror'],
 function (
@@ -45,6 +46,7 @@ function (
 		_all,
 		_import,
 		_include,
+		_notation,
 		_empty,
 		_parsererror) {
 
@@ -99,6 +101,8 @@ function (
 	    			return _enumeration;
 	    		} else if (is(element, 'import')) {
 	    			return _import;
+    			} else if (is(element, 'notation')) {
+	    			return _notation;
 				} else if (element.tagName === 'parsererror') {
 	    			return _parsererror;
 	    		} else {
