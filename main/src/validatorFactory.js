@@ -12,9 +12,11 @@ define(['validators/schema',
 		'validators/simpleType',
 		'validators/simpleContent',
 		'validators/restriction',
+		'validators/restrictionLocal',
 		'validators/extension',
 		'validators/key',
 		'validators/keyref',
+		'validators/enumeration',
 		'validators/empty',
 		'validators/parsererror'],
 function (
@@ -32,20 +34,25 @@ function (
 		simpleType,
 		simpleContent,
 		restriction,
+		restrictionLocal,
 		extension,
 		key,
 		keyref,
+		enumeration,
 		empty,
 		parsererror) {
 
 	return function(xsPrefix) {
+		var is = function(element, elementName) {
+			return (element && element.tagName === xsPrefix + ':' + elementName);
+		};
 		return {
 	    	get: function(elementName, parentElementName) {
-	    		if (elementName.tagName === xsPrefix + ':schema') {
+	    		if (is(elementName, 'schema')) {
 	    			return schema;
-	    		} else if (elementName.tagName === xsPrefix + ':group') {
+	    		} else if (is(elementName, 'group')) {
 	    			return group;
-    			} else if (elementName.tagName === xsPrefix + ':sequence') {
+    			} else if (is(elementName, 'sequence')) {
 	    			return sequence;
     			} else if (elementName.tagName === xsPrefix + ':element' && parentElementName &&
     					parentElementName.tagName === xsPrefix + ':schema') {
@@ -55,28 +62,33 @@ function (
 				} else if (elementName.tagName === xsPrefix + ':attribute' && parentElementName &&
     					parentElementName.tagName === xsPrefix + ':schema') {
     				return attribute;
-				} else if (elementName.tagName === xsPrefix + ':attribute') {
+				} else if (is(elementName, 'attribute')) {
     				return attributeLocal;
-				} else if (elementName.tagName === xsPrefix + ':complexType') {
+				} else if (is(elementName, 'complexType')) {
     				return complexType;
-    			} else if (elementName.tagName === xsPrefix + ':complexContent') {
+    			} else if (is(elementName, 'complexContent')) {
     				return complexContent;
-				} else if (elementName.tagName === xsPrefix + ':simpleType') {
+				} else if (is(elementName, 'simpleType')) {
     				return simpleType;
-    			} else if (elementName.tagName === xsPrefix + ':simpleContent') {
+    			} else if (is(elementName, 'simpleContent')) {
     				return simpleContent;
-    			} else if (elementName.tagName === xsPrefix + ':choice') {
+    			} else if (is(elementName, 'choice')) {
 	    			return choice;
-    			} else if (elementName.tagName === xsPrefix + ':annotation') {
+    			} else if (is(elementName, 'annotation')) {
 	    			return annotation;
-	    		} else if (elementName.tagName === xsPrefix + ':restriction') {
+	    		} else if (elementName.tagName === xsPrefix + ':restriction' && parentElementName &&
+    					parentElementName.tagName === xsPrefix + ':simpleContent') {
+	    			return restrictionLocal;
+	    		} else if (is(elementName, 'restriction')) {
 	    			return restriction;
-	    		} else if (elementName.tagName === xsPrefix + ':extension') {
+	    		} else if (is(elementName, 'extension')) {
 	    			return extension;
-    			} else if (elementName.tagName === xsPrefix + ':key') {
+    			} else if (is(elementName, 'key')) {
 	    			return key;
-    			} else if (elementName.tagName === xsPrefix + ':keyref') {
+    			} else if (is(elementName, 'keyref')) {
 	    			return keyref;
+    			} else if (is(elementName, 'enumeration')) {
+	    			return enumeration;
 				} else if (elementName.tagName === 'parsererror') {
 	    			return parsererror;
 	    		} else {
