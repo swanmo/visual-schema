@@ -4,6 +4,16 @@
  * @return {[type]}      [description]
  */
 define(['validators/util'], function (util) {
+    var u = util.getInstance();
+    var attrs = [
+      {n:'abstract', u:'p'},
+      {n:'block', u:'p'},
+      {n:'final', u:'p'},
+      {n:'id'},
+      {n:'mixed', t:'boolean'},
+      {n:'name', u:'p'}
+     ];
+
     var contentElements = [
       'all',
       'annotation',
@@ -19,7 +29,9 @@ define(['validators/util'], function (util) {
 
     return {
         getValidationErrors: function(schemaElement) {
-            return util.getInstance().validateChildren(schemaElement, contentElements);
+          return u.concat(
+            u.validateAttr(schemaElement, attrs),
+            u.validateChildren(schemaElement, contentElements));
         }
     };
 });

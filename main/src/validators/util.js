@@ -43,7 +43,7 @@ define([], function () {
           for (var i = 0; i < element.attributes.length; i++) {
             var spec = getAttr(element.attributes.item(i).name, attrs);
             console.log('attr', element.attributes.item(i), spec);
-            if (spec === undefined || spec.u === 'p') {
+            if (spec === undefined) {
               results = results || [];
               results.push('Unknown attribute "' + element.attributes.item(i).name + '" of element "' + element.tagName + '"');
             } else if (spec.u === 'p') {
