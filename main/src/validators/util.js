@@ -44,8 +44,7 @@ define([], function () {
             var spec = getAttr(element.attributes.item(i).name, attrs);
             console.log('attr', element.attributes.item(i), spec);
             if (spec === undefined) {
-              results = results || [];
-              results.push('Unknown attribute "' + element.attributes.item(i).name + '" of element "' + element.tagName + '"');
+              // That's ok
             } else if (spec.u === 'p') {
               results = results || [];
               results.push('Attribute "' + element.attributes.item(i).name + '" of element "' + element.tagName + '" is prohibited');
