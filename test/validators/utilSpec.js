@@ -24,7 +24,12 @@ define(['validators/util'], function(validatorsUtil) {
 
         });
 
+        describe('validateAttr', function() {
+            it ('should approve attribute "test"', function() {
+                //expect(sut.validateAttr({children: [{tagName: 'x:elem'}]}, ['sample', 'elem', 'xxx'])).toBeUndefined();
+            });
 
+        });
     });
 
 

@@ -4,6 +4,7 @@
  * @return {[type]}      [description]
  */
 define(['validators/util'], function (util) {
+  var u = util.getInstance();
     var contentElements = [
       'annotation',
       'complexType',
@@ -13,9 +14,25 @@ define(['validators/util'], function (util) {
       'unique'
      ];
 
+     var attrs = [
+      {n:'abstract', t:'boolean'},
+      {n:'block', t:'blockSet'},
+      {n:'default', t:'string'},
+      {n:'final'},
+      {n:'fixed'},
+      {n:'id'},
+      {n:'name', u:'r'},
+      {n:'nillable', t:'boolean'},
+      {n:'substitutionGroup', t:'QName'},
+      {n:'type', t:'QName'}
+     ];
+
     return {
         getValidationErrors: function(schemaElement) {
-            return util.getInstance().validateChildren(schemaElement, contentElements);
+          return u.concat(
+              u.validateAttr(schemaElement, attrs),
+              u.validateChildren(schemaElement, contentElements)
+              );
         }
     };
 });
