@@ -27,6 +27,18 @@ define([], function () {
       }
       return results;
     };
+    var err = function(msg) {
+      return {
+        level:'E',
+        message:msg
+      }
+    };
+    var inf = function(msg) {
+      return {
+        level:'I',
+        message:msg
+      }
+    };
    
     function init() {
       return {
@@ -44,10 +56,11 @@ define([], function () {
             var spec = getAttr(element.attributes.item(i).name, attrs);
             console.log('attr', element.attributes.item(i), spec);
             if (spec === undefined) {
-              // That's ok
+              results = results || [];
+              results.push(inf('Unknown attribute "' + element.attributes.item(i).name + '" of element "' + element.tagName));
             } else if (spec.u === 'p') {
               results = results || [];
-              results.push('Attribute "' + element.attributes.item(i).name + '" of element "' + element.tagName + '" is prohibited');
+              results.push(err('Attribute "' + element.attributes.item(i).name + '" of element "' + element.tagName + '" is prohibited'));
             } else if (spec.u === 'r') {
               requiredAttrs[element.attributes.item(i).name].isAbsent = false;
             }
@@ -55,7 +68,7 @@ define([], function () {
           for (var a in requiredAttrs) {
             if (requiredAttrs[a].isAbsent) {
               results = results || [];
-              results.push('Attribute "' + a + '" of element "' + element.tagName + '" is required');
+              results.push(err('Attribute "' + a + '" of element "' + element.tagName + '" is required'));
             }
           }
           return results;
@@ -86,7 +99,7 @@ define([], function () {
                     var elemTagName = this.withoutNs(element.children[i].tagName);
                     if (validContentElements.indexOf(elemTagName) < 0 ) {
                         results = results || [];
-                        results.push('Unexpected element "' + elemTagName + '" as content of "' + element.tagName + '"')
+                        results.push(err('Unexpected element "' + elemTagName + '" as content of "' + element.tagName + '"'));
                     }
                 }
             }

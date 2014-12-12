@@ -1,5 +1,17 @@
 define(['parser', 'model', 'standardRenderer', 'root', 'linker'],
 function (p,	   model,   renderer,   root,   linker) {
+	var present = function(arr) {
+		var errorsArr = [];
+		arr.forEach(
+			function(e) {
+				if (e.level==='E') {
+					errorsArr.push('Error: ' + e.message);
+				} else if (e.level==='I') {
+					errorsArr.push('Information: ' + e.message);
+				}
+			});
+		return errorsArr.join('<br>');
+	};
 	return {
 		show: function(xsdValue) {
 
@@ -10,7 +22,7 @@ function (p,	   model,   renderer,   root,   linker) {
 			var errors = p.getValidationError(xsdValue);
 
 			if (errors !== null && errors !== undefined) {
-				root.html('<div style="margin:1em 0 0 5em"><h2>Error when parsing xsd...</h2>' + errors + '</div>');
+				root.html('<div style="margin:1em 0 0 5em"><h2>Error when parsing xsd...</h2>' + present(errors) + '</div>');
 			} else {
 
 			    p.parse(xsdValue);
