@@ -3,7 +3,13 @@
  * @param  {[type]} util [description]
  * @return {[type]}      [description]
  */
-define(['validators/util'], function (util) {
+define(['validators/util'], function(util) {
+    var u = util.getInstance();
+    var attrs = [
+        { n: 'id' },
+        { n: 'mixed', t: 'boolean' }
+     ];
+
     var contentElements = [
       'annotation',
       'extension',
@@ -12,7 +18,9 @@ define(['validators/util'], function (util) {
 
     return {
         getValidationErrors: function(schemaElement) {
-            return util.getInstance().validateChildren(schemaElement, contentElements);
+            return u.concat(
+                u.validateAttr(schemaElement, attrs),
+                u.validateChildren(schemaElement, contentElements));
         }
     };
 });

@@ -1,5 +1,11 @@
 // https://www.evolveum.com/downloads/midpoint/1.9/midpoint-xsddocs-1.9/schemas/XMLSchema_xsd/elements/restriction_2.html
 define(['validators/util'], function (util) {
+    var u = util.getInstance();
+    var attrs = [
+        { n: 'id' },
+        { n: 'base', u:'r', t: 'QName' }
+     ];
+
     var contentElements = [
       'annotation',
       'anyAttribute',
@@ -22,7 +28,9 @@ define(['validators/util'], function (util) {
 
     return {
         getValidationErrors: function(schemaElement) {
-            return util.getInstance().validateChildren(schemaElement, contentElements);
+            return u.concat(
+                u.validateAttr(schemaElement, attrs),
+                u.validateChildren(schemaElement, contentElements));
         }
     };
 });
