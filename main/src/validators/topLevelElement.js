@@ -20,9 +20,13 @@ define(['validators/util'], function (util) {
       {n:'default', t:'string'},
       {n:'final'},
       {n:'fixed'},
+      {n:'form', u:'p'},
       {n:'id'},
+      {n:'maxOccurs', u:'p'},
+      {n:'minOccurs', u:'p'},
       {n:'name', u:'r'},
       {n:'nillable', t:'boolean'},
+      {n:'ref', u:'p'},
       {n:'substitutionGroup', t:'QName'},
       {n:'type', t:'QName'}
      ];

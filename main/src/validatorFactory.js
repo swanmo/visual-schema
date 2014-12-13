@@ -1,13 +1,14 @@
 define(['validators/schema',
-		'validators/attribute',
+		'validators/topLevelAttribute',
 		'validators/attributeLocal',
 		'validators/group',
 		'validators/sequence',
 		'validators/choice',
-		'validators/element',
+		'validators/topLevelElement',
 		'validators/localElement',
 		'validators/annotation',
 		'validators/complexType',
+		'validators/topLevelComplexType',
 		'validators/complexContent',
 		'validators/simpleType',
 		'validators/simpleContent',
@@ -26,15 +27,16 @@ define(['validators/schema',
 		'validators/parsererror'],
 function (
 		_schema,
-		_attribute,
+		_topLevelAttribute,
 		_attributeLocal,
 		_group,
 		_sequence,
 		_choice,
-		_element,
+		_topLevelElement,
 		_localElement,
 		_annotation,
 		_complexType,
+		_topLevelComplexType,
 		_complexContent,
 		_simpleType,
 		_simpleContent,
@@ -66,14 +68,17 @@ function (
 	    			return _sequence;
     			} else if (element.tagName === xsPrefix + ':element' && parent_Element_Xyz &&
     					parent_Element_Xyz.tagName === xsPrefix + ':schema') {
-    				return _element;
+    				return _topLevelElement;
     			} else if (element.tagName === xsPrefix + ':element') {
     				return _localElement;
 				} else if (element.tagName === xsPrefix + ':attribute' && parent_Element_Xyz &&
     					parent_Element_Xyz.tagName === xsPrefix + ':schema') {
-    				return _attribute;
+    				return _topLevelAttribute;
 				} else if (is(element, 'attribute')) {
     				return _attributeLocal;
+				} else if (element.tagName === xsPrefix + ':complexType' && parent_Element_Xyz &&
+    					parent_Element_Xyz.tagName === xsPrefix + ':schema') {
+					return _topLevelComplexType;
 				} else if (is(element, 'complexType')) {
     				return _complexType;
     			} else if (is(element, 'complexContent')) {

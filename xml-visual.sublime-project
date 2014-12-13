@@ -3,7 +3,7 @@
 	[
 		{
 			"follow_symlinks": true,
-			"folder_exclude_patterns": [ "node_modules", "main/resources", "dist"],
+			"folder_exclude_patterns": [ "node_modules", "dist"],
 			"path": "."
 		}
 	],

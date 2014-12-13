@@ -27,7 +27,7 @@ define(['validators/util'], function (util) {
 
     return {
         getValidationErrors: function(schemaElement) {
-            return u.errorsOnly(u.validateAll(schemaElement, contentElements, attrs);
+            return u.errorsOnly(u.validateAll(schemaElement, contentElements, attrs));
         }
     };
 });

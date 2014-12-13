@@ -38,15 +38,6 @@ define(['jquery', 'xsd', 'init', 'root'], function($, xsd, init, $root) {
 				$("#showXsd").show();
 			});
 
-			$('.collapser').on("click", function() {
-				var $this = $(this);
-
-				var thisEncountered = false;
-
-				$this.parent().children().each(function(){
-					var $current = $(this);
-				});
-			});
 			var resizeBox = function() {
 				var proposedHeight = $(window).height() - 240;
 				if (proposedHeight < 250) {

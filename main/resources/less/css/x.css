@@ -13,6 +13,9 @@ div.x div.expander {
 div.x span.et {
   color: #888;
 }
+div.x span.ec {
+  color: #88e;
+}
 div.x div {
   display: inline-block;
   border-collapse: collapse;

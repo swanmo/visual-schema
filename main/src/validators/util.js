@@ -41,6 +41,9 @@ define([], function () {
     };
 
     var only = function(level, msgArr) {
+      if (!msgArr) {
+        return undefined;
+      }
       return msgArr.filter(
         function(msg) {
           return (msg.level === level);

@@ -1,9 +1,20 @@
-/**
- * https://www.evolveum.com/downloads/midpoint/1.9/midpoint-xsddocs-1.9/schemas/XMLSchema_xsd/complexTypes/localElement.html
- * @param  {[type]} util [description]
- * @return {[type]}      [description]
- */
 define(['validators/util'], function (util) {
+    var u = util.getInstance();
+
+    var attrs = [
+      {n:'block', t:'blockSet'},
+      {n:'default', t:'string'},
+      {n:'fixed', t:'string'},
+      {n:'form', t:'formChoice'},
+      {n:'id', t:'ID'},
+      {n:'maxOccurs', t:'nonNegativeInteger'},
+      {n:'minOccurs', t:'nonNegativeInteger'},
+      {n:'name', t:'NCName'},
+      {n:'nillable', t:'boolean'},
+      {n:'ref', t:'QName'},
+      {n:'type', t:'QName'}
+    ];
+
     var contentElements = [
       'annotation',
       'complexType',
@@ -15,7 +26,7 @@ define(['validators/util'], function (util) {
 
     return {
         getValidationErrors: function(schemaElement) {
-            return util.getInstance().validateChildren(schemaElement, contentElements);
+            return u.errorsOnly(u.validateAll(schemaElement, contentElements, attrs));
         }
     };
 });

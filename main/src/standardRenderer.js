@@ -15,7 +15,52 @@ define(['jquery', 'parseUtils'], function($, parseUtils) {
 		element.slideToggle();
 
 		// element.css("display", newDisplayProp);
+	};
+
+	var getCardinality = function(minOccurs, maxOccurs) {
+		var maxOccursTxt = undefined, minOccursTxt = undefined;
+		if (maxOccurs && maxOccurs !== "1") {
+			maxOccursTxt = maxOccurs;
+		}
+		if (minOccurs && minOccurs !== "1") {
+			minOccursTxt = minOccurs;
+		}
+		if (maxOccursTxt || minOccursTxt) {
+			var cardinality = [' <span class="ec" title="'];
+			if (minOccursTxt) {
+				cardinality.push('minOccurs=');
+				cardinality.push(minOccursTxt);
+			}
+			if (maxOccursTxt) {
+				if (minOccursTxt) {
+					cardinality.push(', ');
+				}
+				cardinality.push('maxOccurs=');
+				cardinality.push(maxOccursTxt);
+			}
+			cardinality.push('">(');
+			if (minOccursTxt) {
+				cardinality.push(minOccursTxt);
+			} else {
+				cardinality.push('1');
+			}
+			cardinality.push('..');
+			if (maxOccursTxt) {
+				if (maxOccursTxt === 'unbounded') {
+					cardinality.push('*');
+				} else {
+					cardinality.push(maxOccursTxt);
+				}
+			} else {
+				cardinality.push('1');
+			}
+			cardinality.push(')</span>')
+			return cardinality.join('');
+		}
+		return '';	
 	}
+
+
 	return {
 		isExpanded: function(entry) {
 			return (entry.name === 'extension' || entry.name === 'restriction');
@@ -56,26 +101,29 @@ define(['jquery', 'parseUtils'], function($, parseUtils) {
 
 			var desc;
 			var css;
-			if (entry.name=="element") {
+			if (entry.name==="element") {
 				var isUnimportant = (entry.attrs.name === undefined && entry.linkedEntry);
-				
-				var name = entry.attrs.name || '<span style="color:#bbb">&lt;empty&gt;</span>'
-
-				desc = "<div class='e' title='element'>E</div> " + name;
-				if (entry.attrs.type) {
-					desc += " <span class='et'>: " + parseUtils.parseName(entry.attrs.type) + "</span>";
-				} else if (entry.attrs.nodeMap.ref) {
-					desc += " <span class='et'>: " + entry.attrs.nodeMap.ref + "</span>";
-				}
-
 				css = "element-e";
+				var elementTitle = 'element';
 				$div1.addClass("padded");
-				if (entry.attrs.minOccurs == "0") {
+				if (entry.attrs.minOccurs === "0") {
+					elementTitle = 'optional ' + elementTitle;
 					css += " optional";
-				}
+				}				
+
 				if (isUnimportant) {
 					css += " unimportant";
 				}
+				
+				var name = entry.attrs.name || '<span style="color:#bbb">&lt;empty&gt;</span>'
+
+				desc = "<div class='e' title='" +elementTitle+ "'>E</div> " + name;
+				if (entry.attrs.type) {
+					desc += " <span class='et' title=" + entry.attrs.type + ">: " + parseUtils.parseName(entry.attrs.type) + "</span>";
+				} else if (entry.attrs.nodeMap.ref) {
+					desc += " <span class='et'>: " + entry.attrs.nodeMap.ref + "</span>";
+				}
+				desc += getCardinality(entry.attrs.minOccurs, entry.attrs.maxOccurs);
 				
 			} else if (entry.name=="key" || entry.name=="keyref") {
 
