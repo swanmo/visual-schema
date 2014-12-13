@@ -118,7 +118,7 @@ function (
 	    			return _field;
 				} else if (element.tagName === 'parsererror') {
 	    			return _parsererror;
-	    		} else {
+	    		} else if (is(element, 'appinfo')) {
 	    			return _empty;
 	    		}
 	    	}
