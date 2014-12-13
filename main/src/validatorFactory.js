@@ -146,11 +146,15 @@ function (
 					} else {
 						return _attributeGroupLocal;
 					}
+				} else if (is(	element	, 'include')) {
+	    			return _include;
 				} else if (is(	element, 'fractionDigits')) {
 	    			return _fractionDigits;
 				} else if (element.tagName === 'parsererror') {
 	    			return _parsererror;
-	    		} else if (is(element, 'appinfo') || is(element, 'documentationp')) {
+	    		} else if (is(element, 'appinfo') ||
+	    			is(element, 'documentation') ||
+	    			is(element, 'import')) {
 	    			return _empty;
 	    		}
 	    	}
