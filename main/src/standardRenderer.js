@@ -38,7 +38,7 @@ define(['jquery', 'parseUtils'], function($, parseUtils) {
 				cardinality.push('maxOccurs=');
 				cardinality.push(maxOccursTxt);
 			}
-			cardinality.push('">(');
+			cardinality.push('">[');
 			if (minOccursTxt) {
 				cardinality.push(minOccursTxt);
 			} else {
@@ -54,7 +54,7 @@ define(['jquery', 'parseUtils'], function($, parseUtils) {
 			} else {
 				cardinality.push('1');
 			}
-			cardinality.push(')</span>')
+			cardinality.push(']</span>')
 			return cardinality.join('');
 		}
 		return '';	

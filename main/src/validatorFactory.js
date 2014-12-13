@@ -16,6 +16,7 @@ define(['validators/schema',
 		'validators/restriction',
 		'validators/restrictionLocal',
 		'validators/extension',
+		'validators/extensionSimple',
 		'validators/key',
 		'validators/keyref',
 		'validators/enumeration',
@@ -48,6 +49,7 @@ function (
 		_restriction,
 		_restrictionLocal,
 		_extension,
+		_extensionSimple,
 		_key,
 		_keyref,
 		_enumeration,
@@ -109,7 +111,11 @@ function (
 	    		} else if (is(element, 'restriction')) {
 	    			return _restriction;
 	    		} else if (is(element, 'extension')) {
-	    			return _extension;
+	    			if (is(parent_Element_Xyz, 'simpleContent')) {
+	    				return _extensionSimple;
+	    			} else {
+						return _extension;
+	    			}
     			} else if (is(element, 'key')) {
 	    			return _key;
 	    		} else if (	is(element, 'all')) {
@@ -134,7 +140,7 @@ function (
 					}
 				} else if (element.tagName === 'parsererror') {
 	    			return _parsererror;
-	    		} else if (is(element, 'appinfo')) {
+	    		} else if (is(element, 'appinfo') || is(element, 'documentationp')) {
 	    			return _empty;
 	    		}
 	    	}
