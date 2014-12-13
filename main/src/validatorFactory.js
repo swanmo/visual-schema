@@ -24,6 +24,8 @@ define(['validators/schema',
 		'validators/notation',
 		'validators/redefine',
 		'validators/field',
+		'validators/attributeGroupLocal',
+		'validators/attributeGroupGlobal',
 		'validators/empty',
 		'validators/parsererror'],
 function (
@@ -53,6 +55,8 @@ function (
 		_notation,
 		_redefine,
 		_field,
+		_attributeGroupLocal,
+		_attributeGroupGlobal,
 		_empty,
 		_parsererror) {
 
@@ -116,6 +120,12 @@ function (
 	    			return _redefine;
     			} else if (is(element, 'field')) {
 	    			return _field;
+				} else if (is(element, 'attributeGroup')) {
+					if (is(parent_Element_Xyz, 'schema') || is(parent_Element_Xyz, 'redefine')) {
+						return _attributeGroupGlobal;
+					} else {
+						return _attributeGroupLocal;
+					}
 				} else if (element.tagName === 'parsererror') {
 	    			return _parsererror;
 	    		} else if (is(element, 'appinfo')) {
