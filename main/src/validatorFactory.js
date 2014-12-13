@@ -22,6 +22,7 @@ define(['validators/schema',
 		'validators/keyref',
 		'validators/enumeration',
 		'validators/all',
+		'validators/list',
 		'validators/import',
 		'validators/include',
 		'validators/notation',
@@ -58,6 +59,7 @@ function (
 		_keyref,
 		_enumeration,
 		_all,
+		_list,
 		_import,
 		_include,
 		_notation,
@@ -128,8 +130,10 @@ function (
 	    			}
     			} else if (is(element, 'key')) {
 	    			return _key;
-	    		} else if (	is(element, 'all')) {
+	    		} else if (is(element, 'all')) {
 	    			return _all;
+    			} else if (is(element, 'list')) {
+	    			return _list;
     			} else if (is(element, 'keyref')) {
 	    			return _keyref;
     			} else if (is(element, 'enumeration')) {
