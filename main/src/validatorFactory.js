@@ -28,6 +28,7 @@ define(['validators/schema',
 		'validators/field',
 		'validators/attributeGroupLocal',
 		'validators/attributeGroupGlobal',
+		'validators/fractionDigits',
 		'validators/empty',
 		'validators/parsererror'],
 function (
@@ -61,6 +62,7 @@ function (
 		_field,
 		_attributeGroupLocal,
 		_attributeGroupGlobal,
+		_fractionDigits,
 		_empty,
 		_parsererror) {
 
@@ -138,6 +140,8 @@ function (
 					} else {
 						return _attributeGroupLocal;
 					}
+				} else if (is(	element, 'fractionDigits')) {
+	    			return _fractionDigits;
 				} else if (element.tagName === 'parsererror') {
 	    			return _parsererror;
 	    		} else if (is(element, 'appinfo') || is(element, 'documentationp')) {
