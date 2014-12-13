@@ -3,15 +3,14 @@
  */
 define(['validators/util'], function (util) {
     var contentElements = [
-      'all',
-      'annotation',
-      'choice',
-      'sequence'
+      'annotation'
      ];
 
     var attrs = [
       {n:'id', t:'ID'},
-      {n:'name', u:'r', t:'NCName'}
+      {n:'maxOccurs', t:'nonNegativeInteger'},
+      {n:'minOccurs', t:'nonNegativeInteger'},
+      {n:'ref', u:'r', t:'QName'}
     ];
 
     return {

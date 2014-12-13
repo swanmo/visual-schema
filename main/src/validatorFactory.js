@@ -2,6 +2,7 @@ define(['validators/schema',
 		'validators/topLevelAttribute',
 		'validators/attributeLocal',
 		'validators/group',
+		'validators/groupLocal',
 		'validators/sequence',
 		'validators/choiceLocal',
 		'validators/choiceGlobal',
@@ -36,6 +37,7 @@ function (
 		_topLevelAttribute,
 		_attributeLocal,
 		_group,
+		_groupLocal,
 		_sequence,
 		_choiceLocal,
 		_choiceGlobal,
@@ -75,7 +77,11 @@ function (
 	    		if (is(element, 'schema')) {
 	    			return _schema;
 	    		} else if (is(element, 'group')) {
-	    			return _group;
+	    			if (is(parent_Element_Xyz, 'redefine') || is(parent_Element_Xyz, 'schema')) {
+						return _group;
+					} else {
+						return _groupLocal;
+					}
     			} else if (is(element, 'sequence')) {
 	    			return _sequence;
     			} else if (element.tagName === xsPrefix + ':element' && parent_Element_Xyz &&
