@@ -39,6 +39,14 @@ define([], function () {
         message:msg
       }
     };
+
+    var only = function(level, msgArr) {
+      return msgArr.filter(
+        function(msg) {
+          return (msg.level === level);
+        }
+        );
+    };
    
     function init() {
       return {
@@ -48,6 +56,15 @@ define([], function () {
               return elementTagName.substring(colonPos + 1);
           }
 
+        },
+        errorsOnly: function(messagesArray) {
+          return only('E', messagesArray);
+        },
+        validateAll: function(element, contentElements, validAttrs) {
+          return this.concat(
+              this.validateAttr(element, validAttrs),
+              this.validateChildren(element, contentElements)
+              );
         },
         validateAttr: function(element, attrs) {
           var requiredAttrs = getRequired(attrs);
