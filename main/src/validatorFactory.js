@@ -3,7 +3,8 @@ define(['validators/schema',
 		'validators/attributeLocal',
 		'validators/group',
 		'validators/sequence',
-		'validators/choice',
+		'validators/choiceLocal',
+		'validators/choiceGlobal',
 		'validators/topLevelElement',
 		'validators/localElement',
 		'validators/annotation',
@@ -34,7 +35,8 @@ function (
 		_attributeLocal,
 		_group,
 		_sequence,
-		_choice,
+		_choiceLocal,
+		_choiceGlobal,
 		_topLevelElement,
 		_localElement,
 		_annotation,
@@ -94,7 +96,11 @@ function (
     			} else if (is(element, 'simpleContent')) {
     				return _simpleContent;
     			} else if (is(element, 'choice')) {
-	    			return _choice;
+    				if (is(parent_Element_Xyz, 'group')) {
+						return _choiceLocal;
+					} else {
+						return _choiceGlobal;
+					}
     			} else if (is(element, 'annotation')) {
 	    			return _annotation;
 	    		} else if (element.tagName === xsPrefix + ':restriction' && parent_Element_Xyz &&
