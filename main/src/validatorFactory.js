@@ -32,6 +32,7 @@ define(['validators/schema',
 		'validators/attributeGroupGlobal',
 		'validators/fractionDigits',
 		'validators/length',
+		'validators/restrictionImpl',
 		'validators/empty',
 		'validators/parsererror'],
 function (
@@ -69,6 +70,7 @@ function (
 		_attributeGroupGlobal,
 		_fractionDigits,
 		_length,
+		_restrictionImpl,
 		_empty,
 		_parsererror) {
 
@@ -152,12 +154,15 @@ function (
 					} else {
 						return _attributeGroupLocal;
 					}
-				} else if (is(element	, 'include')) {
+				} else if (is(element, 'include')) {
 	    			return _include;
 				} else if (is(element, 'fractionDigits')) {
 	    			return _fractionDigits;
-	    		} else if (is(element, 'length')) {
+	    		} else if (is(element, 'length') || is(element, 'maxLength')) {
 	    			return _length;
+	    		} else if (is(element, 'maxExclusive') || is(element, 'maxInclusive') ||
+	    			is(element, 'minExclusive') || is(element, 'minInclusive')) {
+	    			return _restrictionImpl;
 				} else if (element.tagName === 'parsererror') {
 	    			return _parsererror;
 	    		} else if (is(element, 'appinfo') ||
