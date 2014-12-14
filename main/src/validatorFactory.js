@@ -33,6 +33,7 @@ define(['validators/schema',
 		'validators/fractionDigits',
 		'validators/length',
 		'validators/restrictionImpl',
+		'validators/pattern',
 		'validators/empty',
 		'validators/parsererror'],
 function (
@@ -71,6 +72,7 @@ function (
 		_fractionDigits,
 		_length,
 		_restrictionImpl,
+		_pattern,
 		_empty,
 		_parsererror) {
 
@@ -158,6 +160,8 @@ function (
 	    			return _include;
 				} else if (is(element, 'fractionDigits')) {
 	    			return _fractionDigits;
+	    		} else if (is(element, 'pattern')) {
+	    			return _pattern;
 	    		} else if (is(element, 'length') || is(element, 'maxLength')) {
 	    			return _length;
 	    		} else if (is(element, 'maxExclusive') || is(element, 'maxInclusive') ||
