@@ -11,7 +11,7 @@ define(['validators/util'], function (util) {
 
   return {
     getValidationErrors: function(schemaElement) {
-      return u.validateAll(schemaElement, contentElements, attrs);
+      return util.getInstance().validateAll(schemaElement, contentElements, attrs);
     }
   };
 });

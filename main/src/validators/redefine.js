@@ -6,11 +6,15 @@ define(['validators/util'], function (util) {
       'complexType',
       'group',
       'simpleType'
-     ];
+    ];
+    var attrs = [
+      {n:'id', t:'ID'},
+      {n:'schemaLocation', u:'r'}
+    ];
 
     return {
         getValidationErrors: function(schemaElement) {
-            return util.getInstance().validateChildren(schemaElement, contentElements);
+            return util.getInstance().validateAll(schemaElement, contentElements, attrs);
         }
     };
 });
