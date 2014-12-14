@@ -6,21 +6,17 @@ define(['validators/util'], function (util) {
         { n: 'base', u:'r', t: 'QName' }
      ];
     var contentElements = [
+      'all',
       'annotation',
-      'enumeration',
-      'fractionDigits',
-      'length',
-      'maxExclusive',
-      'maxInclusive',
-      'maxLength',
-      'minExclusive',
-      'minInclusive',
-      'minLength',
-      'pattern',
-      'simpleType',
-      'totalDigits',
-      'whiteSpace'
+      'anyAttribute',
+      'attribute',
+      'attributeGroup',
+      'choice',
+      'group',
+      'sequence'
      ];
+
+     xs:attributeGroup (type xs:attributeGroupRef), xs:choice, xs:group (type xs:groupRef), xs:sequence
 
     return {
         getValidationErrors: function(schemaElement) {

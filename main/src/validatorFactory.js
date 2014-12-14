@@ -14,8 +14,9 @@ define(['validators/schema',
 		'validators/complexContent',
 		'validators/simpleType',
 		'validators/simpleContent',
-		'validators/restriction',
-		'validators/restrictionLocal',
+		'validators/complexRestrictionType',
+		'validators/simpleRestrictionType',
+		'validators/globalRestrictionType',
 		'validators/extension',
 		'validators/extensionSimple',
 		'validators/key',
@@ -53,8 +54,9 @@ function (
 		_complexContent,
 		_simpleType,
 		_simpleContent,
-		_restriction,
-		_restrictionLocal,
+		_complexRestrictionType,
+		_simpleRestrictionType,
+		_globalRestrictionType,
 		_extension,
 		_extensionSimple,
 		_key,
@@ -121,11 +123,14 @@ function (
 					}
     			} else if (is(element, 'annotation')) {
 	    			return _annotation;
-	    		} else if (element.tagName === xsPrefix + ':restriction' && parent_Element_Xyz &&
-    					parent_Element_Xyz.tagName === xsPrefix + ':simpleContent') {
-	    			return _restrictionLocal;
 	    		} else if (is(element, 'restriction')) {
-	    			return _restriction;
+	    			if (is(element, 'simpleContent')) {
+	    				return _simpleRestrictionType;
+	    			} else if (is(element, 'complexContent')) {
+	    				return _complexRestrictionType;
+					} else if (is(element, 'simpleType')) {
+						return _globalRestrictionType;
+					}
 	    		} else if (is(element, 'extension')) {
 	    			if (is(parent_Element_Xyz, 'simpleContent')) {
 	    				return _extensionSimple;
