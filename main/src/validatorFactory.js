@@ -187,7 +187,8 @@ function (
 	    		} else if (is(element, 'length') || is(element, 'maxLength')) {
 	    			return _length;
 	    		} else if (is(element, 'maxExclusive') || is(element, 'maxInclusive') ||
-	    			is(element, 'minExclusive') || is(element, 'minInclusive')) {
+	    			is(element, 'minExclusive') || is(element, 'minInclusive') ||
+	    			is(element, 'totalDigits')|| is(element, 'whiteSpace') {
 	    			return _restrictionImpl;
 				} else if (element.tagName === 'parsererror') {
 	    			return _parsererror;
