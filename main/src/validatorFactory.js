@@ -4,6 +4,7 @@ define(['validators/schema',
 		'validators/group',
 		'validators/groupLocal',
 		'validators/sequence',
+		'validators/sequenceSimpleExplicitGroup',
 		'validators/choiceLocal',
 		'validators/choiceGlobal',
 		'validators/topLevelElement',
@@ -45,6 +46,7 @@ function (
 		_group,
 		_groupLocal,
 		_sequence,
+		_sequenceSimpleExplicitGroup,
 		_choiceLocal,
 		_choiceGlobal,
 		_topLevelElement,
@@ -95,7 +97,12 @@ function (
 						return _groupLocal;
 					}
     			} else if (is(element, 'sequence')) {
-	    			return _sequence;
+    				if (is(parent_Element_Xyz, 'group')) {
+    					return _sequenceSimpleExplicitGroup;
+    				} else {
+    					return _sequence;
+    				}
+	    			
     			} else if (element.tagName === xsPrefix + ':element' && parent_Element_Xyz &&
     					parent_Element_Xyz.tagName === xsPrefix + ':schema') {
     				return _topLevelElement;
