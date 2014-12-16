@@ -14,6 +14,7 @@ define(['validators/schema',
 		'validators/topLevelComplexType',
 		'validators/complexContent',
 		'validators/simpleType',
+		'validators/topLevelSimpleType',
 		'validators/simpleContent',
 		'validators/complexRestrictionType',
 		'validators/simpleRestrictionType',
@@ -56,6 +57,7 @@ function (
 		_topLevelComplexType,
 		_complexContent,
 		_simpleType,
+		_topLevelSimpleType,
 		_simpleContent,
 		_complexRestrictionType,
 		_simpleRestrictionType,
@@ -121,7 +123,11 @@ function (
     			} else if (is(element, 'complexContent')) {
     				return _complexContent;
 				} else if (is(element, 'simpleType')) {
-    				return _simpleType;
+					if (is(parent_Element_Xyz, 'schema') || is(parent_Element_Xyz, 'redefine')) {
+    					return _topLevelSimpleType;
+    				} else {
+    					return _simpleType;
+    				}
     			} else if (is(element, 'simpleContent')) {
     				return _simpleContent;
     			} else if (is(element, 'choice')) {
@@ -133,11 +139,11 @@ function (
     			} else if (is(element, 'annotation')) {
 	    			return _annotation;
 	    		} else if (is(element, 'restriction')) {
-	    			if (is(element, 'simpleContent')) {
+	    			if (is(parent_Element_Xyz, 'simpleContent')) {
 	    				return _simpleRestrictionType;
-	    			} else if (is(element, 'complexContent')) {
+	    			} else if (is(parent_Element_Xyz, 'complexContent')) {
 	    				return _complexRestrictionType;
-					} else if (is(element, 'simpleType')) {
+					} else if (is(parent_Element_Xyz, 'simpleType')) {
 						return _globalRestrictionType;
 					}
 	    		} else if (is(element, 'extension')) {
