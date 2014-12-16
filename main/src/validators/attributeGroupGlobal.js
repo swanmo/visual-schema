@@ -9,7 +9,6 @@ define(['validators/util'], function (util) {
       'attribute',
       'attributeGroup'
      ];
-xs:annotation, xs:anyAttribute, xs:attribute (type xs:attribute), xs:attributeGroup (type xs:attributeGroupRef)
      var attrs = [
       {n:'id'},
       {n:'name', t:'NCName', u:'r'}

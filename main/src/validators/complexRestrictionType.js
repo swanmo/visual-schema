@@ -16,8 +16,6 @@ define(['validators/util'], function (util) {
       'sequence'
      ];
 
-     xs:attributeGroup (type xs:attributeGroupRef), xs:choice, xs:group (type xs:groupRef), xs:sequence
-
     return {
         getValidationErrors: function(schemaElement) {
             return u.concat(

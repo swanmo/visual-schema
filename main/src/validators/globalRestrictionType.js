@@ -8,7 +8,6 @@ define(['validators/util'], function (util) {
 
     var contentElements = [
       'annotation',
-
       'anyAttribute',
       'attribute',
       'attributeGroup',
@@ -26,7 +25,7 @@ define(['validators/util'], function (util) {
       'totalDigits',
       'whiteSpace'
      ];
-  xs:annotation?, xs:simpleType?, (xs:minExclusive | xs:minInclusive | xs:maxExclusive | xs:maxInclusive | xs:totalDigits | xs:fractionDigits | xs:length | xs:minLength | xs:maxLength | xs:enumeration | xs:whiteSpace | xs:pattern)*
+
     return {
         getValidationErrors: function(schemaElement) {
             return u.concat(
