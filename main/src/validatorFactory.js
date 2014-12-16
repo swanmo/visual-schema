@@ -10,6 +10,7 @@ define(['validators/schema',
 		'validators/topLevelElement',
 		'validators/localElement',
 		'validators/annotation',
+		'validators/union',
 		'validators/complexType',
 		'validators/topLevelComplexType',
 		'validators/complexContent',
@@ -53,6 +54,7 @@ function (
 		_topLevelElement,
 		_localElement,
 		_annotation,
+		_union,
 		_complexType,
 		_topLevelComplexType,
 		_complexContent,
@@ -158,6 +160,8 @@ function (
 	    			return _all;
     			} else if (is(element, 'list')) {
 	    			return _list;
+    			} else if (is(element, 'union')) {
+	    			return _union;
     			} else if (is(element, 'keyref')) {
 	    			return _keyref;
     			} else if (is(element, 'enumeration')) {
