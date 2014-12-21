@@ -1,4 +1,4 @@
-define(['validators/util'], function (util) {
+define([], function () {
 
     return {
         getValidationErrors: function(element) {
