@@ -74,7 +74,7 @@ define([], function () {
           var results = undefined;
           for (var i = 0; i < element.attributes.length; i++) {
             var spec = getAttr(element.attributes.item(i).name, attrs);
-            console.log('attr', element.attributes.item(i), spec);
+            
             if (spec === undefined) {
               results = results || [];
               results.push(inf('Unknown attribute "' + element.attributes.item(i).name + '" of element "' + element.tagName));
