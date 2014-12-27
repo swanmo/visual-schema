@@ -18,7 +18,7 @@
   "newcap": true,
   "node": true,
   "nonew": true,
-  "plusplus": true,
+  
   "quotmark": "single",
   "regexdash": false,
   "shadow": false,
@@ -30,6 +30,7 @@
   "unused": true,
   "white": true,
   "globals": {
+    "window": false,
     "$": false,
     "define": false,
     "require": false

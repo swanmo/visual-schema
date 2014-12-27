@@ -2,7 +2,7 @@ define(['jquery', 'xsd', 'init', 'root', 'parser'], function($, xsd, init, $root
 	var lastValidation = 0;
 	var closestTimeBetween = 1500;
 	var validatonInProcess = false;
-	var validatonTimer = undefined;
+	var validatonTimer;
 	var getFatalMessages = function(arrMessages) {
 		return arrMessages.filter(function(item) {
 			return item.level === 'F';
@@ -39,7 +39,7 @@ define(['jquery', 'xsd', 'init', 'root', 'parser'], function($, xsd, init, $root
 			$('#validationPrefix').text(messages.length);
 
 			for (var i = 0; i < messages.length; i++) {
-				var valMessage = $("<li></li>").text(messages[i].message);
+				var valMessage = $('<li></li>').text(messages[i].message);
 				$list.append(valMessage);
 			}
 		} else {
@@ -84,13 +84,13 @@ define(['jquery', 'xsd', 'init', 'root', 'parser'], function($, xsd, init, $root
 			this.setupValidation();
 			init.setDefaults();
 
-			$("#showXsd").on("click", function() {
+			$('#showXsd').on('click', function() {
 
-				$("#headRow").addClass('closed').removeClass('semi-open');
+				$('#headRow').addClass('closed').removeClass('semi-open');
 
 
-				$("#inputRow").slideUp(function() {
-					$("#leftie").slideToggle("fast");
+				$('#inputRow').slideUp(function() {
+					$('#leftie').slideToggle('fast');
 				});
 
 				$(this).hide();
@@ -100,46 +100,50 @@ define(['jquery', 'xsd', 'init', 'root', 'parser'], function($, xsd, init, $root
 			});
 			var timer = null;
 			var killMessages = function() {
-				$("#footer .x-messages").removeClass('act');
+				$('#footer .x-messages').removeClass('act');
 				d.html(d.html() + 'k');
 			};
 
 			var suppressShow = false;
 			var unsuppress = function() {
 				suppressShow = false;
-			}
+			};
 			var killHard = function() {
 				suppressShow = true;
 				setTimeout(unsuppress, 700);
 				killMessages();
-			}
+			};
 
 			var d = $('#debug');
-			$("#iller").on("click", killHard);
+			$('#iller').on('click', killHard);
 
-			$("#footer .x-messages").on("mouseover", function() {
-				if (suppressShow) return;
+			$('#footer .x-messages').on('mouseover', function() {
+				if (suppressShow) {
+					return;
+				}
 				clearTimeout(timer);
 				$(this).addClass('act');
 				d.html(d.html() + 'o');
-			}).on("mouseout", function() {
-				if (suppressShow) return;
+			}).on('mouseout', function() {
+				if (suppressShow) {
+					return;
+				}
 				d.html(d.html() + '.');
 				clearTimeout(timer);
 				timer = setTimeout(killMessages, 2000);
-			})
+			});
 
-			$("#undo").on("click", function() {
+			$('#undo').on('click', function() {
 				$root.hide();
-				$("#leftie").slideToggle("fast");
-				$("#headRow").addClass("semi-open").removeClass("closed");
-				$("#inputRow").slideDown(resizeBox);
-				$("#showXsd").show();
+				$('#leftie').slideToggle('fast');
+				$('#headRow').addClass('semi-open').removeClass('closed');
+				$('#inputRow').slideDown(resizeBox);
+				$('#showXsd').show();
 			});
 
 			var resizeBox = function() {
 				var proposedHeight = $(window).height() - 250;
-				if ($("#headRow").hasClass("semi-open")) {
+				if ($('#headRow').hasClass('semi-open')) {
 					proposedHeight += 60;
 				}
 
@@ -147,7 +151,7 @@ define(['jquery', 'xsd', 'init', 'root', 'parser'], function($, xsd, init, $root
 					proposedHeight = 250;
 				}
 			  	$('#xsdContent').height(proposedHeight);
-			}
+			};
 			resizeBox();
 			$(window).resize(resizeBox);
 		}
