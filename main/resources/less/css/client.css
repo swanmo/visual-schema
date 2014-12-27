@@ -18,9 +18,13 @@ body > #container { height: auto; min-height: 100%; }
 #footer .x-messages.nomessages {
   opacity: 0;
 }
+#footer .x-messages .badge {
+  color: #6FBE9D;
+  background-color: #fff;
+}
 #footer .x-messages:hover {
   max-height: 400px;
-
+  opacity: 1;
 }
 #footer .x-messages:hover .icon-close {
   color:white;
@@ -32,7 +36,7 @@ body > #container { height: auto; min-height: 100%; }
   // background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #b3b3b3), color-stop(90%, #f0f0f0), color-stop(100%, #e0e0e0));
   color:#fff;
 
-  opacity: .92;
+  opacity: .88;
   padding:.6em;
   position:absolute;
   bottom:0;

@@ -40,6 +40,7 @@ define(['validators/schema',
 		'validators/pattern',
 		'validators/selector',
 		'validators/empty',
+		'validators/unknown',
 		'validators/parsererror'],
 function (
 		_schema,
@@ -84,6 +85,7 @@ function (
 		_pattern,
 		_selector,
 		_empty,
+		_unknown,
 		_parsererror) {
 
 	return function(xsPrefix) {
@@ -200,6 +202,8 @@ function (
 	    			is(element, 'documentation') ||
 	    			is(element, 'import')) {
 	    			return _empty;
+	    		} else {
+	    			return _unknown;
 	    		}
 	    	}
 	    };	

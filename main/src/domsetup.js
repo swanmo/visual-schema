@@ -3,23 +3,37 @@ define(['jquery', 'xsd', 'init', 'root', 'parser'], function($, xsd, init, $root
 	var closestTimeBetween = 1500;
 	var validatonInProcess = false;
 	var validatonTimer = undefined;
-
+	var getFatalMessages = function(arrMessages) {
+		return arrMessages.filter(function(item) {
+			return item.level === 'F';
+		});
+	};
 	var runValidation = function() {
 		var messages;
 		try {
 			messages = parser.getValidationError($('#xsdContent').val());
 		} catch(err) {
-		    console.log(err);
 		    messages = [{
 		    	message:'Invalid XSD document',
-		    	level:'E'
+		    	level:'F'
 		    }];
 		}
 		var $list = $('#validationList');
 		$list.empty();
-		console.log('validation', messages);
 
 		if (messages) {
+			var fatal = getFatalMessages(messages);
+			var isLogFatal = false;
+			if (fatal.length > 0) {
+				messages = fatal;
+				isLogFatal = true;
+			}
+
+			if (isLogFatal) {
+				$('.x-messages').addClass('fatal');
+			} else {
+				$('.x-messages').removeClass('fatal');
+			}
 			$('.x-messages').removeClass('nomessages');
 			
 			$('#validationPrefix').text(messages.length);
@@ -41,14 +55,12 @@ define(['jquery', 'xsd', 'init', 'root', 'parser'], function($, xsd, init, $root
 			if(!validatonTimer) {
 				validatonTimer = setTimeout(triggerValidation, ((closestTimeBetween - sinceLastRun) + 100));
 			}
-			console.log('delayed validation');
 			return;
 		}
 		if (validatonInProcess) {
 			if(!validatonTimer) {
 				validatonTimer = setTimeout(triggerValidation, closestTimeBetween);
 			}
-			console.log('validation already in process');
 			return;
 		}
 		if (validatonTimer) {
