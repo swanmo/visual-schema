@@ -5,7 +5,6 @@
     <title>What is the visual xsd editor?</title>
     <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css' />
     <link rel="stylesheet" type="text/css" href="resources/less/css/client.css">
-    <link rel="stylesheet" type="text/css" href="resources/less/css/x.css">
     <link rel="stylesheet" type="text/css" href="resources/css/bootstrap.css">
   </head>
 
@@ -26,10 +25,41 @@
     </div>
 
     <div id="rightCol">
-       <p>Visualize xsd's.</p>
-    </div>
+      <h1 class="what1">Simple validation</h1>
+      <ul class="what">
+        <li>Validation of XSD on a basic level
+          <ul>
+            <li>Checks that nesting of tags is valid</li>
+            <li>Checks that occurences of attributes are valid</li>
+            <li style="color:#999">Does not validate types of attributes</li>
+          </ul>
+        </li>
+        <li>Provides a little bit of help when fabricating an XSD.</li>
+      </ul>
 
-      
-    <!-- script data-main="src/main.js" src="lib/require.js"></script -->
+      <h1 class="what1">Visualization of XSD's</h1>
+      <ul class="what">
+        <li>Graphical view of the XML Schema
+          <ul>
+            <li>Bird's eye view of XML schema.</li>
+            <li>Illustration of all commonly used XSD elements.
+            <ul style="font-size:90%">
+              <li>element (with maxOccurs/minOccurs printed and dashed if optional)</li>
+              <li>attribute (with icon)</li>
+              <li>sequence indicated by ... (symbol)</li>
+              <li>complexType is boxed, to illustrate the packaging</li>
+              <li>extension is boxed, with base type and extensions</li>
+              <li>restriciton is boxed, with base type</li>
+              <li>key/keyref-elements displayed with icon</li>
+              <li>selector/field-elements displayed with icons</li>
+              <li>XSD Restrictions of datatypes are displayed</li>
+              <li>Default presentation of other xsd elements</li>
+            </ul>
+            </li>
+            <li>Edit'n view tool for XSD</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
   </body>
 </html>
