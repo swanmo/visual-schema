@@ -1,20 +1,38 @@
 define(function() {
 
     var sample =
-        '<?xml version="1.0"?>\n' +
+
+'<?xml version="1.0" encoding="UTF-8" ?>\n' +
 '<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">\n\n' +
 
-'<xs:element name="note">\n' +
+'<xs:element name="w3shiporder">\n' +
 '  <xs:complexType>\n' +
 '    <xs:sequence>\n' +
-'      <xs:element name="to" type="xs:string"/>\n' +
-'      <xs:element name="from" type="xs:string"/>\n' +
-'      <xs:element name="heading" type="xs:string"/>\n' +
-'      <xs:element name="body" type="xs:string"/>\n' +
+'      <xs:element name="orderperson" type="xs:string"/>\n' +
+'      <xs:element name="shipto">\n' +
+'        <xs:complexType>\n' +
+'          <xs:sequence>\n' +
+'            <xs:element name="name" type="xs:string"/>\n' +
+'            <xs:element name="address" type="xs:string"/>\n' +
+'            <xs:element name="city" type="xs:string"/>\n' +
+'            <xs:element name="country" type="xs:string"/>\n' +
+'          </xs:sequence>\n' +
+'        </xs:complexType>\n' +
+'      </xs:element>\n' +
+'      <xs:element name="item" maxOccurs="unbounded">\n' +
+'        <xs:complexType>\n' +
+'          <xs:sequence>\n' +
+'            <xs:element name="title" type="xs:string"/>\n' +
+'            <xs:element name="note" type="xs:string" minOccurs="0"/>\n' +
+'            <xs:element name="quantity" type="xs:positiveInteger"/>\n' +
+'            <xs:element name="price" type="xs:decimal"/>\n' +
+'          </xs:sequence>\n' +
+'        </xs:complexType>\n' +
+'      </xs:element>\n' +
 '    </xs:sequence>\n' +
+'    <xs:attribute name="orderid" type="xs:string" use="required"/>\n' +
 '  </xs:complexType>\n' +
-'</xs:element>\n\n' +
-
+'</xs:element>\n' +
 '</xs:schema>';
 
 var sample2 = '<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" \n' +
@@ -41,7 +59,7 @@ var sample2 = '<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" \n' +
 '</xsd:schema>';
 
     return {
-    	getXml:function() {return sample2},
+    	getXml:function() {return sample},
         getTestXml:function() {return sample}
-    }
+    };
 });

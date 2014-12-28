@@ -101,34 +101,19 @@ define(['jquery', 'xsd', 'init', 'root', 'parser'], function($, xsd, init, $root
 			var timer = null;
 			var killMessages = function() {
 				$('#footer .x-messages').removeClass('act');
-				d.html(d.html() + 'k');
 			};
 
-			var suppressShow = false;
-			var unsuppress = function() {
-				suppressShow = false;
-			};
 			var killHard = function() {
-				suppressShow = true;
-				setTimeout(unsuppress, 700);
-				killMessages();
+				$('#aMsg').addClass('nomessages');
 			};
 
-			var d = $('#debug');
 			$('#iller').on('click', killHard);
 
 			$('#footer .x-messages').on('mouseover', function() {
-				if (suppressShow) {
-					return;
-				}
+				
 				clearTimeout(timer);
 				$(this).addClass('act');
-				d.html(d.html() + 'o');
 			}).on('mouseout', function() {
-				if (suppressShow) {
-					return;
-				}
-				d.html(d.html() + '.');
 				clearTimeout(timer);
 				timer = setTimeout(killMessages, 2000);
 			});
