@@ -1,20 +1,17 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <title>XSD visualization</title>
     <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css' />
     <link rel="stylesheet" type="text/css" href="resources/less/css/client.css">
     <link rel="stylesheet" type="text/css" href="resources/less/css/x.css">
-    <link rel="stylesheet" type="text/css" href="resources/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="resources/css/bootstrap.min.css">
     <link rel="icon" href="favicon.ico">
     <meta name="description" content="Visualize, validate and view XML schemas" />
     <meta name="keywords" content="XSD, XML schema, visualization tool, free" />
 </head>
-
 <body>
-
     <div id="container">
         <div id="content">
 
@@ -43,8 +40,7 @@
                     <div id="inputRow">
                         <textarea class="form-control" id="xsdContent" placeholder="Paste here"></textarea>
                     </div>
-                </form>
-
+                </form> 
                 <div id="graph"></div>
             </div>
         </div>
@@ -60,12 +56,8 @@
             <ul style="clear:both" id="validationList">
             </ul>
         </div>
-
         <button type="button" id="showXsd">Show!</button>
-
-
     </div>
-
     <!-- build:remove -->
     <script data-main="src/main.js" src="lib/static/require.js"></script>
     <!-- /build -->

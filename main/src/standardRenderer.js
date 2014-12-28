@@ -16,7 +16,14 @@ define(['jquery', 'parseUtils'], function($, parseUtils) {
 
 		// element.css("display", newDisplayProp);
 	};
-
+	var getUseCardinality = function(use) {
+		if (use) {
+			if (use !== 'optional') {
+				return ' <span class="ec">[' + use + ']</span>';
+			}
+		}
+		return '';
+	};
 	var getCardinality = function(minOccurs, maxOccurs) {
 		var maxOccursTxt = undefined, minOccursTxt = undefined;
 		if (maxOccurs && maxOccurs !== "1") {
@@ -147,16 +154,19 @@ define(['jquery', 'parseUtils'], function($, parseUtils) {
 					css += " optional";
 				}
 
-			} else if (entry.name=="attribute") {
+			} else if (entry.name === 'attribute') {
 				desc = "<div class='a' title='attribute'>A</div> " + entry.attrs.name;
 
 				if (entry.attrs.type) {
 					desc += " <span class='et'>: " + parseUtils.parseName(entry.attrs.type) + "</span>";
+					if (entry.attrs.nodeMap.use) {
+						desc += getUseCardinality(entry.attrs.nodeMap.use);
+					}
 				}
 				css = "element-a";
 				$div1.addClass("padded");
 
-				if (entry.attrs.minOccurs == "0") {
+				if (entry.attrs.nodeMap.use === 'optional') {
 					css += " optional";
 				}
 			} else if (entry.name=="selector" || entry.name=="field") {
@@ -206,12 +216,12 @@ define(['jquery', 'parseUtils'], function($, parseUtils) {
 				}
 				css = "element-a";
 				$div1.addClass("padded");
-
-			} else {
+			} else if (entry.name!=="schema" && entry.name!=="#comment") {
+				desc = '<span class="icon-file-xml" style="font-size:160%"></span>';
 				if (entry.attrs.name) {
-					desc = entry.attrs.name + ' (' + entry.name + ')';
+					desc += entry.attrs.name + ' (' + entry.name + ')';
 				} else {
-					desc = entry.name;
+					desc += entry.name;
 				}
 			}
 

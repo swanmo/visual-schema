@@ -31,7 +31,7 @@ define(['model', 'xsdValidator'], function (model, xsdValidator) {
 			var $elem = $(elem);
 
 			var me = this;
-
+			console.log('add', elem)
 			var entry = model.add(elem, parentEntry, nsMap);
 
 			$elem.contents()

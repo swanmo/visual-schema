@@ -14,7 +14,7 @@ div.x span.et {
   color: #888;
 }
 div.x span.ec {
-  color: #88e;
+  color: #4aa1a1;
 }
 div.x div {
   display: inline-block;
@@ -101,6 +101,9 @@ div.x span.element-a {
   border-bottom-left-radius: 18px;
   border-top-left-radius: 18px;
   padding: 7px 5px 9px 3px;
+}
+div.x span.element-a.optional {
+  border-style: dotted !important;
 }
 div.x div.e {
   background: #8888cc;
