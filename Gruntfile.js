@@ -1,5 +1,6 @@
 module.exports = function (grunt) {
   'use strict';
+  require('jit-grunt')(grunt);
 
   grunt.initConfig({
 
@@ -46,7 +47,28 @@ module.exports = function (grunt) {
           src: [ '<%= jshint.all %>' ]
       }      
     },
+
+    less: {
+      build: {
+        options: {
+          compress: true,
+          yuicompress: true,
+          optimization: 2
+        },
+        files: {
+          "main/style/one.css": "main/style/less/*.less" // destination file and source file
+        }
+      }
+    },
+
     watch: {
+      style: {
+        files: ['main/style/less/**/*.less'], // which files to watch
+        tasks: ['less:build'],
+        options: {
+          nospawn: true
+        }
+      },
       jshint: {
         files: [
           '<%= meta.base %>app/js/**/*.js',
@@ -97,22 +119,10 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.loadNpmTasks('grunt-processhtml');
-  grunt.loadNpmTasks('grunt-contrib-cssmin');
-  grunt.loadNpmTasks('grunt-contrib-requirejs');
-  grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-uglify'); 
-
-  grunt.loadNpmTasks('grunt-env');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-concat');
-
   grunt.registerTask('lint', ['jshint:all']);
   grunt.registerTask('test', ['karma:unit']);
   grunt.registerTask('build', ['copy:dist', 'requirejs:compile']);
+  grunt.registerTask('default', ['less:build', 'watch:style']);
 
   grunt.registerTask('make-dist', [
     'clean:dist',

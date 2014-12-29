@@ -1,0 +1,82 @@
+@import "variables";
+
+#footer {
+ clear: both;
+ position: relative;
+ z-index: 10;
+ height: 3em;
+ margin-top: -3em;
+
+	.x-messages.nomessages {
+	  opacity: 0 !important;
+	}
+	.x-messages .badge {
+	  color: @sign-color;
+	  background-color: @bg;
+	}
+	.x-messages:hover {
+	  max-height: 400px;
+	  opacity: 1;
+	}
+	.x-messages:hover .icon-close {
+	  color:@text-light;
+	  cursor:pointer;
+	}
+	.x-messages {
+	  border-radius: 4px;
+	  background:@sign-color;
+	  color:@text-light;
+
+	  opacity: .88;
+	  padding:.6em;
+	  position:absolute;
+	  bottom:0;
+
+	  transition: all 500ms ease-in;
+	  margin:0 .5em 1em 1em;
+	  overflow: hidden;
+	  width:60%;
+	  float:left;
+	  max-height: 40px;
+	  border-top:2px solid @bg;
+	  border-right:1px solid @bg;
+
+	}
+	button:hover {
+	  background:@main-color-hilight;
+	  color:@text-light;
+	}
+	button {
+	  position:absolute;
+	  bottom:0;
+	  padding:9px 19px 9px 19px;
+	  border:none;
+	  margin:0 .5em 1em 61%;
+	  float:left;
+	  border-radius: 4px;
+	  color:#eff;
+	  background:@main-color;
+	}
+
+	.x-messages div {
+	  font-size: larger;
+	}
+	.x-messages.act {
+	  transition: all 300ms ease-out;
+	  max-height: 400px;
+	}
+	.x-messages.act #iller {
+	  display:block;
+	  opacity: .55;
+	}
+	.x-messages.act #iller:hover {
+	  opacity: 1;
+	}
+
+	.x-messages #iller {
+	  display:none;
+	}
+}
+#content {
+  padding-bottom: 3.5em;
+}
