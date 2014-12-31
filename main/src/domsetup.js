@@ -127,9 +127,9 @@ define(['jquery', 'xsd', 'init', 'root', 'parser'], function($, xsd, init, $root
 			});
 
 			var resizeBox = function() {
-				var proposedHeight = $(window).height() - 250;
+				var proposedHeight = $(window).height() - 200;
 				if ($('#headRow').hasClass('semi-open')) {
-					proposedHeight += 60;
+					proposedHeight += 30;
 				}
 
 				if (proposedHeight < 250) {
