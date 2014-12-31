@@ -4,21 +4,27 @@
     <meta charset="utf-8">
     <title>XSD visualization</title>
     <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css' />
-    <link rel="stylesheet" type="text/css" href="resources/less/css/client.css">
-    <link rel="stylesheet" type="text/css" href="resources/less/css/x.css">
-    <link rel="stylesheet" type="text/css" href="resources/css/bootstrap.min.css">
+
+    <!--link rel="stylesheet" type="text/css" href="resources/css/bootstrap.min.css" -->
+    <link rel="stylesheet" type="text/css" href="style/one.css">
     <link rel="icon" href="favicon.ico">
+
     <meta name="description" content="Visualize, validate and view XML schemas" />
     <meta name="keywords" content="XSD, XML schema, visualization tool, free" />
 </head>
 <body>
     <div id="container">
         <div id="content">
-
-            <div id="headRow" class="slider">
+            <div id="headRow">
                 <div>
                     <span class="icon-xsd"></span>
                     <h1>eyeXSD</h1>
+                    <!--span id="indicator1" style="font-size:10px; margin-left:5px">594</span>
+                    <span id="indicator2" style="font-size:10px; margin-left:5px">764</span>
+                    <span id="indicator3" style="font-size:10px; margin-left:5px">880</span>
+                    <span id="indicator4" style="font-size:10px; margin-left:5px">1020</span>
+                    <span id="indicator5" style="font-size:10px; margin-left:5px">5</span>
+                    <span id="indicator6" style="font-size:10px; margin-left:5px">6</span -->
                 </div>
                 <label for="xsdContent">Paste XSD content below</label>
                 <a href="what.html" rel="about">
@@ -35,10 +41,10 @@
                 </div>
             </div>
 
-            <div id="rightCol">
+            <div id="rightCol" class="rightCol">
                 <form role="form">
                     <div id="inputRow">
-                        <textarea class="form-control" id="xsdContent" placeholder="Paste here"></textarea>
+                        <textarea class="ctrl" id="xsdContent" placeholder="Paste here"></textarea>
                     </div>
                 </form> 
                 <div id="graph"></div>
@@ -47,21 +53,26 @@
     </div>
 
     <div id="footer">
-        <div id="aMsg" class="x-messages nomessages">
-            <div style="float:left; margin-bottom:.3em">
-                <span id="validationPrefix" class="badge"></span> Validation results
+        <div class="myrow">
+            <div class="leftmost">
+                <div id="aMsg" class="x-messages nomessages">
+                    <div class="res">
+                        <span id="validationPrefix" class="badge"></span> Validation results
+                    </div>
+                    <div class="pull-right"><span class="icon-close" id="iller"></span>
+                    </div>
+                    <ul style="clear:both" id="validationList">
+                    </ul>
+                </div>
             </div>
-            <div class="pull-right"><span class="icon-close" id="iller"></span>
-            </div>
-            <ul style="clear:both" id="validationList">
-            </ul>
         </div>
+        
         <button type="button" id="showXsd">Show!</button>
     </div>
 
     <script src="main.js"></script>
 
-    <!-- built 2014-12-29(0.0.1) -->
+    <!-- built 2014-12-31(0.0.1) -->
 
     <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
