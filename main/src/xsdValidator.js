@@ -1,12 +1,13 @@
 define(['validatorFactory', 'validators/util'], function (validatorFactory, validatorUtil) {
     var validators = validatorFactory('xs');
+    var util = validatorUtil.getInstance();
 
     var getTnsPrefix = function(element) {
         // https://developer.mozilla.org/en-US/docs/Web/API/Attr
 
         for (var i = 0; i < element.attributes.length; i++) {
             if (element.attributes.item(i).value === 'http://www.w3.org/2001/XMLSchema') {
-                return validatorUtil.getInstance().withoutNs(element.attributes.item(i).name);
+                return util.withoutNs(element.attributes.item(i).name);
             }
         }
         throw 'Unable to find xsd namespace prefix';
@@ -26,21 +27,25 @@ define(['validatorFactory', 'validators/util'], function (validatorFactory, vali
     var all = function(elem, parentElem, errormessages) {
         apply(elem, parentElem, errormessages);
 
-        for(var i = 0; i < elem.children.length; i++) {
-            all(elem.children[i], elem, errormessages);
+        for(var i = 0; i < kids(elem).length; i++) {
+            all(kids(elem)[i], elem, errormessages);
         }
     };
-
+    var kids = function(elem) {
+      return util.elementChildren(elem);
+    }
     var findParseErrors = function(elem, errormessages) {
         if (elem.tagName === 'parsererror') {
-          errormessages.push(elem.childNodes[1].innerHTML);
+          errormessages.push(kids(elem).innerHTML);
         }
-        for(var i = 0; i < elem.children.length; i++) {
+
+        for(var i = 0; i < kids(elem).length; i++) {
             if (errormessages.length > 0) {
               return;
             }
-            findParseErrors(elem.children[i], errormessages);
+            findParseErrors(kids(elem)[i], errormessages);
         }
+
     };
 
     return {
@@ -55,7 +60,6 @@ define(['validatorFactory', 'validators/util'], function (validatorFactory, vali
           findParseErrors(oDOM.documentElement, errorMessages);
 
           validators = validatorFactory(tnsPrefix);
-
           all(oDOM.documentElement, undefined, errorMessages);
           return (errorMessages.length > 0) ? errorMessages : undefined;
         }

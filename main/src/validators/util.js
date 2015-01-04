@@ -3,6 +3,7 @@ define([], function () {
    
     // Instance stores a reference to the Singleton
     var instance;
+
     var getAttr = function(name, arr) {
       var hits = arr.filter(
           function(s) {
@@ -31,13 +32,13 @@ define([], function () {
       return {
         level:'E',
         message:msg
-      }
+      };
     };
     var inf = function(msg) {
       return {
         level:'I',
         message:msg
-      }
+      };
     };
 
     var only = function(level, msgArr) {
@@ -49,6 +50,13 @@ define([], function () {
           return (msg.level === level);
         }
         );
+    };
+    var getElementName = function(element) {
+      if (element.tagName) {
+        return element.tagName;
+      } else if (element.nodeName) {
+        return element.nodeName;
+      }
     };
    
     function init() {
@@ -77,10 +85,10 @@ define([], function () {
             
             if (spec === undefined) {
               results = results || [];
-              results.push(inf('Unknown attribute "' + element.attributes.item(i).name + '" of element "' + element.tagName));
+              results.push(inf('Unknown attribute "' + element.attributes.item(i).name + '" of element "' + getElementName(element)));
             } else if (spec.u === 'p') {
               results = results || [];
-              results.push(err('Attribute "' + element.attributes.item(i).name + '" of element "' + element.tagName + '" is prohibited'));
+              results.push(err('Attribute "' + element.attributes.item(i).name + '" of element "' + getElementName(element) + '" is prohibited'));
             } else if (spec.u === 'r') {
               requiredAttrs[element.attributes.item(i).name].isAbsent = false;
             }
@@ -88,7 +96,7 @@ define([], function () {
           for (var a in requiredAttrs) {
             if (requiredAttrs[a].isAbsent) {
               results = results || [];
-              results.push(err('Attribute "' + a + '" of element "' + element.tagName + '" is required'));
+              results.push(err('Attribute "' + a + '" of element "' + getElementName(element) + '" is required'));
             }
           }
           return results;
@@ -111,16 +119,28 @@ define([], function () {
             return undefined;
           }
         },
+        elementChildren: function(element) {
+          if (element.children) {
+            return element.children;
+          } else if (element.childNodes) {
+            return element.childNodes;
+          } else {
+            console.log('unable to find children of node', element);
+            return undefined;
+          }
+        },
         validateChildren: function(element, validContentElements) {
             // https://developer.mozilla.org/en-US/docs/Web/API/Element
             var results = undefined;
-            if (element.children.length) {
-                for (var i = 0; i < element.children.length; i++) {
-                    var elemTagName = this.withoutNs(element.children[i].tagName);
+            if (this.elementChildren(element).length) {
+                for (var i = 0; i < this.elementChildren(element).length; i++) {
+                  if (this.elementChildren(element)[i].nodeType === 1) {
+                    var elemTagName = this.withoutNs(getElementName(this.elementChildren(element)[i]));
                     if (validContentElements.indexOf(elemTagName) < 0 ) {
                         results = results || [];
-                        results.push(err('Unexpected element "' + elemTagName + '" as content of "' + element.tagName + '"'));
+                        results.push(err('Unexpected element "' + elemTagName + '" as content of "' + getElementName(element) + '"'));
                     }
+                  }
                 }
             }
             return results;
