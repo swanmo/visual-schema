@@ -1,4 +1,4 @@
-define(['jquery', 'xsd', 'init', 'root', 'parser'], function($, xsd, init, $root, parser) {
+define(['jquery', 'xsd', 'init', 'root', 'parser', 'store', 'saved'], function($, xsd, init, $root, parser, store, saved) {
 	var lastValidation = 0;
 	var closestTimeBetween = 1500;
 	var validatonInProcess = false;
@@ -73,17 +73,62 @@ define(['jquery', 'xsd', 'init', 'root', 'parser'], function($, xsd, init, $root
 		validatonInProcess = false;
 	};
 
+	
+
 	return {
 		setupValidation:function() {
 			$('#xsdContent').keyup(function() {
-				
 				triggerValidation();
 			});
 		},
 		setup:function() {
 			this.setupValidation();
 			init.setDefaults();
+			saved.setup();
+			
+			$('#saveXsd').on('click', function() {
+				console.log('save clicked!!!');
 
+				store.addItem($('#xsdContent').val(), 'me');
+
+				store.findAll(function(items) {
+					console.log('all', items);
+				});
+			});
+
+  /*if (window.history && window.history.pushState) {
+  	console.log('hist');
+    //window.history.pushState('forward', null, './#forward');
+
+    $(window).on('popstate', function() {
+    	console.log('xxxxxxxx');
+    	console.log('xxxxxxxx');
+    	console.log('xxxxxxxx');
+    	console.log('xxxxxxxx');
+    	console.log('xxxxxxxx');
+    	
+      alert('Back button was pressed.');
+    });
+  }*/
+
+
+			$('#optMenu').on('click', function() {
+				hideMenu(100);
+			});
+			$('html').click(function() {
+				hideMenu();
+			});
+
+			var hideMenu = function() {
+				if (!$('#optMenu').hasClass('hidden')) {
+					$('#optMenu').addClass('hidden');
+				}
+			};
+
+			$('#showOptions').on('click', function(e) {
+				e.stopPropagation()
+				$('#optMenu').toggleClass('hidden');
+			});
 			$('#showXsd').on('click', function() {
 
 				$('#headRow').addClass('closed').removeClass('semi-open');
@@ -94,6 +139,7 @@ define(['jquery', 'xsd', 'init', 'root', 'parser'], function($, xsd, init, $root
 				});
 
 				$(this).hide();
+				$('#showOptions').hide();
 
 				$root.show();
 				xsd.show($('#xsdContent').val());
@@ -124,6 +170,7 @@ define(['jquery', 'xsd', 'init', 'root', 'parser'], function($, xsd, init, $root
 				$('#headRow').addClass('semi-open').removeClass('closed');
 				$('#inputRow').slideDown(resizeBox);
 				$('#showXsd').show();
+				$('#showOptions').show();
 			});
 
 			var resizeBox = function() {

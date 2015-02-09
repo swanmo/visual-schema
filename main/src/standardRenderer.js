@@ -4,17 +4,13 @@ define(['jquery', 'parseUtils'], function($, parseUtils) {
 		var element = $(this).next();
 		var label = $(this).text();
 
-		if (label == "-") {
-			// element.slideUp( "slow", function() {element.css('display', 'none')});
-			$(this).text("+");
+		if (label === '-') {
+			$(this).text('+');
 		} else {
-			// element.css('display', 'inline-block');
-			// element.slideDown();
-			$(this).text("-");
+			$(this).text('-');
 		}
 		element.slideToggle();
 
-		// element.css("display", newDisplayProp);
 	};
 	var getUseCardinality = function(use) {
 		if (use) {
@@ -25,11 +21,11 @@ define(['jquery', 'parseUtils'], function($, parseUtils) {
 		return '';
 	};
 	var getCardinality = function(minOccurs, maxOccurs) {
-		var maxOccursTxt = undefined, minOccursTxt = undefined;
-		if (maxOccurs && maxOccurs !== "1") {
+		var maxOccursTxt, minOccursTxt;
+		if (maxOccurs && maxOccurs !== '1') {
 			maxOccursTxt = maxOccurs;
 		}
-		if (minOccurs && minOccurs !== "1") {
+		if (minOccurs && minOccurs !== '1') {
 			minOccursTxt = minOccurs;
 		}
 		if (maxOccursTxt || minOccursTxt) {
@@ -61,11 +57,11 @@ define(['jquery', 'parseUtils'], function($, parseUtils) {
 			} else {
 				cardinality.push('1');
 			}
-			cardinality.push(']</span>')
+			cardinality.push(']</span>');
 			return cardinality.join('');
 		}
 		return '';	
-	}
+	};
 
 
 	return {
@@ -83,8 +79,8 @@ define(['jquery', 'parseUtils'], function($, parseUtils) {
 		},
 		isExtensionBase: function(entry, parentEntry) {
 			return parentEntry && 
-				(parentEntry.name == "extension") &&
-				parentEntry.linkedEntry == entry;
+				(parentEntry.name === 'extension') &&
+				parentEntry.linkedEntry === entry;
 		},
 		hasBranching: function(entry) {
 			var kids = [];
@@ -108,7 +104,7 @@ define(['jquery', 'parseUtils'], function($, parseUtils) {
 
 			var desc;
 			var css;
-			if (entry.name==="element") {
+			if (entry.name === 'element') {
 				var isUnimportant = (entry.attrs.name === undefined && entry.linkedEntry);
 				css = "element-e";
 				var elementTitle = 'element';

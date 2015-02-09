@@ -1,26 +1,57 @@
 @import "variables";
-
+.box-shadow(@style, @c) when (iscolor(@c)) {
+  -webkit-box-shadow: @style @c;
+  box-shadow:         @style @c;
+}
 .adaptiveWidth () {
-    /*@media (min-width: 594px) {
-        width: 574px;
-    }
-    @media (min-width: 764px) {
-        width: 744px;
-    }*/
     @media (min-width: 594px) {
-        width: 574px;
+        width: 474px;
     }
     @media (min-width: 764px) {
         width: 78%;
     }
     @media (min-width: 880px) {
-        width: 86%;
+        width: 82%;
+    }
+}
+.adaptiveLPos () {
+    @media (min-width: 594px) {
+        left: 474px;
+    }
+    @media (min-width: 764px) {
+        left: 78%;
+    }
+    @media (min-width: 880px) {
+        left: 82%;
+    }
+}
+.monospaceFont () {
+    font-family: 'Source Code Pro', 'Courier New',  monospace;
+}
+
+.mainFont () {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+textarea.mono {
+    .monospaceFont();
+}
+.signatureFont () {
+    font-family: 'Oswald';
+}
+.adaptiveWidthRest () {
+    @media (min-width: 594px) {
+        width: 100px;
+    }
+    @media (min-width: 764px) {
+        width: 19%;
+    }
+    @media (min-width: 880px) {
+        width: 15%;
     }
 }
 
 html, body, #container { height: 100%; }
 body > #container { height: auto; min-height: 100%; }
-
 
 
 #headRow.closed {
@@ -74,6 +105,7 @@ body > #container { height: auto; min-height: 100%; }
       cursor: pointer;
     }
     label {
+      .mainFont();
       text-shadow: 0 0 20px #ddf;
       color: white;
       margin-top: 20px;
@@ -85,7 +117,7 @@ body > #container { height: auto; min-height: 100%; }
       display: inline;
     }
     div h1 {
-      font-family: 'Oswald';
+        .signatureFont();
     }
     div {
       text-shadow: 0 0 20px #ddf;
@@ -100,7 +132,73 @@ body > #container { height: auto; min-height: 100%; }
 }
 
 .rightCol {
-    width: 90%;
+    .adaptiveWidthRest();
+    float: left;
+    padding: 0 0 0 20px;
+
+    .container {
+        .line {
+            margin-top:4px;
+            clear: left;
+            .cal {
+                float: left;
+                background: lighten(@sign-color, 10%);
+                width:50px;
+                padding:4px;
+                text-align: center;
+                border-radius: 3px;
+                margin:4px;
+
+                .month {
+                    margin: 0;
+                    display: block;
+                    font-size: small;
+                    color:#fff;
+                }
+                .day {
+                    border-radius: 2px;
+                    margin: 0;
+                    display: block;
+                    background:#fff;
+                    font-size: large;
+                    .mainFont();
+                    color:@main-color;
+                }
+            }
+            .head {
+                .signatureFont();
+                font-weight: bold;
+
+                margin-left: 68px;
+                color:#444;
+
+                input {
+                    border:1px solid #e6e6e6;
+                    border-radius: 3px;
+                    color:#444;
+                    padding-left:3px;
+                    transition: all 300ms ease-in;
+                }
+                input:focus {
+                    border:1px solid #444;
+                    color:#111;
+                }
+                input:hover {
+                    border:1px solid #444;
+                    color:#111;
+                }
+            }
+            .body {
+                .mainFont();
+                color:#999;
+                
+            }
+        }
+    }
+}
+
+.centerCol {
+    width: 80%;
     padding: 6px 0 0 2px;
     float: left;
 
@@ -236,24 +334,89 @@ body > #container { height: auto; min-height: 100%; }
             }
         
     }
-
-    button:hover {
-        background: @main-color-hilight;
-        color: @text-light;
-    }
-    button {
+    .buttons {
         margin-left:30px;
-        bottom: 0;
-        padding: 8px 19px 8px 19px;
-        border: none;
-
         float: left;
-        border-radius: 4px;
-        color: #eff;
-        background: @main-color;
-    }
-    
 
+        button {
+            outline: none;
+            transition:all .3s;
+            border-style: solid;
+            border-width: 3px;
+            border-color:@main-color;
+            bottom: 0;
+            padding: 8px 19px 8px 19px;
+            margin:0 !important;
+            border-radius: 4px;
+            color: #eff;
+            background: @main-color;
+        }
+        button:hover {
+            background: @main-color-hilight;
+            color: @text-light;
+            border-color:@main-color-hilight;
+        }
+
+        button.action {
+            bottom: 0;
+            padding: 5px 12px 4px 15px;
+            border-right: none;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        button.option {
+            bottom: 0;
+            padding: 5px 6px 4px 6px;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            border-left: none;
+        }
+
+        .option-menu.hidden {
+            opacity: 0;
+        }
+
+        .option-menu {
+            transition:opacity .3s;
+             .box-shadow(2px 4px 5px, @shadow-color);
+            .adaptiveLPos();
+            margin-left:30px;
+            position:absolute;
+            bottom:50px;
+            border-radius: 3px;
+            border-style: solid;
+            border-width: 2px;
+            border-color:@main-color-hilight;
+            background-color: @bg;
+
+            ul {
+                padding:0;
+                margin:0;
+                li {
+                    transition:background-color .3s;
+                    &:hover{
+
+                        background-color: @main-color;
+                        a {
+                            color:white;    
+                        }
+                    }
+                    list-style-type: none;
+                    padding-top: 5px;
+                    padding-bottom: 4px;
+                    padding-left: 18px;
+                    padding-right: 19px;
+                    a {
+                        color: darken(@main-color, 10%);
+                        transition:color .2s;
+                        text-decoration: none;
+                    }
+                    
+                }
+            }
+        }
+    }
 }
 #content {
     padding-bottom: 3.5em;
@@ -262,12 +425,12 @@ body > #container { height: auto; min-height: 100%; }
 
 h1.what1 {
     margin-left:76px;
-    font-family: 'Oswald';
+    .mainFont();
     font-size: 1.8em;
 }
 ul.what  {
     margin-left:60px;
     font-size: 1.2em;
-    font-family: 'Oswald';
+    .mainFont();
 }
 

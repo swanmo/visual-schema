@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>XSD visualization</title>
     <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css' />
+    <link href='http://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>    
 
     <!--link rel="stylesheet" type="text/css" href="resources/css/bootstrap.min.css" -->
     <link rel="stylesheet" type="text/css" href="style/one.css">
@@ -19,12 +20,6 @@
                 <div>
                     <span class="icon-xsd"></span>
                     <h1>eyeXSD</h1>
-                    <!--span id="indicator1" style="font-size:10px; margin-left:5px">594</span>
-                    <span id="indicator2" style="font-size:10px; margin-left:5px">764</span>
-                    <span id="indicator3" style="font-size:10px; margin-left:5px">880</span>
-                    <span id="indicator4" style="font-size:10px; margin-left:5px">1020</span>
-                    <span id="indicator5" style="font-size:10px; margin-left:5px">5</span>
-                    <span id="indicator6" style="font-size:10px; margin-left:5px">6</span -->
                 </div>
                 <label for="xsdContent">Paste XSD content below</label>
                 <a href="what.html" rel="about">
@@ -41,13 +36,56 @@
                 </div>
             </div>
 
-            <div id="rightCol" class="rightCol">
+            <div class="centerCol">
                 <form role="form">
                     <div id="inputRow">
-                        <textarea class="ctrl" id="xsdContent" placeholder="Paste here"></textarea>
+                        <textarea class="mono ctrl" id="xsdContent" placeholder="Paste here"></textarea>
                     </div>
                 </form> 
                 <div id="graph"></div>
+            </div>
+
+            <div class="rightCol">
+                <div class="container" id="s">
+                    <!--div class="line">
+                        <div class="cal">
+                            <span class="month">Feb</span>
+                            <span class="day">23</span>
+                        </div>
+                        <div class="head">
+                            <input type="text" value="unnamed" />
+                        </div>
+                        <div class="body">
+                            <span>22 minutes ago</span>
+                        </div>
+                    </div>
+
+                    <div class="line">
+                        <div class="cal">
+                            <span class="month">Feb</span>
+                            <span class="day">22</span>
+                        </div>
+                        <div class="head">
+                            <span>Saved and named</span>
+                        </div>
+                        <div class="body">
+                            <span>old stuff</span>
+                        </div>
+                    </div>
+
+                    <div class="line">
+                        <div class="cal">
+                            <span class="month">Feb</span>
+                            <span class="day">22</span>
+                        </div>
+                        <div class="head old unnamed">
+                            <span>Old version</span>
+                        </div>
+                        <div class="body">
+                            <span>36 hours ago</span>
+                        </div>
+                    </div -->
+                </div>
             </div>
         </div>
     </div>
@@ -66,8 +104,19 @@
                 </div>
             </div>
         </div>
-        
-        <button type="button" id="showXsd">Show!</button>
+        <span class="buttons">
+            <button type="button" class="action" id="showXsd">Show</button><button type="button" class="option" id="showOptions">&#x25BE;</button>
+
+            <div aria-labelledby="showOptions" id="optMenu" class="option-menu hidden">
+                <ul role="menu">
+                    <li role="presentation"> <a id="saveXsd" role="menuitem" href="#">Save</a></li>
+                    <li role="presentation"><a role="menuitem" href="#">Revert...</a></li>
+                    <li role="presentation"><a role="menuitem" href="#">More...</a></li>
+                </ul>
+            </div>
+
+            <!--button type="button" class="save" id="saveXsd">Save</button -->
+        </span>
     </div>
 
     <!-- build:remove -->

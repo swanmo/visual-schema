@@ -71,21 +71,28 @@ module.exports = function (grunt) {
       },
       jshint: {
         files: [
-          '<%= meta.base %>app/js/**/*.js',
-          '<%= meta.base %>/test/**/*.js',
-          './app/**/*.js'
+          '<%= meta.base %>main/src/js/**/*.js',
+          '<%= meta.base %>test/**/*.js'
 
         ],
         tasks: ['lint']
       },
       karma: {
-        files: ['<%= meta.base %>app/js/**/*.js',
+        files: ['<%= meta.base %>main/app/js/**/*.js',
           '<%= meta.base %>/test/**/*.js',
           './app/**/*.js'
 
         ],
         tasks: ['test']
       }
+    },
+    karma: {
+      files: ['<%= meta.base %>main/app/js/**/*.js',
+        '<%= meta.base %>/test/**/*.js',
+        './app/**/*.js'
+
+      ],
+      tasks: ['test']
     },
     copy: {
       dist: {

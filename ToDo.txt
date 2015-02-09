@@ -1,1 +1,2 @@
-Suppress expander in first section of extension.
+http://blog.vanamco.com/indexeddb-fundamentals-plus-a-indexeddb-example-tutorial/
+guid: http://jsfiddle.net/briguy37/2MVFd/

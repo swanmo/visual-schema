@@ -16,7 +16,6 @@ define(['jquery', 'simpleNodeRenderer'], function($, renderer) {
 			listEntry.appendTo(domParent);
 
 			var childrenContainer = $('<ul>');
-			
 
 			if (entry.children && entry.children.length > 0) {
 
@@ -24,7 +23,6 @@ define(['jquery', 'simpleNodeRenderer'], function($, renderer) {
 				for(var i = 0; i < entry.children.length; i++) {
 					this.renderElem(entry.children[i], childrenContainer);
 				}
-
 			} else if (entry.linkedEntry) {
 				childrenContainer.css("background-color", arrOfColors[(colorPos++) % arrOfColors.length]);
 

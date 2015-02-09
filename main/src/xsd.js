@@ -12,13 +12,15 @@ function (p,	   model,   renderer,   root,   linker) {
 			});
 		return errorsArr.join('<br>');
 	};
+	var _id = 1;
 	return {
 		show: function(xsdValue) {
 
-			root.html("parsing...");
+			root.html('saving...');
 
+			root.html('parsing...');
 			model.clean();
-
+			
 			var errors = p.getValidationError(xsdValue);
 
 			if (errors !== null && errors !== undefined) {
@@ -35,5 +37,5 @@ function (p,	   model,   renderer,   root,   linker) {
 				root.html(domElem);
 			}
 		}
-	}
+	};
 });
