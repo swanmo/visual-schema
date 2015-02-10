@@ -3,12 +3,8 @@
 	[
 		{
 			"follow_symlinks": true,
-			"folder_exclude_patterns": [ "node_modules", "dist"],
-			"path": "."
+			"path": ".",
+			"folder_exclude_patterns": [ "node_modules", "dist"]
 		}
-	],
-	"settings":
-    {
-        "tab_size": 4
-    },
+	]
 }
