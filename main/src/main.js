@@ -1,6 +1,6 @@
 requirejs.config({
     paths: {
-        'jquery': '../lib/static/jquery'
+        'jquery': 'node_modules/jquery/dist/jquery.js'
     }
 });
 require(['domsetup'],

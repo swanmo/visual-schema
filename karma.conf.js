@@ -3,10 +3,7 @@
 
 module.exports = function(config) {
   config.set({
-
     // base path, that will be used to resolve files and exclude
-    
-
 
     // frameworks to use
     frameworks: ['jasmine', 'requirejs'],
@@ -14,10 +11,10 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-        {pattern: './main/lib/vendor/jasmine/lib/jasmine-core/jasmine.js', included: false},
-        {pattern: './main/lib/static/jquery.js', included: true},
-        {pattern: './main/src/**/*.js', included: false},
-        {pattern: './test/**/*Spec.js', included: false},
+        {pattern: './node_modules/jasmine-core/lib/jasmine-core.js', included: false},
+        {pattern: './node_modules/jquery/dist/jquery.js', included: true},
+        {pattern: './main/src/sample.js', included: false},
+        {pattern: './test/sampleSpec.js', included: false},
 
         './test/test-main.js',
     ],

@@ -2,7 +2,10 @@
   "name": "jorden-gui",
   "version": "0.0.1",
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "jquery": "^2.1.3",
+    "requirejs": "^2.1.15"
+    },
   "devDependencies": {
     "grunt": "~0.4.5",
     "grunt-bower-task": "^0.4.0",
@@ -17,7 +20,7 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt-env": "^0.4.1",
     "grunt-exec": "^0.4.6",
-    "grunt-karma": "^0.9.0",
+    "grunt-karma": "^0.10.1",
     "grunt-processhtml": "~0.3.3",
     "jit-grunt": "^0.9.0",
     "karma": "^0.12.25",
@@ -33,6 +36,7 @@
     "karma-phantomjs-launcher": "^0.1.4",
     "karma-requirejs": "^0.2.2",
     "karma-safari-launcher": "^0.1.1",
-    "karma-spec-reporter": "0.0.13"
+    "karma-spec-reporter": "0.0.13",
+    "jasmine-core": "2.2.0"
   }
 }

@@ -26,7 +26,7 @@ module.exports = function (grunt) {
           include: ['main'],
          
           paths: {
-            jquery: '../lib/static/jquery'
+            jquery: 'node_modules/jquery/dist/jquery'
           }
         }
       }

@@ -1,4 +1,6 @@
-define(['jquery', 'xsd', 'init', 'root', 'parser', 'store', 'saved'], function($, xsd, init, $root, parser, store, saved) {
+define(['jquery', 'xsd', 'init', 'root', 'parser', 'store', 'saved'],
+		function($, xsd, init, $root, parser, store, saved) {
+	'use strict';
 	var lastValidation = 0;
 	var closestTimeBetween = 1500;
 	var validatonInProcess = false;
@@ -126,7 +128,7 @@ define(['jquery', 'xsd', 'init', 'root', 'parser', 'store', 'saved'], function($
 			};
 
 			$('#showOptions').on('click', function(e) {
-				e.stopPropagation()
+				e.stopPropagation();
 				$('#optMenu').toggleClass('hidden');
 			});
 			$('#showXsd').on('click', function() {
