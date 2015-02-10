@@ -37,6 +37,7 @@
     "karma-requirejs": "^0.2.2",
     "karma-safari-launcher": "^0.1.1",
     "karma-spec-reporter": "0.0.13",
-    "jasmine-core": "2.2.0"
+    "jasmine-core": "2.2.0",
+    "express": "^4.11.2"
   }
 }
