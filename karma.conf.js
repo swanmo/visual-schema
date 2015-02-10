@@ -13,8 +13,8 @@ module.exports = function(config) {
     files: [
         {pattern: './node_modules/jasmine-core/lib/jasmine-core.js', included: false},
         {pattern: './node_modules/jquery/dist/jquery.js', included: true},
-        {pattern: './main/src/sample.js', included: false},
-        {pattern: './test/sampleSpec.js', included: false},
+        {pattern: './main/src/**/*.js', included: false},
+        {pattern: './test/**/*Spec.js', included: false},
 
         './test/test-main.js',
     ],
@@ -56,7 +56,7 @@ module.exports = function(config) {
     // - Safari (only Mac)
     // - PhantomJS
     // - IE (only Windows)
-    browsers: ['Chrome'],
+    browsers: ['PhantomJS'],
 
 
     // If browser does not capture in given timeout [ms], kill it
