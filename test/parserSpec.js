@@ -5,7 +5,7 @@ define(['parser', 'model', 'xmlTestSource'], function(sut, model, xmlSource) {
 			model.roots = [];
 		});
 
-        it("should extract namespaces", function() {
+        xit("should extract namespaces", function() {
 			sut.parse(xmlSource.getEmptySchemaWithNs());
 
 			expect(model.roots.length).toEqual(1);
@@ -18,7 +18,7 @@ define(['parser', 'model', 'xmlTestSource'], function(sut, model, xmlSource) {
 			expect(model.roots[0].nsMap['xmlns']).toEqual("http://www.w3.org/2001/XMLSchema");
 		});
 
-		it("should be able to parse an unqualified xsd (with one child)", function() {
+		xit("should be able to parse an unqualified xsd (with one child)", function() {
 			sut.parse(xmlSource.getUnqualifiedSchema());
 
 			expect(model.roots.length).toEqual(1);
@@ -26,7 +26,7 @@ define(['parser', 'model', 'xmlTestSource'], function(sut, model, xmlSource) {
 			expect(model.roots[0].children[0].attrs.name).toEqual('teresa');
 		});
 
-		it("should recognize multiple elements", function() {
+		xit("should recognize multiple elements", function() {
 			sut.parse(xmlSource.getXsdWithMultipleRoots());
 
 			expect(model.roots[0].children.length).toEqual(3);

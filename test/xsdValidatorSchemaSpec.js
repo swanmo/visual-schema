@@ -68,7 +68,7 @@ define(['xsdValidator'], function(sut) {
             expect(sut.getValidationErrors(xsdWhateverType).length).toBe(1);
         });
 
-        it ("should accept xsd (from xsdCTwithCC)", function() {
+        xit ("should accept xsd (from xsdCTwithCC)", function() {
             expect(sut.getValidationErrors(xsdCTwithCC)).toBeUndefined();
         });
 
