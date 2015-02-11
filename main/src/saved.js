@@ -3,37 +3,30 @@ define(['jquery', 'store', 'datePresentationUtil'], function($, store, datePrese
 
 	function renderAll(items) {
 		for (var p = 0; p < items.length; p++) {
-			append(items[p].value);
+			create(items[p].value).appendTo(baseAttachment);
 		}
 	}
 
-	function append(storedItem) {
+	function create(storedItem) {
 		var d = new Date(storedItem.saved);
 
-		render(
+		return createElem(
 			d.getUTCDate(),
 			datePresentationUtil.month(d),
-			'unknown',
-			datePresentationUtil.since(d));
+			storedItem.title,
+			datePresentationUtil.since(d),
+			storedItem.id);
 	}
 
-	/*
-		<div class="line">
-	        <div class="cal">
-	            <span class="month">Feb</span>
-	            <span class="day">22</span>
-	        </div>
-	        <div class="head old unnamed">
-	            <span>Old version</span>
-	        </div>
-	        <div class="body">
-	            <span>36 hours ago</span>
-	        </div>
-	    </div -->
-	*/
-	function render(day, month, title, age) {
-		console.log('render', age);
-		$('<div>').addClass('line').append(
+	function nameChanged() {
+		var $input = $(this);
+		console.log('nameChanged, id', $input.attr('data-id'));
+		store.updateTitle($input.attr('data-id'), $input.val());
+	}
+
+
+	function createElem(day, month, title, age, id) {
+		return $('<div>').addClass('line').append(
 			$('<div>').addClass('cal').append(
 				$('<span class="month">' + month + '</span>')
 			).append(
@@ -41,16 +34,19 @@ define(['jquery', 'store', 'datePresentationUtil'], function($, store, datePrese
 			)
 		).append(
 			$('<div>').addClass('head old unnamed').append(
-				$('<span>Old version</span>'))
+				$('<span>').append(
+					$('<input type="text" data-id="' + id + '" value="' + title + '">').on('change', nameChanged)
+				)
+			)
 		).append(
 			$('<div>').addClass('body').append(
 				$('<span>' + age + '</span>'))
-		).appendTo(baseAttachment);
+		);
 	}
 
 	function whenChanged(action, item) {
 		if (action === 'new') {
-			append(item);
+			create(item).prependTo(baseAttachment);
 		}
 	}
 

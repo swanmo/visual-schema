@@ -33,10 +33,20 @@ define([], function() {
 	        };
 	    }
     }
-	
-	var makeItem = function(_id, xsdStr, initiatedBy) {
+	var cloneItem = function(other) {
+		return {
+			id:other.id,
+			title: other.title,
+			saved: other.saved,
+			type: other.type,
+			owner: other.owner,
+			xsdData: other.xsdData
+		};
+	};
+	var makeItem = function(_id, _title, xsdStr, initiatedBy, _no) {
 		var storeItem = {
 			id:_id,
+			title: _title,
 			saved: JSON.stringify(new Date()),
 			type: 'usr',
 			owner: initiatedBy,
@@ -65,10 +75,10 @@ define([], function() {
 	};
 	
 	return {
-		addItem: function(item, initiatedBy) {
+		addItem: function(title, item, initiatedBy) {
 			console.log('addItem, initiatedBy', initiatedBy);
 			var id = generateUUID();
-			var storeItem = makeItem(id, item, initiatedBy);
+			var storeItem = makeItem(id, title, item, initiatedBy);
 			var transaction = db.transaction(['schema'], 'readwrite');
 			var store = transaction.objectStore('schema');
 
@@ -82,6 +92,28 @@ define([], function() {
 			    console.log('OK, item saved', e);
 			    notifySubscribers('new', storeItem);
 			};
+		},
+		updateTitle: function(_id, newTitle, initiatedBy) {
+			console.log('updateTitle', _id, newTitle);
+
+			var transaction = db.transaction(['schema'], 'readwrite');
+			var store = transaction.objectStore('schema');
+			var objectStoreRequest = store.get(_id);
+			objectStoreRequest.onsuccess = function() {
+				var results = objectStoreRequest.result;
+
+				results.title = newTitle;
+				var request = store.put(results, _id);
+
+				request.onerror = function(e) {
+				    console.log('error', e.target.error.name);
+				    window.alert('Sorry, its not possible to update this document on your computer\n' + e.target.error.name);
+				};
+				 
+				request.onsuccess = function(e) {
+				    console.log('OK, item updated', e);
+				};
+		}	;
 		},
 		subscribe: function(fnSubscriber) {
 			subscribers.push(fnSubscriber);
