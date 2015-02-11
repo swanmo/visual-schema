@@ -22,6 +22,33 @@ define([], function() {
 		var now = new Date();
 	}
 
+  function asText(_no) {
+    switch(_no) {
+        case 1:
+            return 'One';
+        case 2:
+            return 'Two';
+        case 3:
+            return 'Three';
+        case 4:
+            return 'Four';
+        case 5:
+            return 'Five';
+        case 6:
+            return 'Six';
+        case 7:
+            return 'Seven';
+        case 8:
+            return 'Eight';
+        case 9:
+            return 'Nine';
+        case 10:
+            return 'Ten';
+        default:
+            return _no;
+    }
+  }
+
 	return {
 		month: function(_date) {
 			return nameOfMonth(_date.getUTCMonth());
@@ -32,82 +59,51 @@ define([], function() {
 
       var seconds = Math.floor((now - _date) / 1000);
       var interval = Math.floor(seconds / 31536000);
-      console.log('since', seconds);
-
-
-      if (interval > 1) {
-        return interval + " years";
+      // console.log('since', seconds, Math.floor(seconds / 86400));
+      
+      if (interval === 1) {
+        return "A year ago";
+      } else if (interval > 1) {
+        return asText(interval) + " years ago";
       }
       interval = Math.floor(seconds / 2592000);
-      if (interval > 1) {
-        return interval + " months";
+      if (interval === 1) {
+        return "A month ago";
+      } else if (interval > 1) {
+        return asText(interval) + " months ago";
       }
       interval = Math.floor(seconds / 86400);
       if (interval === 1) {
-        return "a day";
+        return "A day ago";
+      } else if (interval > 6 && interval < 9) {
+        return "A week ago";
+      } else if (interval > 13 && interval < 17) {
+        return "Two weeks ago";
+      } else if (interval > 20 && interval < 23) {
+        return "Three weeks ago";
       } else if (interval > 1) {
-        return interval + " days";
+        return asText(interval) + " days ago";
       }
       interval = Math.floor(seconds / 3600);
       if (interval === 1) {
-        return "en timme";
+        return "An hour ago";
       } else if (interval > 1) {
-        return interval + " hours";
+        return asText(interval) + " hours ago";
       }
       interval = Math.floor(seconds / 60);
       if (interval === 1) {
-        return "a minute";
+        return "A minute ago";
       } else if (interval > 1) {
-        return interval + " minutes";
+        return asText(interval) + " minutes ago";
       }
       interval = Math.floor(seconds);
       if (interval < 5) {
-        return 'a second ago';
+        return 'A second ago';
       } else if (interval < 30) {
-        return 'a few seconds ago';
+        return 'A few seconds ago';
       } else {
         return interval + ' seconds';
       }
 		}
 	};
 });
-
-/*
-      this.timeSince = function(date) {
-        var seconds = Math.floor((new Date() - date) / 1000);
-        var interval = Math.floor(seconds / 31536000);
-
-        if (interval > 1) {
-          return interval + " år";
-        }
-        interval = Math.floor(seconds / 2592000);
-        if (interval > 1) {
-          return interval + " månader";
-        }
-        interval = Math.floor(seconds / 86400);
-        if (interval === 1) {
-          return "en dag";
-        } else if (interval > 1) {
-          return interval + " dagar";
-        }
-        interval = Math.floor(seconds / 3600);
-        if (interval === 1) {
-          return "en timme";
-        } else if (interval > 1) {
-          return interval + " timmar";
-        }
-        interval = Math.floor(seconds / 60);
-        if (interval === 1) {
-          return "en minut";
-        } else if (interval > 1) {
-          return interval + " minuter";
-        }
-        interval = Math.floor(seconds);
-        if (interval === 1) {
-          return "en sekund";
-        } else if (interval === 0) {
-          return null;
-        } else {
-          return interval + " sekunder";
-		    }
-*/
