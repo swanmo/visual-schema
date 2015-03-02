@@ -2,7 +2,7 @@
 
 define([], function() {
 	var idbSupported = false;
-	var db = undefined;
+	var db;
 	var dbName = 'exs-v0';
 	var dbVer = 1;
 	var subscribers = [];
@@ -33,19 +33,13 @@ define([], function() {
 	        };
 	    }
     }
-	var cloneItem = function(other) {
-		return {
-			id:other.id,
-			title: other.title,
-			saved: other.saved,
-			type: other.type,
-			owner: other.owner,
-			xsdData: other.xsdData
-		};
-	};
-	var makeItem = function(_id, _title, xsdStr, initiatedBy, _no) {
+
+	var statusCreated = 1, statusEdited = 2, statusDeleted = 3;
+
+	var makeItem = function(_id, _title, xsdStr, initiatedBy) {
 		var storeItem = {
 			id:_id,
+			status: statusCreated,
 			title: _title,
 			saved: JSON.stringify(new Date()),
 			type: 'usr',
@@ -69,7 +63,10 @@ define([], function() {
 		console.log('notifySubscribers', subscribers);
 		for (var i = subscribers.length - 1; i >=0; i--) {
 			console.log('notify', item);
-			item.saved = JSON.parse(item.saved);
+			if (item.saved) {
+				item.saved = JSON.parse(item.saved);
+			}
+			
 			subscribers[i].call(this, action, item);
 		}
 	};
@@ -90,7 +87,38 @@ define([], function() {
 			 
 			request.onsuccess = function(e) {
 			    console.log('OK, item saved', e);
-			    notifySubscribers('new', storeItem);
+			    notifySubscribers('created', storeItem);
+			};
+		},
+		find: function(_id, fnFound) {
+			var transaction = db.transaction(['schema'], 'readonly');
+			var store = transaction.objectStore('schema');
+			var objectStoreRequest = store.get(_id);
+
+			objectStoreRequest.onsuccess = function() {
+				var results = objectStoreRequest.result;
+				fnFound.call(this, results);
+				// console.log('find results', results);
+			};
+			objectStoreRequest.onerror = function(e) {
+			    console.log('read error', e.target);
+			    window.alert('Sorry, its not possible to read this document on your computer\n' + e.target.error.name);
+			};
+		},
+		delete: function(_id, fnDone) {
+			var transaction = db.transaction(['schema'], 'readwrite');
+			var store = transaction.objectStore('schema');
+			console.log('delete', _id);
+			var delRequest = store.delete(_id);
+
+			delRequest.onsuccess = function() {
+				console.log('delete successful');
+				fnDone.call(this);
+				notifySubscribers('deleted', {id: _id});
+			};
+			delRequest.onerror = function(e) {
+			    console.log('delete error', e.target);
+			    window.alert('Sorry, its not possible to delete this document from your computer\n' + e.target.error.name);
 			};
 		},
 		updateTitle: function(_id, newTitle, initiatedBy) {
@@ -113,7 +141,7 @@ define([], function() {
 				request.onsuccess = function(e) {
 				    console.log('OK, item updated', e);
 				};
-		}	;
+			};
 		},
 		subscribe: function(fnSubscriber) {
 			subscribers.push(fnSubscriber);

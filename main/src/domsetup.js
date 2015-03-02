@@ -98,21 +98,6 @@ define(['jquery', 'xsd', 'init', 'root', 'parser', 'store', 'saved'],
 				});
 			});
 
-  /*if (window.history && window.history.pushState) {
-  	console.log('hist');
-    //window.history.pushState('forward', null, './#forward');
-
-    $(window).on('popstate', function() {
-    	console.log('xxxxxxxx');
-    	console.log('xxxxxxxx');
-    	console.log('xxxxxxxx');
-    	console.log('xxxxxxxx');
-    	console.log('xxxxxxxx');
-    	
-      alert('Back button was pressed.');
-    });
-  }*/
-
 
 			$('#optMenu').on('click', function() {
 				hideMenu(100);
