@@ -59,16 +59,21 @@ define([], function() {
 	    return uuid;
 	};
 
+	/**
+	 Just do it later
+	*/
 	var notifySubscribers = function(action, item) {
-		console.log('notifySubscribers', subscribers);
-		for (var i = subscribers.length - 1; i >=0; i--) {
-			console.log('notify', item);
-			if (item.saved) {
-				item.saved = JSON.parse(item.saved);
+		setTimeout(function(){ 
+			console.log('notifySubscribers', subscribers);
+			for (var i = subscribers.length - 1; i >=0; i--) {
+				console.log('notify', item);
+				if (item.saved) {
+					item.saved = JSON.parse(item.saved);
+				}
+				
+				subscribers[i].call(this, action, item);
 			}
-			
-			subscribers[i].call(this, action, item);
-		}
+		}, 30);
 	};
 	
 	return {
@@ -158,6 +163,7 @@ define([], function() {
 			    cursor.continue();
 			  }
 			  else {
+			  	console.log('findAll calling')
 			    fnAll.call(this, all);
 			  }
 			};

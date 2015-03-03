@@ -9,12 +9,29 @@ define(['jquery', 'store', 'datePresentationUtil'], function($, store, datePrese
 		});
 	}
 
+	function showBaseAttachment() {
+		var o = $('#saved-items');
+		if (o.hasClass('no-items')) {
+			$('#no').html('1');	
+		}
+		$('#saved-items').removeClass('no-items');
+		
+	}
+
 	function renderAll(items) {
 		sortByAge(items);
+		if (items && items.length > 0) {
+			console.log('rendering a few');
+			$('#no').html(items.length);
+			$('#saved-items').removeClass('no-items');
+		} else {
+			console.log('rendering none');
+			$('#saved-items').addClass('no-items');
+		}
 
 		for (var p = 0; p < items.length; p++) {
 			create(items[p].value).appendTo(baseAttachment);
-		}
+		}	
 	}
 
 	function create(storedItem) {
@@ -94,8 +111,10 @@ define(['jquery', 'store', 'datePresentationUtil'], function($, store, datePrese
 	}
 
 	function whenChanged(action, item) {
-		console.log('whenChanged!!!!');
+		console.log('whenChanged', action, item);
 		if (action === 'created') {
+			console.log('whenChanged created');
+			showBaseAttachment();
 			create(item).prependTo(baseAttachment);
 		} else if (action === 'deleted') {
 			console.log('deleted notified!!!!');
