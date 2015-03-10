@@ -42,6 +42,7 @@ define([], function() {
 			status: statusCreated,
 			title: _title,
 			saved: JSON.stringify(new Date()),
+			accessed: JSON.stringify(new Date()),
 			type: 'usr',
 			owner: initiatedBy,
 			xsdData: xsdStr
@@ -122,13 +123,33 @@ define([], function() {
 				notifySubscribers('deleted', {id: _id});
 			};
 			delRequest.onerror = function(e) {
-			    console.log('delete error', e.target);
-			    window.alert('Sorry, its not possible to delete this document from your computer\n' + e.target.error.name);
+				console.log('delete error', e.target);
+				window.alert('Sorry, its not possible to delete this document from your computer\n' + e.target.error.name);
+			};
+		},
+		findAndUpdate: function(_id, fnFound, initiatedBy) {
+			var transaction = db.transaction(['schema'], 'readwrite');
+			var store = transaction.objectStore('schema');
+			var objectStoreRequest = store.get(_id);
+
+			objectStoreRequest.onsuccess = function() {
+				var results = objectStoreRequest.result;
+
+				results.accessed = new Date();
+				var request = store.put(results, _id);
+				fnFound.call(this, results);
+
+				request.onerror = function(e) {
+					console.log('error', e.target.error.name);
+					window.alert('Sorry, its not possible to update this document on your computer\n' + e.target.error.name);
+				};
+
+				request.onsuccess = function(e) {
+					console.log('OK, item updated', e);
+				};
 			};
 		},
 		updateTitle: function(_id, newTitle, initiatedBy) {
-			console.log('updateTitle', _id, newTitle);
-
 			var transaction = db.transaction(['schema'], 'readwrite');
 			var store = transaction.objectStore('schema');
 			var objectStoreRequest = store.get(_id);
@@ -152,7 +173,7 @@ define([], function() {
 			subscribers.push(fnSubscriber);
 		},
 		findAll: function(fnAll) {
-			var objectStore = db.transaction('schema').objectStore('schema');
+			var objectStore = db.transaction(['schema'], 'readonly').objectStore('schema');
 			var all = [];
 			objectStore.openCursor().onsuccess = function(event) {
 			  var cursor = event.target.result;
@@ -161,9 +182,7 @@ define([], function() {
 			  	stored.value.saved = JSON.parse(stored.value.saved);
 			    all.push({key: cursor.key, value: cursor.value});
 			    cursor.continue();
-			  }
-			  else {
-			  	console.log('findAll calling')
+			  } else {
 			    fnAll.call(this, all);
 			  }
 			};

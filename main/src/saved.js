@@ -3,8 +3,9 @@ define(['jquery', 'store', 'datePresentationUtil'], function($, store, datePrese
 
 	function sortByAge(items) {
 		items.sort(function(a, b){
-			var dA = new Date(a.value.saved);
-			var dB = new Date(b.value.saved);
+			var dA = new Date(a.value.accessed);
+			var dB = new Date(b.value.accessed);
+			// console.log('sort', a, b, (dB.getTime() - dA.getTime()));
 			return dB.getTime() - dA.getTime();
 		});
 	}
@@ -19,7 +20,9 @@ define(['jquery', 'store', 'datePresentationUtil'], function($, store, datePrese
 	}
 
 	function renderAll(items) {
+		console.log('a', items);
 		sortByAge(items);
+		console.log('b', items);
 		if (items && items.length > 0) {
 			console.log('rendering a few');
 			$('#no').html(items.length);
@@ -53,11 +56,14 @@ define(['jquery', 'store', 'datePresentationUtil'], function($, store, datePrese
 
 	function op() {
 		var $input = $(this);
-
-		store.find($input.attr('data-id'),
+		var $root = $(this).parent().parent().parent();
+		$root.addClass('reveal')
+		$('#s').prepend($root);
+		$root.removeClass('reveal');
+		store.findAndUpdate($input.attr('data-id'),
 			function (storedData) {
 				$('#xsdContent').val(storedData.xsdData);
-			}
+			}, 'me'
 		);
 	}
 
