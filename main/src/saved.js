@@ -5,7 +5,6 @@ define(['jquery', 'store', 'datePresentationUtil'], function($, store, datePrese
 		items.sort(function(a, b){
 			var dA = new Date(a.value.accessed);
 			var dB = new Date(b.value.accessed);
-			// console.log('sort', a, b, (dB.getTime() - dA.getTime()));
 			return dB.getTime() - dA.getTime();
 		});
 	}
@@ -136,7 +135,7 @@ define(['jquery', 'store', 'datePresentationUtil'], function($, store, datePrese
 
 	return {
 		setup: function() {
-			initAll();
+			setTimeout(initAll, 1100);
 		}
 	};
 });

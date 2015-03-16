@@ -89,12 +89,10 @@ define(['jquery', 'xsd', 'init', 'root', 'parser', 'store', 'saved'],
 			saved.setup();
 			
 			$('#saveXsd').on('click', function() {
-				console.log('save clicked!!!');
-
 				store.addItem('Unnamed', $('#xsdContent').val(), 'me');
 
 				store.findAll(function(items) {
-					console.log('all', items);
+
 				});
 			});
 

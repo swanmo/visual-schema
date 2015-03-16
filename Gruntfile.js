@@ -20,13 +20,13 @@ module.exports = function (grunt) {
           baseUrl: 'main/src',
  
           out: 'dist/main.js',
-          optimize: 'uglify2',
+          optimize: 'none',
          
           name: '../lib/vendor/almond/almond',
           include: ['main'],
          
           paths: {
-            jquery: 'node_modules/jquery/dist/jquery'
+            jquery: '../../node_modules/jquery/dist/jquery'
           }
         }
       }

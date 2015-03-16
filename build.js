@@ -8,6 +8,6 @@
   include: ['main'],
  
   paths: {
-    jquery: '../lib/jquery'
+    jquery: '../../lib/vendor/jquery/src/jquery'
   }
 })

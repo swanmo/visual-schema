@@ -173,6 +173,7 @@ define([], function() {
 			subscribers.push(fnSubscriber);
 		},
 		findAll: function(fnAll) {
+			console.log('findAll');
 			var objectStore = db.transaction(['schema'], 'readonly').objectStore('schema');
 			var all = [];
 			objectStore.openCursor().onsuccess = function(event) {
