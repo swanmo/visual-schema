@@ -15,7 +15,11 @@ define(function() {
 '            <xs:element name="name" type="xs:string"/>\n' +
 '            <xs:element name="address" type="xs:string"/>\n' +
 '            <xs:element name="city" type="xs:string"/>\n' +
-'            <xs:element name="country" type="xs:string"/>\n' +
+'            <xs:element name="country" type="xs:string">' +
+'              <xs:annotation>' +
+'	             <xs:documentation>Land som berödes av Kubakrisen var inte bara de närmaste i regionen utan även...</xs:documentation>' +
+'              </xs:annotation>' +
+'            </xs:element>\n' +
 '          </xs:sequence>\n' +
 '        </xs:complexType>\n' +
 '      </xs:element>\n' +

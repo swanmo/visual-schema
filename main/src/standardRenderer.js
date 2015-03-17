@@ -189,6 +189,15 @@ define(['jquery', 'parseUtils'], function($, parseUtils) {
 					desc = "<span class='ctBadge'>complexType</span> ";
 				}
 				addWrapperContainer = true;
+			} else if (entry.name=="annotation") {
+
+			} else if (entry.name=="documentation") {
+				css = "doc";
+				var elementTitle = 'info';
+				$div1.addClass("padded");
+
+				desc = "<div class='icon icon-uniE609'></div>";
+
 			} else if (entry.name=="simpleType") {
 				if (entry.attrs.name) {
 					desc = "<span class='stBadge' title='simpleType'>" + entry.attrs.name + "</span> ";	
