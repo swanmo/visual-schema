@@ -1,6 +1,6 @@
 {
-  "name": "jorden-gui",
-  "version": "0.0.1",
+  "name": "xml-visual",
+  "version": "0.0.2",
   "private": true,
   "dependencies": {
     "jquery": "^2.1.3",
