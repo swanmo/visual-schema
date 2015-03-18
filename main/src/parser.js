@@ -27,14 +27,12 @@ define(['model', 'xsdValidator'], function (model, xsdValidator) {
 		},
 		elements: function(elem, parentEntry) {
 			var nsMap = this.findNs(elem);
-			
-			var $elem = $(elem);
 
 			var me = this;
-			console.log('add', elem)
+			// console.log('add', $elem.html());
 			var entry = model.add(elem, parentEntry, nsMap);
 
-			$elem.contents()
+			$(elem).contents()
 				.filter(function() {
 					return this.nodeType != 3;
 				})

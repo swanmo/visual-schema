@@ -11514,6 +11514,8 @@ define('standardRenderer',['jquery', 'parseUtils'], function($, parseUtils) {
 					desc = "<span class='ctBadge'>complexType</span> ";
 				}
 				addWrapperContainer = true;
+			} else if (entry.name=="document" || entry.name=="annotation") {
+				desc = "<span class='stBadge' title='simpleType'>i</span> ";	
 			} else if (entry.name=="simpleType") {
 				if (entry.attrs.name) {
 					desc = "<span class='stBadge' title='simpleType'>" + entry.attrs.name + "</span> ";	
@@ -12493,7 +12495,7 @@ define('domsetup',['jquery', 'xsd', 'init', 'root', 'parser', 'store', 'saved'],
 
 requirejs.config({
     paths: {
-        'jquery': '../node_modules/jquery/dist/jquery'
+        'jquery': '../../node_modules/jquery/dist/jquery'
 
     }
 });

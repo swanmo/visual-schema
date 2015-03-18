@@ -56,7 +56,7 @@ module.exports = function (grunt) {
           optimization: 2
         },
         files: {
-          "main/style/one.css": "main/style/less/*.less" // destination file and source file
+          "main/style/one.css": "main/style/less/build.less" // destination file and source file
         }
       }
     },

@@ -29,6 +29,7 @@ define(function() {
     };
 
     var entry = function(prefix, name, node, parent, nsMap){
+        // console.log('E', name, node);
         var attrs = null;
         this.prefix = prefix;
         this.name = name;
@@ -43,6 +44,9 @@ define(function() {
             $.each($node[0].attributes, function(i, attrib){
                 nodeMap[attrib.name] = attrib.value;
             });
+        }
+        if(name === 'documentation') {
+            nodeMap._inner = node.innerHTML;
         }
 
         if (name == "element") {

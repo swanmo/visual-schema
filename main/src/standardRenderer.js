@@ -196,7 +196,7 @@ define(['jquery', 'parseUtils'], function($, parseUtils) {
 				var elementTitle = 'info';
 				$div1.addClass("padded");
 
-				desc = "<div class='icon icon-uniE609'></div>";
+				desc = "<span class='hint--bottom' data-hint='" + entry.attrs.nodeMap._inner + "'><div class='icon icon-uniE609'></div></span>";
 
 			} else if (entry.name=="simpleType") {
 				if (entry.attrs.name) {
