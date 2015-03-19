@@ -15,7 +15,6 @@ define(['jquery', 'store', 'datePresentationUtil'], function($, store, datePrese
 			$('#no').html('1');	
 		}
 		$('#saved-items').removeClass('no-items');
-		
 	}
 
 	function renderAll(items) {
@@ -30,10 +29,15 @@ define(['jquery', 'store', 'datePresentationUtil'], function($, store, datePrese
 			console.log('rendering none');
 			$('#saved-items').addClass('no-items');
 		}
-
+		var firstItem = undefined;
 		for (var p = 0; p < items.length; p++) {
+			if (!firstItem) {
+				firstItem = items[p];
+			}
 			create(items[p].value).appendTo(baseAttachment);
-		}	
+		}
+
+		whenDoneCallee.call(this, firstItem.value.xsdData);
 	}
 
 	function create(storedItem) {
@@ -49,7 +53,7 @@ define(['jquery', 'store', 'datePresentationUtil'], function($, store, datePrese
 
 	function nameChanged() {
 		var $input = $(this);
-		console.log('nameChanged, id', $input.attr('data-id'));
+
 		store.updateTitle($input.attr('data-id'), $input.val());
 	}
 
@@ -96,33 +100,12 @@ define(['jquery', 'store', 'datePresentationUtil'], function($, store, datePrese
 			);
 	}
 
-	function createElemOld(day, month, title, age, id) {
-		return $('<div>').addClass('line').append(
-			$('<div>').addClass('cal').append(
-				$('<span class="month">' + month + '</span>')
-			).append(
-				$('<span class="day">' + day + '</span>')
-			)
-		).append(
-			$('<div>').addClass('head old unnamed').append(
-				$('<span>').append(
-					$('<input type="text" data-id="' + id + '" value="' + title + '">').on('change', nameChanged)
-				)
-			)
-		).append(
-			$('<div>').addClass('body').append(
-				$('<span>' + age + '</span>'))
-		);
-	}
-
 	function whenChanged(action, item) {
-		console.log('whenChanged', action, item);
+
 		if (action === 'created') {
-			console.log('whenChanged created');
 			showBaseAttachment();
 			create(item).prependTo(baseAttachment);
 		} else if (action === 'deleted') {
-			console.log('deleted notified!!!!');
 			baseAttachment.empty();
 			store.findAll(renderAll);
 		}
@@ -132,10 +115,11 @@ define(['jquery', 'store', 'datePresentationUtil'], function($, store, datePrese
 		store.findAll(renderAll);
 		store.subscribe(whenChanged);
 	}
-
+	var whenDoneCallee;
 	return {
-		setup: function() {
-			setTimeout(initAll, 1100);
+		setup: function(callee) {
+			whenDoneCallee = callee;
+			setTimeout(initAll, 800);
 		}
 	};
 });

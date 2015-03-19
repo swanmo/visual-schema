@@ -63,7 +63,6 @@ var sample2 = '<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" \n' +
 '</xsd:schema>';
 
     return {
-    	getXml:function() {return sample},
-        getTestXml:function() {return sample}
+    	getXml:function() {return sample2}
     };
 });

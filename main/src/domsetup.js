@@ -75,8 +75,6 @@ define(['jquery', 'xsd', 'init', 'root', 'parser', 'store', 'saved'],
 		validatonInProcess = false;
 	};
 
-	
-
 	return {
 		setupValidation:function() {
 			$('#xsdContent').keyup(function() {
@@ -85,17 +83,12 @@ define(['jquery', 'xsd', 'init', 'root', 'parser', 'store', 'saved'],
 		},
 		setup:function() {
 			this.setupValidation();
-			init.setDefaults();
-			saved.setup();
+			var callee = init.setDefaults();
+			saved.setup(callee);
 			
 			$('#saveXsd').on('click', function() {
 				store.addItem('Unnamed', $('#xsdContent').val(), 'me');
-
-				store.findAll(function(items) {
-
-				});
 			});
-
 
 			$('#optMenu').on('click', function() {
 				hideMenu(100);
