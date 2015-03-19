@@ -9667,6 +9667,7 @@ define('entry',[],function() {
     };
 
     var entry = function(prefix, name, node, parent, nsMap){
+        // console.log('E', name, node);
         var attrs = null;
         this.prefix = prefix;
         this.name = name;
@@ -9681,6 +9682,9 @@ define('entry',[],function() {
             $.each($node[0].attributes, function(i, attrib){
                 nodeMap[attrib.name] = attrib.value;
             });
+        }
+        if(name === 'documentation') {
+            nodeMap._inner = node.innerHTML;
         }
 
         if (name == "element") {
@@ -11277,14 +11281,12 @@ define('parser',['model', 'xsdValidator'], function (model, xsdValidator) {
 		},
 		elements: function(elem, parentEntry) {
 			var nsMap = this.findNs(elem);
-			
-			var $elem = $(elem);
 
 			var me = this;
-			console.log('add', elem)
+			// console.log('add', $elem.html());
 			var entry = model.add(elem, parentEntry, nsMap);
 
-			$elem.contents()
+			$(elem).contents()
 				.filter(function() {
 					return this.nodeType != 3;
 				})
@@ -11514,8 +11516,15 @@ define('standardRenderer',['jquery', 'parseUtils'], function($, parseUtils) {
 					desc = "<span class='ctBadge'>complexType</span> ";
 				}
 				addWrapperContainer = true;
-			} else if (entry.name=="document" || entry.name=="annotation") {
-				desc = "<span class='stBadge' title='simpleType'>i</span> ";	
+			} else if (entry.name=="annotation") {
+
+			} else if (entry.name=="documentation") {
+				css = "doc";
+				var elementTitle = 'info';
+				$div1.addClass("padded");
+
+				desc = "<span class='hint--bottom' data-hint='" + entry.attrs.nodeMap._inner + "'><div class='icon icon-uniE609'></div></span>";
+
 			} else if (entry.name=="simpleType") {
 				if (entry.attrs.name) {
 					desc = "<span class='stBadge' title='simpleType'>" + entry.attrs.name + "</span> ";	
@@ -11772,7 +11781,9 @@ function (p,	   model,   renderer,   root,   linker) {
 		var errorsArr = [];
 		arr.forEach(
 			function(e) {
-				if (e.level==='E') {
+				if (!e) {
+					errorsArr.push('An error occurred');
+				} else if (e.level==='E') {
 					errorsArr.push('Error: ' + e.message);
 				} else if (e.level==='I') {
 					errorsArr.push('Information: ' + e.message);
@@ -11809,75 +11820,91 @@ function (p,	   model,   renderer,   root,   linker) {
 });
 define('xmlSource',[],function() {
 
-    var sample =
+//     var sample =
 
-'<?xml version="1.0" encoding="UTF-8" ?>\n' +
-'<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">\n\n' +
+// '<?xml version="1.0" encoding="UTF-8" ?>\n' +
+// '<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">\n\n' +
 
-'<xs:element name="w3shiporder">\n' +
-'  <xs:complexType>\n' +
-'    <xs:sequence>\n' +
-'      <xs:element name="orderperson" type="xs:string"/>\n' +
-'      <xs:element name="shipto">\n' +
-'        <xs:complexType>\n' +
-'          <xs:sequence>\n' +
-'            <xs:element name="name" type="xs:string"/>\n' +
-'            <xs:element name="address" type="xs:string"/>\n' +
-'            <xs:element name="city" type="xs:string"/>\n' +
-'            <xs:element name="country" type="xs:string"/>\n' +
-'          </xs:sequence>\n' +
-'        </xs:complexType>\n' +
-'      </xs:element>\n' +
-'      <xs:element name="item" maxOccurs="unbounded">\n' +
-'        <xs:complexType>\n' +
-'          <xs:sequence>\n' +
-'            <xs:element name="title" type="xs:string"/>\n' +
-'            <xs:element name="note" type="xs:string" minOccurs="0"/>\n' +
-'            <xs:element name="quantity" type="xs:positiveInteger"/>\n' +
-'            <xs:element name="price" type="xs:decimal"/>\n' +
-'          </xs:sequence>\n' +
-'        </xs:complexType>\n' +
-'      </xs:element>\n' +
-'    </xs:sequence>\n' +
-'    <xs:attribute name="orderid" type="xs:string" use="required"/>\n' +
-'  </xs:complexType>\n' +
-'</xs:element>\n' +
-'</xs:schema>';
+// '<xs:element name="w3shiporder">\n' +
+// '  <xs:complexType>\n' +
+// '    <xs:sequence>\n' +
+// '      <xs:element name="orderperson" type="xs:string"/>\n' +
+// '      <xs:element name="shipto">\n' +
+// '        <xs:complexType>\n' +
+// '          <xs:sequence>\n' +
+// '            <xs:element name="name" type="xs:string"/>\n' +
+// '            <xs:element name="address" type="xs:string"/>\n' +
+// '            <xs:element name="city" type="xs:string"/>\n' +
+// '            <xs:element name="country" type="xs:string">\n' +
+// '              <xs:annotation>\n' +
+// '	             <xs:documentation>Land som berödes av Kubakrisen var inte bara de närmaste i regionen utan även...</xs:documentation>\n' +
+// '              </xs:annotation>\n' +
+// '            </xs:element>\n' +
+// '          </xs:sequence>\n' +
+// '        </xs:complexType>\n' +
+// '      </xs:element>\n' +
+// '      <xs:element name="item" maxOccurs="unbounded">\n' +
+// '        <xs:complexType>\n' +
+// '          <xs:sequence>\n' +
+// '            <xs:element name="title" type="xs:string"/>\n' +
+// '            <xs:element name="note" type="xs:string" minOccurs="0"/>\n' +
+// '            <xs:element name="quantity" type="xs:positiveInteger"/>\n' +
+// '            <xs:element name="price" type="xs:decimal"/>\n' +
+// '          </xs:sequence>\n' +
+// '        </xs:complexType>\n' +
+// '      </xs:element>\n' +
+// '    </xs:sequence>\n' +
+// '    <xs:attribute name="orderid" type="xs:string" use="required"/>\n' +
+// '  </xs:complexType>\n' +
+// '</xs:element>\n' +
+// '</xs:schema>';
 
 var sample2 = '<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" \n' +
 'elementFormDefault="qualified">\n\n' +
 '<xsd:element name="PurchaseOrder" type="tns:PurchaseOrderType"/>\n' +
 '<xsd:complexType name="PurchaseOrderType">\n' +
 ' <xsd:sequence>\n' +
-'  <xsd:element name="ShipTo" type="tns:USAddress" maxOccurs="2"/>\n' +
-'  <xsd:element name="BillTo" type="tns:USAddress"/>\n' +
+'  <xsd:element name="ShipTo" type="tns:Address" maxOccurs="2"/>\n' +
+'  <xsd:element name="BillTo" type="tns:Address"/>\n' +
 ' </xsd:sequence>\n' +
 ' <xsd:attribute name="OrderDate" type="xsd:date"/>\n' +
 '</xsd:complexType>\n' +
-
-'<xsd:complexType name="USAddress">\n' +
+'<xsd:complexType name="Address">\n' +
 ' <xsd:sequence>\n' +
-'  <xsd:element name="name"   type="xsd:string"/>\n' +
 '  <xsd:element name="street" type="xsd:string"/>\n' +
 '  <xsd:element name="city"   type="xsd:string"/>\n' +
-'  <xsd:element name="state"  type="xsd:string"/>\n' +
+'  <xsd:element name="state"  type="xsd:string">\n' +
+'    <xsd:annotation>\n' +
+'  	   <xsd:documentation>\n' +
+'  	     State if country is US\n' +
+'  	   </xsd:documentation>\n' +
+'    </xsd:annotation>\n' +
+'  </xsd:element>\n' +
 '  <xsd:element name="zip"    type="xsd:integer"/>\n' +
 ' </xsd:sequence>\n' +
-' <xsd:attribute name="country" type="xsd:NMTOKEN" fixed="US"/>\n' +
+' <xsd:attribute name="country" type="xsd:string">\n' +
+' </xsd:attribute>\n' +
 '</xsd:complexType>\n' +
 '</xsd:schema>';
 
     return {
-    	getXml:function() {return sample},
-        getTestXml:function() {return sample}
+    	getXml:function() {return sample2}
     };
 });
 define('init',['jquery', 'xmlSource'], function($, xmlSource) {
 	return {
 		setDefaults: function() {
-			$("#xsdContent").text(xmlSource.getXml());
+
+			return function(contents) {
+				console.log('callback', contents);
+				if (contents) {
+					$('#xsdContent').text(contents);
+				} else {
+					$('#xsdContent').text(xmlSource.getXml());
+				}
+			};
 		}
-	}
+	};
 });
 // http://code.tutsplus.com/tutorials/working-with-indexeddb--net-34673
 
@@ -12191,7 +12218,6 @@ define('saved',['jquery', 'store', 'datePresentationUtil'], function($, store, d
 			$('#no').html('1');	
 		}
 		$('#saved-items').removeClass('no-items');
-		
 	}
 
 	function renderAll(items) {
@@ -12206,10 +12232,15 @@ define('saved',['jquery', 'store', 'datePresentationUtil'], function($, store, d
 			console.log('rendering none');
 			$('#saved-items').addClass('no-items');
 		}
-
+		var firstItem = undefined;
 		for (var p = 0; p < items.length; p++) {
+			if (!firstItem) {
+				firstItem = items[p].value.xsdData;
+			}
 			create(items[p].value).appendTo(baseAttachment);
-		}	
+		}
+
+		whenDoneCallee.call(this, firstItem);
 	}
 
 	function create(storedItem) {
@@ -12225,7 +12256,7 @@ define('saved',['jquery', 'store', 'datePresentationUtil'], function($, store, d
 
 	function nameChanged() {
 		var $input = $(this);
-		console.log('nameChanged, id', $input.attr('data-id'));
+
 		store.updateTitle($input.attr('data-id'), $input.val());
 	}
 
@@ -12272,33 +12303,12 @@ define('saved',['jquery', 'store', 'datePresentationUtil'], function($, store, d
 			);
 	}
 
-	function createElemOld(day, month, title, age, id) {
-		return $('<div>').addClass('line').append(
-			$('<div>').addClass('cal').append(
-				$('<span class="month">' + month + '</span>')
-			).append(
-				$('<span class="day">' + day + '</span>')
-			)
-		).append(
-			$('<div>').addClass('head old unnamed').append(
-				$('<span>').append(
-					$('<input type="text" data-id="' + id + '" value="' + title + '">').on('change', nameChanged)
-				)
-			)
-		).append(
-			$('<div>').addClass('body').append(
-				$('<span>' + age + '</span>'))
-		);
-	}
-
 	function whenChanged(action, item) {
-		console.log('whenChanged', action, item);
+
 		if (action === 'created') {
-			console.log('whenChanged created');
 			showBaseAttachment();
 			create(item).prependTo(baseAttachment);
 		} else if (action === 'deleted') {
-			console.log('deleted notified!!!!');
 			baseAttachment.empty();
 			store.findAll(renderAll);
 		}
@@ -12308,10 +12318,11 @@ define('saved',['jquery', 'store', 'datePresentationUtil'], function($, store, d
 		store.findAll(renderAll);
 		store.subscribe(whenChanged);
 	}
-
+	var whenDoneCallee;
 	return {
-		setup: function() {
-			setTimeout(initAll, 1100);
+		setup: function(callee) {
+			whenDoneCallee = callee;
+			setTimeout(initAll, 800);
 		}
 	};
 });
@@ -12325,7 +12336,7 @@ define('domsetup',['jquery', 'xsd', 'init', 'root', 'parser', 'store', 'saved'],
 	var validatonTimer;
 	var getFatalMessages = function(arrMessages) {
 		return arrMessages.filter(function(item) {
-			return item.level === 'F';
+			return item && item.level === 'F';
 		});
 	};
 	var runValidation = function() {
@@ -12393,8 +12404,6 @@ define('domsetup',['jquery', 'xsd', 'init', 'root', 'parser', 'store', 'saved'],
 		validatonInProcess = false;
 	};
 
-	
-
 	return {
 		setupValidation:function() {
 			$('#xsdContent').keyup(function() {
@@ -12403,17 +12412,12 @@ define('domsetup',['jquery', 'xsd', 'init', 'root', 'parser', 'store', 'saved'],
 		},
 		setup:function() {
 			this.setupValidation();
-			init.setDefaults();
-			saved.setup();
+			var callee = init.setDefaults();
+			saved.setup(callee);
 			
 			$('#saveXsd').on('click', function() {
 				store.addItem('Unnamed', $('#xsdContent').val(), 'me');
-
-				store.findAll(function(items) {
-
-				});
 			});
-
 
 			$('#optMenu').on('click', function() {
 				hideMenu(100);
