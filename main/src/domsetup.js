@@ -7,7 +7,7 @@ define(['jquery', 'xsd', 'init', 'root', 'parser', 'store', 'saved'],
 	var validatonTimer;
 	var getFatalMessages = function(arrMessages) {
 		return arrMessages.filter(function(item) {
-			return item.level === 'F';
+			return item && item.level === 'F';
 		});
 	};
 	var runValidation = function() {

@@ -4,7 +4,9 @@ function (p,	   model,   renderer,   root,   linker) {
 		var errorsArr = [];
 		arr.forEach(
 			function(e) {
-				if (e.level==='E') {
+				if (!e) {
+					errorsArr.push('An error occurred');
+				} else if (e.level==='E') {
 					errorsArr.push('Error: ' + e.message);
 				} else if (e.level==='I') {
 					errorsArr.push('Information: ' + e.message);

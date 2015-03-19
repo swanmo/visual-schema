@@ -32,12 +32,12 @@ define(['jquery', 'store', 'datePresentationUtil'], function($, store, datePrese
 		var firstItem = undefined;
 		for (var p = 0; p < items.length; p++) {
 			if (!firstItem) {
-				firstItem = items[p];
+				firstItem = items[p].value.xsdData;
 			}
 			create(items[p].value).appendTo(baseAttachment);
 		}
 
-		whenDoneCallee.call(this, firstItem.value.xsdData);
+		whenDoneCallee.call(this, firstItem);
 	}
 
 	function create(storedItem) {
