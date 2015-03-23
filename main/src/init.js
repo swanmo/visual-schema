@@ -3,7 +3,6 @@ define(['jquery', 'xmlSource'], function($, xmlSource) {
 		setDefaults: function() {
 
 			return function(contents) {
-				console.log('callback', contents);
 				if (contents) {
 					$('#xsdContent').text(contents);
 				} else {

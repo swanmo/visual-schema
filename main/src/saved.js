@@ -18,15 +18,12 @@ define(['jquery', 'store', 'datePresentationUtil'], function($, store, datePrese
 	}
 
 	function renderAll(items) {
-		console.log('a', items);
 		sortByAge(items);
-		console.log('b', items);
 		if (items && items.length > 0) {
-			console.log('rendering a few');
 			$('#no').html(items.length);
 			$('#saved-items').removeClass('no-items');
 		} else {
-			console.log('rendering none');
+
 			$('#saved-items').addClass('no-items');
 		}
 		var firstItem = undefined;
@@ -75,7 +72,7 @@ define(['jquery', 'store', 'datePresentationUtil'], function($, store, datePrese
 
 		store.delete($input.attr('data-id'),
 			function () {
-				console.log('delete done');
+				// console.log('delete done');
 			}
 		);
 	}

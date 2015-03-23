@@ -14,7 +14,6 @@ define([], function() {
 	        var openRequest = window.indexedDB.open(dbName, dbVer);
 	 
 	        openRequest.onupgradeneeded = function(e) {
-                console.log('running onupgradeneeded', e);
 	            var thisDB = e.target.result;
 	 
 	            if(!thisDB.objectStoreNames.contains('schema')) {
@@ -23,12 +22,10 @@ define([], function() {
 	        };
 	 
 	        openRequest.onsuccess = function(e) {
-	            console.log('Open success', e);
 	            db = e.target.result;
 	        };
 	 
 	        openRequest.onerror = function(e) {
-	            console.log('Error', e);
 	            console.dir(e);
 	        };
 	    }

@@ -5,6 +5,27 @@ define(['jquery', 'xsd', 'init', 'root', 'parser', 'store', 'saved'],
 	var closestTimeBetween = 1500;
 	var validatonInProcess = false;
 	var validatonTimer;
+
+
+
+
+
+if (typeof history.pushState === "function") {
+	console.log('alpha');
+        // history.pushState("jibberish", null, null);
+        window.onpopstate = function (item) {
+            console.log('bravo', item);
+            goBack();
+
+            // history.pushState('newjibberish', null, null);
+            // Handle the back (or forward) buttons here
+            // Will NOT handle refresh, use onbeforeunload for this.
+            
+        };
+    }
+
+
+
 	var getFatalMessages = function(arrMessages) {
 		return arrMessages.filter(function(item) {
 			return item && item.level === 'F';
@@ -74,6 +95,27 @@ define(['jquery', 'xsd', 'init', 'root', 'parser', 'store', 'saved'],
 		lastValidation = now;
 		validatonInProcess = false;
 	};
+	var resizeBox = function() {
+		var proposedHeight = $(window).height() - 200;
+		if ($('#headRow').hasClass('semi-open')) {
+			proposedHeight += 30;
+		}
+
+		if (proposedHeight < 250) {
+			proposedHeight = 250;
+		}
+	  	$('#xsdContent').height(proposedHeight);
+	};
+	var goBack = function() {
+		$root.hide();
+		$('#leftie').slideToggle('fast');
+		$('#headRow').addClass('semi-open').removeClass('closed');
+		$('#inputRow').slideDown(resizeBox);
+		$('#showXsd').show();
+		$('#showOptions').show();
+
+		$('#saved-items').css('display', 'block');
+	};
 
 	return {
 		setupValidation:function() {
@@ -111,6 +153,8 @@ define(['jquery', 'xsd', 'init', 'root', 'parser', 'store', 'saved'],
 
 				$('#headRow').addClass('closed').removeClass('semi-open');
 
+				history.pushState('show', "Show XSD", "/xsd");
+				$('#saved-items').css('display', 'none');
 
 				$('#inputRow').slideUp(function() {
 					$('#leftie').slideToggle('fast');
@@ -143,25 +187,10 @@ define(['jquery', 'xsd', 'init', 'root', 'parser', 'store', 'saved'],
 			});
 
 			$('#undo').on('click', function() {
-				$root.hide();
-				$('#leftie').slideToggle('fast');
-				$('#headRow').addClass('semi-open').removeClass('closed');
-				$('#inputRow').slideDown(resizeBox);
-				$('#showXsd').show();
-				$('#showOptions').show();
+				goBack();
 			});
 
-			var resizeBox = function() {
-				var proposedHeight = $(window).height() - 200;
-				if ($('#headRow').hasClass('semi-open')) {
-					proposedHeight += 30;
-				}
-
-				if (proposedHeight < 250) {
-					proposedHeight = 250;
-				}
-			  	$('#xsdContent').height(proposedHeight);
-			};
+			
 			resizeBox();
 			$(window).resize(resizeBox);
 		}
