@@ -1,0 +1,11 @@
+<svg width="120" height="120" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
+ <g>
+  <title>Union symbol</title>
+  <ellipse ry="14" rx="14" id="svg_3" cy="60" cx="23" stroke-width="0" stroke="#000000" fill="#000000"/>
+  <ellipse id="svg_4" ry="14" rx="14" cy="61" cx="81" fill="#000000"/>
+  <ellipse id="svg_6" ry="14" rx="14" cy="101" cx="81" stroke-width="0" stroke="#000000" fill="#000000"/>
+  <ellipse id="svg_7" ry="14" rx="14" cy="21" cx="81" stroke-width="0" stroke="#000000" fill="#000000"/>
+  <path id="svg_10" d="m28.5,51l32.5,-23l4.75,6.5l-32.75,22.75l-4.5,-6.25z" stroke-linecap="null" stroke-linejoin="null" stroke-width="0" stroke="#000000" fill="#000000"/>
+ </g>
+</svg>
