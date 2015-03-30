@@ -196,7 +196,7 @@ define(['jquery', 'parseUtils'], function($, parseUtils) {
 				var elementTitle = 'info';
 				$div1.addClass("padded");
 
-				desc = "<span class='hint--bottom' data-hint='" + entry.attrs.nodeMap._inner + "'><div class='icon icon-uniE609'></div></span>";
+				desc = "<span class='hint--bottom' data-hint='" + entry.attrs.nodeMap._inner + "'><div class='icon-info-lined'></div></span>";
 
 			} else if (entry.name=="simpleType") {
 				if (entry.attrs.name) {
@@ -211,9 +211,9 @@ define(['jquery', 'parseUtils'], function($, parseUtils) {
 					entry.name==='pattern' || entry.name==='totalDigits' || entry.name==='whiteSpace') {
 
 				if (entry.name==='enumeration') {
-					desc = "<div class='a' title='attribute'><span class='glyphicon glyphicon-th-list'></span></div> " + entry.name;
+					desc = "<div class='a' title='attribute'><span class='icon-icon-menu'></span></div> " + entry.name;
 				} else {
-					desc = "<div class='a' title='attribute'><span class='glyphicon glyphicon-ban-circle'></span></div> " + entry.name;
+					desc = "<div class='a' title='attribute'><span class='icon-ban'></span></div> " + entry.name;
 				}
 
 				if (entry.attrs.nodeMap.value) {
@@ -222,7 +222,7 @@ define(['jquery', 'parseUtils'], function($, parseUtils) {
 				css = "element-a";
 				$div1.addClass("padded");
 			} else if (entry.name!=="schema" && entry.name!=="#comment") {
-				desc = '<span class="icon-file-xml" style="font-size:160%"></span>';
+				desc = '<span class="icon-x-doc" style="font-size:160%"></span>';
 				if (entry.attrs.name) {
 					desc += entry.attrs.name + ' (' + entry.name + ')';
 				} else {

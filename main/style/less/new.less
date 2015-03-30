@@ -1,0 +1,76 @@
+.signatureFont () {
+    font-family: 'Oswald';
+}
+
+@light-color: #bbb;
+@hilight-color: #ef4503;
+
+
+.new {
+	.header {
+		.top {
+			.signatureFont ();
+			color:black;
+			width: 100%;
+			min-height: 50px;
+			.icon-xsd {
+				margin:15px 10px 0 12px;
+				float:left;
+				font-size: 28px;
+				color:@light-color;
+			}
+			.more-xsd {
+				float:left;
+				margin-top:6px;
+				.one {
+					font-weight: bold;
+					font-size: 46px;
+					float:left;
+					margin-top:-10px;
+				}
+
+				.two {
+					font-weight: bold;
+					&>*:first-child {
+						font-size: 14px;
+						span {
+							color:#aaa;	
+						}
+					}
+					&>*:last-child {
+						color:#aaa;
+						font-size: 20px;
+					}
+					float:left;
+				}
+			}
+			
+			.options {
+				float:right;
+				padding-top:6px;
+				a {
+					margin-right:30px;
+
+					&:first-of-type {
+						margin-left:300px;
+					}
+					color: @light-color;
+					font-size: 28px;
+					text-decoration: none;
+					&:hover{
+						color: darken(@hilight-color, 5%);
+					}
+				}
+			}
+
+		}
+		.bottom {
+			margin-top: 4px;
+			background:black;
+			width: 100%;
+			min-height: 30px;
+		}
+		
+	}
+
+}
