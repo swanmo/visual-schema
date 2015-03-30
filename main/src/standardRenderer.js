@@ -173,7 +173,7 @@ define(['jquery', 'parseUtils'], function($, parseUtils) {
 				css = "element-a";
 				$div1.addClass("padded");
 			} else if (entry.name=="sequence") {
-				desc = "<div class='s' title='sequence'>...</div> ";
+				desc = "<div class='s' title='sequence'><span class='icon-three-sequence'> </span></div> ";
 			} else if (entry.name=="complexContent") {
 				return parent;
 			} else if (entry.name=="extension") {
