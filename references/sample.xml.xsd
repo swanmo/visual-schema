@@ -37,10 +37,24 @@
   </xs:sequence>
 </xs:complexType>
 
+<xs:element name="person">
+  <xs:complexType>
+    <xs:choice>
+      <xs:element name="employee" type="employee"/>
+      <xs:element name="member" type="member"/>
+    </xs:choice>
+  </xs:complexType>
+</xs:element>
+
+
 <xs:complexType name="shipordertype">
   <xs:sequence>
     <xs:element name="orderperson" type="stringtype"/>
-    <xs:element name="letter" type="LettersType"/>
+    <xs:element name="owner" type="person"/>
+    <xs:choice>
+      <xs:element name="lansbokstav" type="LettersType"/>
+      <xs:element name="alternativ-bokstav" type="LettersType"/>
+    </xs:choice>
     <xs:element name="shipto" type="shiptotype"/>
     <xs:element name="item" maxOccurs="unbounded" type="itemtype"/>
   </xs:sequence>
@@ -54,8 +68,6 @@
     <xs:enumeration value="G"/>
     <xs:enumeration value="L"/>
     <xs:enumeration value="LG"/>
-    <xs:enumeration value="M"/>
-    <xs:enumeration value="UG"/>
   </xs:restriction>
 </xs:simpleType>
 
