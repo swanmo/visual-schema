@@ -11500,7 +11500,9 @@ define('standardRenderer',['jquery', 'parseUtils'], function($, parseUtils) {
 				css = "element-a";
 				$div1.addClass("padded");
 			} else if (entry.name=="sequence") {
-				desc = "<div class='s' title='sequence'>...</div> ";
+				desc = "<div class='s' title='sequence'><span class='icon-three-sequence'> </span></div> ";
+			} else if (entry.name=="choice") {
+				desc = "<div class='s' title='choice'><span class='icon-choice'> </span></div> ";
 			} else if (entry.name=="complexContent") {
 				return parent;
 			} else if (entry.name=="extension") {
@@ -11523,7 +11525,7 @@ define('standardRenderer',['jquery', 'parseUtils'], function($, parseUtils) {
 				var elementTitle = 'info';
 				$div1.addClass("padded");
 
-				desc = "<span class='hint--bottom' data-hint='" + entry.attrs.nodeMap._inner + "'><div class='icon icon-uniE609'></div></span>";
+				desc = "<span class='hint--bottom' data-hint='" + entry.attrs.nodeMap._inner + "'><div class='icon-info-lined'></div></span>";
 
 			} else if (entry.name=="simpleType") {
 				if (entry.attrs.name) {
@@ -11538,9 +11540,9 @@ define('standardRenderer',['jquery', 'parseUtils'], function($, parseUtils) {
 					entry.name==='pattern' || entry.name==='totalDigits' || entry.name==='whiteSpace') {
 
 				if (entry.name==='enumeration') {
-					desc = "<div class='a' title='attribute'><span class='glyphicon glyphicon-th-list'></span></div> " + entry.name;
+					desc = "<div class='a' title='attribute'><span class='icon-icon-menu'></span></div> " + entry.name;
 				} else {
-					desc = "<div class='a' title='attribute'><span class='glyphicon glyphicon-ban-circle'></span></div> " + entry.name;
+					desc = "<div class='a' title='attribute'><span class='icon-ban'></span></div> " + entry.name;
 				}
 
 				if (entry.attrs.nodeMap.value) {
@@ -11549,7 +11551,7 @@ define('standardRenderer',['jquery', 'parseUtils'], function($, parseUtils) {
 				css = "element-a";
 				$div1.addClass("padded");
 			} else if (entry.name!=="schema" && entry.name!=="#comment") {
-				desc = '<span class="icon-file-xml" style="font-size:160%"></span>';
+				desc = '<span class="icon-x-doc" style="font-size:160%"></span>';
 				if (entry.attrs.name) {
 					desc += entry.attrs.name + ' (' + entry.name + ')';
 				} else {
@@ -11896,7 +11898,6 @@ define('init',['jquery', 'xmlSource'], function($, xmlSource) {
 		setDefaults: function() {
 
 			return function(contents) {
-				console.log('callback', contents);
 				if (contents) {
 					$('#xsdContent').text(contents);
 				} else {
@@ -11922,7 +11923,6 @@ define('store',[], function() {
 	        var openRequest = window.indexedDB.open(dbName, dbVer);
 	 
 	        openRequest.onupgradeneeded = function(e) {
-                console.log('running onupgradeneeded', e);
 	            var thisDB = e.target.result;
 	 
 	            if(!thisDB.objectStoreNames.contains('schema')) {
@@ -11931,12 +11931,10 @@ define('store',[], function() {
 	        };
 	 
 	        openRequest.onsuccess = function(e) {
-	            console.log('Open success', e);
 	            db = e.target.result;
 	        };
 	 
 	        openRequest.onerror = function(e) {
-	            console.log('Error', e);
 	            console.dir(e);
 	        };
 	    }
@@ -12221,15 +12219,12 @@ define('saved',['jquery', 'store', 'datePresentationUtil'], function($, store, d
 	}
 
 	function renderAll(items) {
-		console.log('a', items);
 		sortByAge(items);
-		console.log('b', items);
 		if (items && items.length > 0) {
-			console.log('rendering a few');
 			$('#no').html(items.length);
 			$('#saved-items').removeClass('no-items');
 		} else {
-			console.log('rendering none');
+
 			$('#saved-items').addClass('no-items');
 		}
 		var firstItem = undefined;
@@ -12278,7 +12273,7 @@ define('saved',['jquery', 'store', 'datePresentationUtil'], function($, store, d
 
 		store.delete($input.attr('data-id'),
 			function () {
-				console.log('delete done');
+				// console.log('delete done');
 			}
 		);
 	}
@@ -12334,6 +12329,27 @@ define('domsetup',['jquery', 'xsd', 'init', 'root', 'parser', 'store', 'saved'],
 	var closestTimeBetween = 1500;
 	var validatonInProcess = false;
 	var validatonTimer;
+
+
+
+
+
+if (typeof history.pushState === "function") {
+	console.log('alpha');
+        // history.pushState("jibberish", null, null);
+        window.onpopstate = function (item) {
+            console.log('bravo', item);
+            goBack();
+
+            // history.pushState('newjibberish', null, null);
+            // Handle the back (or forward) buttons here
+            // Will NOT handle refresh, use onbeforeunload for this.
+            
+        };
+    }
+
+
+
 	var getFatalMessages = function(arrMessages) {
 		return arrMessages.filter(function(item) {
 			return item && item.level === 'F';
@@ -12403,6 +12419,27 @@ define('domsetup',['jquery', 'xsd', 'init', 'root', 'parser', 'store', 'saved'],
 		lastValidation = now;
 		validatonInProcess = false;
 	};
+	var resizeBox = function() {
+		var proposedHeight = $(window).height() - 200;
+		if ($('#headRow').hasClass('semi-open')) {
+			proposedHeight += 30;
+		}
+
+		if (proposedHeight < 250) {
+			proposedHeight = 250;
+		}
+	  	$('#xsdContent').height(proposedHeight);
+	};
+	var goBack = function() {
+		$root.hide();
+		$('#leftie').slideToggle('fast');
+		$('#headRow').addClass('semi-open').removeClass('closed');
+		$('#inputRow').slideDown(resizeBox);
+		$('#showXsd').show();
+		$('#showOptions').show();
+
+		$('#saved-items').css('display', 'block');
+	};
 
 	return {
 		setupValidation:function() {
@@ -12440,6 +12477,8 @@ define('domsetup',['jquery', 'xsd', 'init', 'root', 'parser', 'store', 'saved'],
 
 				$('#headRow').addClass('closed').removeClass('semi-open');
 
+				history.pushState('show', "Show XSD", "/xsd");
+				$('#saved-items').css('display', 'none');
 
 				$('#inputRow').slideUp(function() {
 					$('#leftie').slideToggle('fast');
@@ -12472,25 +12511,10 @@ define('domsetup',['jquery', 'xsd', 'init', 'root', 'parser', 'store', 'saved'],
 			});
 
 			$('#undo').on('click', function() {
-				$root.hide();
-				$('#leftie').slideToggle('fast');
-				$('#headRow').addClass('semi-open').removeClass('closed');
-				$('#inputRow').slideDown(resizeBox);
-				$('#showXsd').show();
-				$('#showOptions').show();
+				goBack();
 			});
 
-			var resizeBox = function() {
-				var proposedHeight = $(window).height() - 200;
-				if ($('#headRow').hasClass('semi-open')) {
-					proposedHeight += 30;
-				}
-
-				if (proposedHeight < 250) {
-					proposedHeight = 250;
-				}
-			  	$('#xsdContent').height(proposedHeight);
-			};
+			
 			resizeBox();
 			$(window).resize(resizeBox);
 		}
