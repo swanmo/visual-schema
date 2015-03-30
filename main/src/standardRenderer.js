@@ -127,18 +127,17 @@ define(['jquery', 'parseUtils'], function($, parseUtils) {
 					desc += " <span class='et'>: " + entry.attrs.nodeMap.ref + "</span>";
 				}
 				desc += getCardinality(entry.attrs.minOccurs, entry.attrs.maxOccurs);
-				
+			} else if (entry.name=="list") {
+				css = "element-l";
+
+				desc = "<div class='e' title='list'><span class='icon-icon-menu'></span></div> ";
+
 			} else if (entry.name=="key" || entry.name=="keyref") {
 
 				if (entry.attrs.type) {
 					desc += " <span class='et'>: " + parseUtils.parseName(entry.attrs.type) + "</span>";
 				}
 
-				css = "element-e";
-				$div1.addClass("padded");
-				if (entry.attrs.minOccurs == "0") {
-					css += " optional";
-				}
 				desc = "<div class='e' title='" + entry.name + "'><span class='icon-key2'></span></div> " + entry.attrs.name;
 				if (entry.attrs.type) {
 					desc += " <span class='et'>: " + parseUtils.parseName(entry.attrs.type) + "</span>";

@@ -80,6 +80,8 @@ define(['parseUtils', 'logger'], function(parseUtils, logger) {
 					reference = entry.attrs.ref;
 				} else if (entry.attrs.base) {
 					reference = entry.attrs.base;
+				} else if (entry.attrs.nodeMap.itemType) {
+					reference = entry.attrs.nodeMap.itemType;
 				}
 			}
 			if (reference) {
