@@ -131,6 +131,10 @@ define(['jquery', 'parseUtils'], function($, parseUtils) {
 				css = "element-l";
 
 				desc = "<div class='e' title='list'><span class='icon-icon-menu'></span></div> ";
+			} else if (entry.name=="union") {
+				css = "element-u";
+
+				desc = "<div class='e' title='union'><span class='icon-union'></span></div> " + entry.attrs.nodeMap.memberTypes;
 
 			} else if (entry.name=="key" || entry.name=="keyref") {
 

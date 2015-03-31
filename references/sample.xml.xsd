@@ -58,7 +58,7 @@
     <xs:element name="shipto" type="shiptotype"/>
     <xs:element name="item" maxOccurs="unbounded" type="itemtype"/>
     <xs:element name="size" maxOccurs="1" type="USClothingSizeType"/>
-    <xs:element name="sizesInStock" type="SizesinStockType"/>
+    <xs:element name="sizesInStock" type="xs:int"/>
     
   </xs:sequence>
   <xs:attribute name="orderid" type="orderidtype" use="required"/>
@@ -86,20 +86,6 @@
         <xs:enumeration value="medium"/> 
         <xs:enumeration value="large"/>
     </xs:restriction>
-</xs:simpleType>
-
-<xs:simpleType name="SizesinStockType">
-    <xs:list>
-      <xs:simpleType name="LettersType">
-        <xs:restriction base="xsd:string">
-          <xs:enumeration value="B"/>
-          <xs:enumeration value="FL"/>
-          <xs:enumeration value="G"/>
-          <xs:enumeration value="L"/>
-          <xs:enumeration value="LG"/>
-        </xs:restriction>
-      </xs:simpleType>
-    </xs:list>
 </xs:simpleType>
 
 <xs:simpleType name="USClothingSizeType"> 
