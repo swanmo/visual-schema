@@ -11406,8 +11406,8 @@ define('standardRenderer',['jquery', 'parseUtils'], function($, parseUtils) {
 		},
 		isExtensionBase: function(entry, parentEntry) {
 			return parentEntry && 
-				(parentEntry.name === 'extension') &&
-				parentEntry.linkedEntry === entry;
+				(parentEntry.name === 'extension') && parentEntry.linkedEntry &&
+				parentEntry.linkedEntry[0] === entry;
 		},
 		hasBranching: function(entry) {
 			var kids = [];
@@ -11418,7 +11418,9 @@ define('standardRenderer',['jquery', 'parseUtils'], function($, parseUtils) {
 			}
 
 			if (entry.linkedEntry) {
-				kids.push(entry.linkedEntry);
+				for (var i = 0; i < entry.linkedEntry.length; i++) {
+					kids.push(entry.linkedEntry[i]);
+				}
 			}
 			return kids.length > 1;
 		},
@@ -11458,9 +11460,11 @@ define('standardRenderer',['jquery', 'parseUtils'], function($, parseUtils) {
 				css = "element-l";
 
 				desc = "<div class='e' title='list'><span class='icon-icon-menu'></span></div> ";
-
+			} else if (entry.name=="union") {
+				css = "element-u";
+				desc = "<div class='s' title='union'><span class='icon-union'></span></div>";
+				desc += "union<span class='et' title='union'>: " + entry.attrs.nodeMap.memberTypes + "</span>";
 			} else if (entry.name=="key" || entry.name=="keyref") {
-
 				if (entry.attrs.type) {
 					desc += " <span class='et'>: " + parseUtils.parseName(entry.attrs.type) + "</span>";
 				}
@@ -11499,7 +11503,9 @@ define('standardRenderer',['jquery', 'parseUtils'], function($, parseUtils) {
 				css = "element-a";
 				$div1.addClass("padded");
 			} else if (entry.name=="sequence") {
-				desc = "<div class='s' title='sequence'><span class='icon-three-sequence'> </span></div> ";
+				desc = "<div class='s' title='sequence'><span class='icon-sequence'> </span></div> ";
+			} else if (entry.name=="all") {
+				desc = "<div class='s' title='all'><span class='icon-all'> </span></div> ";
 			} else if (entry.name=="choice") {
 				desc = "<div class='s' title='choice'><span class='icon-choice'> </span></div> ";
 			} else if (entry.name=="complexContent") {
@@ -11639,7 +11645,9 @@ define('standardRenderer',['jquery', 'parseUtils'], function($, parseUtils) {
 				container = domParent;
 			}
 			if (entry.linkedEntry) {
-				this.renderElem(entry.linkedEntry, container, entry);
+				for (var i = 0; i < entry.linkedEntry.length; i++) {
+					this.renderElem(entry.linkedEntry[i], container, entry);
+				}
 			}
 
 			if (entry.children) {
@@ -11736,7 +11744,7 @@ define('linker',['parseUtils', 'logger'], function(parseUtils, logger) {
 			this.linkItem(roots[0], mapOfRootTypes, [roots[0].nsMap]);
 		},
 		linkItem:function(entry, entriesByName, arrNamespacesMaps) {
-			var reference = null;
+			var reference = [];
 			var hasNsMapping = (entry.nsMap) ? true : false;
 			if (hasNsMapping) {
 				arrNamespacesMaps.unshift(entry.nsMap);	
@@ -11744,29 +11752,38 @@ define('linker',['parseUtils', 'logger'], function(parseUtils, logger) {
 
 			if (entry.attrs) {
 				if (entry.attrs.type) {
-					reference = entry.attrs.type;
+					reference.push(entry.attrs.type);
 				} else if (entry.attrs.ref) {
-					reference = entry.attrs.ref;
+					reference.push(entry.attrs.ref);
 				} else if (entry.attrs.base) {
-					reference = entry.attrs.base;
+					reference.push(entry.attrs.base);
 				} else if (entry.attrs.nodeMap.itemType) {
-					reference = entry.attrs.nodeMap.itemType;
+					reference.push(entry.attrs.nodeMap.itemType);
+				} else if (entry.attrs.nodeMap.memberTypes) {
+					console.log('memberTypes', entry.attrs.nodeMap.memberTypes);
+					var allRefs = entry.attrs.nodeMap.memberTypes.split(' ');
+					for (var i = 0; i < allRefs.length; i++) {
+						reference.push(allRefs[i]);
+					}
 				}
 			}
-			if (reference) {
-				var _isNotXsdPrefixed = isNotXsdPrefixed(reference, arrNamespacesMaps);
-				// console.log(reference + " is Xsd prefixed: " + (!_isNotXsdPrefixed));
+			entry.linkedEntry = [];
+			for(var i = 0; i < reference.length; i++) {
+				var _isNotXsdPrefixed = isNotXsdPrefixed(reference[i], arrNamespacesMaps);
+				if (isNotXsdPrefixed(reference[i], arrNamespacesMaps)) {
+					var e = findByNameAndPrefix(reference[i], entriesByName, arrNamespacesMaps);
+					if (!e) {
+						// TODO
+						console.log("Unable to find referenced element '"  + reference[i] + "'");
+					} else {
+						entry.linkedEntry.push(e);
+					}
+				}
+			}
+			if (entry.linkedEntry.length === 0) {
+				entry.linkedEntry = undefined;
 			}
 
-			if (reference && isNotXsdPrefixed(reference, arrNamespacesMaps)) {
-				var e = findByNameAndPrefix(reference,entriesByName, arrNamespacesMaps);
-				if (!e) {
-					// TODO
-					console.log("Unable to find referenced element '"  + reference + "'");
-				} else {
-					entry.linkedEntry = e;
-				}
-			}
 			if (entry.children) {
 				for (var i = 0; i < entry.children.length; i++) {
 					this.linkItem(entry.children[i], entriesByName, arrNamespacesMaps);
