@@ -67,7 +67,7 @@ define(['parseUtils', 'logger'], function(parseUtils, logger) {
 			this.linkItem(roots[0], mapOfRootTypes, [roots[0].nsMap]);
 		},
 		linkItem:function(entry, entriesByName, arrNamespacesMaps) {
-			var reference = null;
+			var reference = [];
 			var hasNsMapping = (entry.nsMap) ? true : false;
 			if (hasNsMapping) {
 				arrNamespacesMaps.unshift(entry.nsMap);	
@@ -75,29 +75,38 @@ define(['parseUtils', 'logger'], function(parseUtils, logger) {
 
 			if (entry.attrs) {
 				if (entry.attrs.type) {
-					reference = entry.attrs.type;
+					reference.push(entry.attrs.type);
 				} else if (entry.attrs.ref) {
-					reference = entry.attrs.ref;
+					reference.push(entry.attrs.ref);
 				} else if (entry.attrs.base) {
-					reference = entry.attrs.base;
+					reference.push(entry.attrs.base);
 				} else if (entry.attrs.nodeMap.itemType) {
-					reference = entry.attrs.nodeMap.itemType;
+					reference.push(entry.attrs.nodeMap.itemType);
+				} else if (entry.attrs.nodeMap.memberTypes) {
+					console.log('memberTypes', entry.attrs.nodeMap.memberTypes);
+					var allRefs = entry.attrs.nodeMap.memberTypes.split(' ');
+					for (var i = 0; i < allRefs.length; i++) {
+						reference.push(allRefs[i]);
+					}
 				}
 			}
-			if (reference) {
-				var _isNotXsdPrefixed = isNotXsdPrefixed(reference, arrNamespacesMaps);
-				// console.log(reference + " is Xsd prefixed: " + (!_isNotXsdPrefixed));
+			entry.linkedEntry = [];
+			for(var i = 0; i < reference.length; i++) {
+				var _isNotXsdPrefixed = isNotXsdPrefixed(reference[i], arrNamespacesMaps);
+				if (isNotXsdPrefixed(reference[i], arrNamespacesMaps)) {
+					var e = findByNameAndPrefix(reference[i], entriesByName, arrNamespacesMaps);
+					if (!e) {
+						// TODO
+						console.log("Unable to find referenced element '"  + reference[i] + "'");
+					} else {
+						entry.linkedEntry.push(e);
+					}
+				}
+			}
+			if (entry.linkedEntry.length === 0) {
+				entry.linkedEntry = undefined;
 			}
 
-			if (reference && isNotXsdPrefixed(reference, arrNamespacesMaps)) {
-				var e = findByNameAndPrefix(reference,entriesByName, arrNamespacesMaps);
-				if (!e) {
-					// TODO
-					console.log("Unable to find referenced element '"  + reference + "'");
-				} else {
-					entry.linkedEntry = e;
-				}
-			}
 			if (entry.children) {
 				for (var i = 0; i < entry.children.length; i++) {
 					this.linkItem(entry.children[i], entriesByName, arrNamespacesMaps);

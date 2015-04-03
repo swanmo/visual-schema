@@ -16,7 +16,7 @@ define(['linker', 'entry'], function(sut, Entry) {
                     base:_base
 				}
 			};
-		}
+		};
 
         var fabricateSampleWithTnsPrefix = function () {
             var testSubject = [
@@ -35,7 +35,7 @@ define(['linker', 'entry'], function(sut, Entry) {
             testSubject[0].nsMap['tns'] = "sample.org";
             testSubject[0].nsMap['xs'] = "http://www.w3.org/2001/XMLSchema";
             return testSubject;
-        }
+        };
 
         var fabricateSampleWithoutPrefix = function () {
             var testSubject = [

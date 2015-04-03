@@ -6,7 +6,10 @@
 </xs:simpleType>
 
 <xs:simpleType name="inttype">
-  <xs:restriction base="xs:positiveInteger"/>
+  <xs:restriction base="xs:integer">
+    <xs:minInclusive value="0"/>
+    <xs:maxInclusive value="120"/>
+  </xs:restriction>
 </xs:simpleType>
 
 <xs:simpleType name="dectype">

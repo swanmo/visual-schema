@@ -79,8 +79,8 @@ define(['jquery', 'parseUtils'], function($, parseUtils) {
 		},
 		isExtensionBase: function(entry, parentEntry) {
 			return parentEntry && 
-				(parentEntry.name === 'extension') &&
-				parentEntry.linkedEntry === entry;
+				(parentEntry.name === 'extension') && parentEntry.linkedEntry &&
+				parentEntry.linkedEntry[0] === entry;
 		},
 		hasBranching: function(entry) {
 			var kids = [];
@@ -91,7 +91,9 @@ define(['jquery', 'parseUtils'], function($, parseUtils) {
 			}
 
 			if (entry.linkedEntry) {
-				kids.push(entry.linkedEntry);
+				for (var i = 0; i < entry.linkedEntry.length; i++) {
+					kids.push(entry.linkedEntry[i]);
+				}
 			}
 			return kids.length > 1;
 		},
@@ -133,11 +135,9 @@ define(['jquery', 'parseUtils'], function($, parseUtils) {
 				desc = "<div class='e' title='list'><span class='icon-icon-menu'></span></div> ";
 			} else if (entry.name=="union") {
 				css = "element-u";
-
-				desc = "<div class='e' title='union'><span class='icon-union'></span></div> " + entry.attrs.nodeMap.memberTypes;
-
+				desc = "<div class='s' title='union'><span class='icon-union'></span></div>";
+				desc += "union<span class='et' title='union'>: " + entry.attrs.nodeMap.memberTypes + "</span>";
 			} else if (entry.name=="key" || entry.name=="keyref") {
-
 				if (entry.attrs.type) {
 					desc += " <span class='et'>: " + parseUtils.parseName(entry.attrs.type) + "</span>";
 				}
@@ -176,7 +176,9 @@ define(['jquery', 'parseUtils'], function($, parseUtils) {
 				css = "element-a";
 				$div1.addClass("padded");
 			} else if (entry.name=="sequence") {
-				desc = "<div class='s' title='sequence'><span class='icon-three-sequence'> </span></div> ";
+				desc = "<div class='s' title='sequence'><span class='icon-sequence'> </span></div> ";
+			} else if (entry.name=="all") {
+				desc = "<div class='s' title='all'><span class='icon-all'> </span></div> ";
 			} else if (entry.name=="choice") {
 				desc = "<div class='s' title='choice'><span class='icon-choice'> </span></div> ";
 			} else if (entry.name=="complexContent") {
@@ -316,7 +318,9 @@ define(['jquery', 'parseUtils'], function($, parseUtils) {
 				container = domParent;
 			}
 			if (entry.linkedEntry) {
-				this.renderElem(entry.linkedEntry, container, entry);
+				for (var i = 0; i < entry.linkedEntry.length; i++) {
+					this.renderElem(entry.linkedEntry[i], container, entry);
+				}
 			}
 
 			if (entry.children) {

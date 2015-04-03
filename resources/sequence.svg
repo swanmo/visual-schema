@@ -1,9 +1,11 @@
 <svg width="120" height="120" xmlns="http://www.w3.org/2000/svg">
  <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
  <g>
-  <title>Three dots sequence</title>
-  <ellipse fill="#000000" cx="100" cy="61" id="svg_3" rx="14" ry="14"/>
-  <ellipse fill="#000000" cx="60" cy="61" rx="14" ry="14" id="svg_6"/>
-  <ellipse fill="#000000" cx="20" cy="61" rx="14" ry="14" id="svg_4"/>
+  <title>Sequence</title>
+  <ellipse id="svg_4" ry="14" rx="14" cy="61" cx="60" fill="#000000"/>
+  <ellipse id="svg_6" ry="14" rx="14" cy="104" cx="60" stroke-width="0" stroke="#000000" fill="#000000"/>
+  <ellipse id="svg_7" ry="14" rx="14" cy="18" cx="60" stroke-width="0" stroke="#000000" fill="#000000"/>
+  <rect fill="#000000" stroke-width="0" stroke-linejoin="null" stroke-linecap="null" x="56" y="35" width="9" height="9" id="svg_1"/>
+  <rect fill="#000000" stroke-width="0" stroke-linejoin="null" stroke-linecap="null" x="56" y="78" width="9" height="9" id="svg_2"/>
  </g>
 </svg>
