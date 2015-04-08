@@ -37,10 +37,12 @@
                 <a href="">ABOUT</a>
             </div>
         </div>
-        <div class="bottom" style="color:grey">asds</div>
+        <div class="bottom" style="color:grey"></div>
     </div>
 
     <div class="content">
+        
+        <div id="graph"></div>
         <div id="editor"></div>
         
         <div class="perifer">
@@ -61,69 +63,11 @@
 
         </div>
         <div class="actions">
-            <button type="button">SAVE AS...</button>
+            <button id="showXsd" type="button">SHOW</button>
         </div>
 
     </div>
-    
-    <script>
-        var editor = ace.edit("editor");
-        editor.setTheme("ace/theme/clouds");
-        editor.getSession().setMode("ace/mode/xml");
-        editor.setValue('<?xml version="1.0" encoding="UTF-8" ?>\n' +
-'<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">\n' +
-'<!-- definition of simple elements -->\n' +
-'<xs:element name="orderperson" type="xs:string"/>\n' +
-'<xs:element name="name" type="xs:string"/>\n' +
-'<xs:element name="address" type="xs:string"/>\n' +
-'<xs:element name="city" type="xs:string"/>\n' +
-'<xs:element name="country" type="xs:string"/>\n' +
-'<xs:element name="title" type="xs:string"/>\n' +
-'<xs:element name="note" type="xs:string"/>\n' +
-'<xs:element name="quantity" type="xs:positiveInteger"/>\n' +
-'<xs:element name="price" type="xs:decimal"/>\n' +
 
-'<!-- definition of attributes -->\n' +
-'<xs:attribute name="orderid" type="xs:string"/>\n' +
-
-'<!-- definition of complex elements -->\n' +
-'<xs:element name="shipto">\n' +
-'  <xs:complexType>\n' +
-'    <xs:sequence>\n' +
-'      <xs:element ref="name"/>\n' +
-'      <xs:element ref="address"/>\n' +
-'      <xs:element ref="city"/>\n' +
-'      <xs:element ref="country"/>\n' +
-'    </xs:sequence>\n' +
-'  </xs:complexType>\n' +
-'</xs:element>\n' +
-
-'<xs:element name="item">\n' +
-'  <xs:complexType>\n' +
-'    <xs:sequence>\n' +
-'      <xs:element ref="title"/>\n' +
-'      <xs:element ref="note" minOccurs="0"/>\n' +
-'      <xs:element ref="quantity"/>\n' +
-'      <xs:element ref="price"/>\n' +
-'    </xs:sequence>\n' +
-'  </xs:complexType>\n' +
-'</xs:element>\n' +
-
-'<xs:element name="shiporder">\n' +
-'  <xs:complexType>\n' +
-'    <xs:sequence>\n' +
-'      <xs:element ref="orderperson"/>\n' +
-'      <xs:element ref="shipto"/>\n' +
-'      <xs:element ref="item" maxOccurs="unbounded"/>\n' +
-'    </xs:sequence>\n' +
-'    <xs:attribute ref="orderid" use="required"/>\n' +
-'  </xs:complexType>\n' +
-'</xs:element>\n\n' +
-
-'</xs:schema>')
-    </script>
-    
-    
+    <script data-main="src/page/main.js" src="lib/static/require.js"></script>
 </body>
-
 </html>
