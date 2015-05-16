@@ -2,21 +2,110 @@
     font-family: 'Oswald';
 }
 
-@light-color: #bbb;
+@light-color: #ddd;
+@hint-color: #888;
 @hilight-color: #ef4503;
 
+@heavy-bg: #2c2c2c;
+@accent-bg: #000;
+@content-pos: 114px;
 
 .new {
+	.ace_gutter {
+		background-color: white !important;
+		color: #555  !important;
+	}
+	.ace_print-margin {
+		background-color: #333 !important;
+		color:red !important;
+	}
+	.ace_gutter-active-line {
+		background-color: @heavy-bg !important;
+		color:red !important;
+	}
+	.content {
+
+
+		#editor {
+            position: fixed;
+            top: @content-pos;
+            width:80vw;
+            bottom: 0;
+            left: 0;
+        }
+		
+		.perifer {
+			padding-top:1vw;
+			position: fixed;
+            top: @content-pos;
+            bottom: 0;
+            right:0;
+			width:19vw;
+
+			.header {
+				div	{
+					color:white;
+					padding: 6px;
+				}
+				width:18vw;
+				background-color: @accent-bg;
+				font-size: 22px;
+			}
+			.body {
+				width:18vw;
+				background-color: @heavy-bg;
+				font-size: 22px;
+				&>div {
+					padding: 12px 2px 2px 6px;
+					.session-head {
+						a {
+							color:white;
+							text-decoration: none;
+							transition: color .2s;
+							&:hover {
+								color: @hilight-color;
+							}
+						}
+						
+					}
+					.session-hint {
+						font-size: 16px;
+						color:@hint-color;
+					}
+				}
+			}
+		}
+		.actions {
+			position: fixed;
+            bottom: 1vw;
+            right:0;
+			width:19vw;
+			button {
+				padding:10px 22px 10px 22px;
+				font-size: 22px;
+				font-weight: bold;
+				background-color: @light-color;
+				border: none;
+				color: @accent-bg;
+				&:hover {
+					background-color: darken(@light-color, 10%);
+				}	
+			}
+			
+		}
+
+	}
 	.header {
 		.top {
 			.signatureFont ();
+			padding-top: 10px;
 			color:black;
 			width: 100%;
-			min-height: 50px;
+			min-height: 70px;
 			.icon-eye {
 				margin:15px 10px 0 12px;
 				float:left;
-				font-size: 28px;
+				font-size: 38px;
 				color:@light-color;
 			}
 
@@ -25,9 +114,10 @@
 				margin-top:6px;
 				.one {
 					font-weight: bold;
-					font-size: 46px;
+					font-size: 54px;
 					float:left;
 					margin-top:-10px;
+					margin-left: 8px;
 				}
 
 				.two {
@@ -38,14 +128,14 @@
 						}
 					}
 					&>*:first-child {
-						font-size: 14px;
+						font-size: 18px;
 						span {
 							color:#aaa;	
 						}
 					}
 					&>*:last-child {
 						color:#aaa;
-						font-size: 20px;
+						font-size: 24px;
 					}
 					float:left;
 				}
@@ -53,7 +143,7 @@
 			
 			.options {
 				float:right;
-				padding-top:6px;
+				padding-top:30px;
 				a {
 					margin-right:30px;
 
@@ -61,8 +151,9 @@
 						margin-left:300px;
 					}
 					color: @light-color;
-					font-size: 28px;
+					font-size: 24px;
 					text-decoration: none;
+					transition: color .2s;
 					&:hover{
 						color: darken(@hilight-color, 5%);
 					}
@@ -72,7 +163,7 @@
 		}
 		.bottom {
 			margin-top: 4px;
-			background:black;
+			background:@accent-bg;
 			width: 100%;
 			min-height: 30px;
 		}

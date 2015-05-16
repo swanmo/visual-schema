@@ -1,7 +1,8 @@
 requirejs.config({
-	baseUrl: '/main/src',
+	baseUrl: '/src',
     paths: {
-        'jquery': '../../../node_modules/jquery/dist/jquery'
+        'jquery': '../../node_modules_copy/jquery/dist/jquery',
+        'pagejs': '../../node_modules_copy/page/page'
     }
 });
 

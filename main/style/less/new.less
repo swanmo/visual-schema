@@ -9,22 +9,28 @@
 @heavy-bg: #2c2c2c;
 @accent-bg: #000;
 @content-pos: 114px;
-
+@content-pos-smallhead: 20px;
+#graph {
+	padding-top: 44px;
+}
 .new {
 	.ace_gutter {
-		background-color: #000 !important;
-		color: #555  !important;
+		background-color: white !important;
+		color: #eaeaea !important;
+		transition: color .6s;
+		&:hover {
+			color: #aaa !important;
+		}
 	}
 	.ace_print-margin {
 		background-color: #333 !important;
 		color:red !important;
 	}
 	.ace_gutter-active-line {
-		background-color: @heavy-bg !important;
-		color:red !important;
+		background-color: white !important;
 	}
 	.content {
-		#editor { 
+		#editor {
             position: fixed;
             top: @content-pos;
             width:80vw;
@@ -33,6 +39,10 @@
         }
 		
 		.perifer {
+			transition: top .2s;
+			&.small-header {
+				top: @content-pos-smallhead;
+			}
 			padding-top:1vw;
 			position: fixed;
             top: @content-pos;
@@ -40,38 +50,42 @@
             right:0;
 			width:19vw;
 
-			.header {
-				div	{
-					color:white;
-					padding: 6px;
-				}
-				
-				width:18vw;
-				background-color: @accent-bg;
-				font-size: 22px;
-			}
+			
 			.body {
 				width:18vw;
 				background-color: @heavy-bg;
 				font-size: 22px;
-				&>div {
-					padding: 12px 2px 2px 6px;
-					.session-head {
-						a {
-							color:white;
-							text-decoration: none;
-							transition: color .2s;
-							&:hover {
-								color: @hilight-color;
+				ul {
+					&>li {
+						color:white;
+						padding: 0;
+						margin: 0;
+					}
+					list-style: none;
+					padding-left: 0;
+					div {
+						padding: 8px 2px 2px px;
+						.session-head {
+							a {
+								color:white;
+								text-decoration: none;
+								transition: color .2s;
+								&:hover {
+									color: @hilight-color;
+								}
 							}
+							
 						}
-						
+						.session-hint {
+							font-size: 16px;
+							color:@hint-color;
+						}
 					}
-					.session-hint {
-						font-size: 16px;
-						color:@hint-color;
-					}
+
 				}
+
+
+				
 			}
 		}
 		.actions {
@@ -80,6 +94,13 @@
             right:0;
 			width:19vw;
 			button {
+				transition: background-color .2s;
+				&.primary {
+					background-color: darken(@light-color, 20%);
+					&:hover {
+						background-color: darken(@light-color, 30%);
+					}
+				}
 				padding:10px 22px 10px 22px;
 				font-size: 22px;
 				font-weight: bold;
@@ -88,13 +109,39 @@
 				color: @accent-bg;
 				&:hover {
 					background-color: darken(@light-color, 10%);
-				}	
+				}
 			}
 			
 		}
 
 	}
 	.header {
+		&.small {
+			position: fixed;
+			width:100vw;
+
+			.top {
+				transition: all .2s;
+				padding-top: 0;
+				min-height: 0;
+				div:nth-of-type(n+2) {
+					display:none;
+					transition: all .3s;
+				}
+				.icon-eye {
+					color:#777;
+					transition: all .2s;
+					font-size: 28px;
+					margin-top:0;
+				}
+			}
+
+			.bottom {
+				background-color:@accent-bg;
+				min-height: 32px;
+			}
+		}
+
 		.top {
 			.signatureFont ();
 			padding-top: 10px;
@@ -102,6 +149,7 @@
 			width: 100%;
 			min-height: 70px;
 			.icon-eye {
+				transition: all .2s;
 				margin:15px 10px 0 12px;
 				float:left;
 				font-size: 38px;
@@ -161,8 +209,7 @@
 
 		}
 		.bottom {
-			margin-top: 4px;
-			background:@accent-bg;
+			background-color:@accent-bg;
 			width: 100%;
 			min-height: 30px;
 		}

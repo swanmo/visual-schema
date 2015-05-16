@@ -1,21 +1,14 @@
-define(['jquery', 'root', 'xsd', 'page/editor'],
-    function($, $root, xsd, editor) {
+define(['jquery', 'pagejs', 'root', 'xsd', 'page/editor'],
+    function($, page, $root, xsd, editor) {
         'use strict';
         return {
             init: function() {
                 $('#showXsd').on('click', function() {
-
+                    
+                    page('/xsd');
                     // $('#headRow').addClass('closed').removeClass('semi-open');
 
-                    $('#editor').slideUp(function() {
-                        // $('#leftie').slideToggle('fast');
 
-                        $(this).hide();
-                        // $('#showOptions').hide();
-
-                        $root.show();
-                        xsd.show(editor.val());
-                    });
                 }); // on
             } // init: function
         }

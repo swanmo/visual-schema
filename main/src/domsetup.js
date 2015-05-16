@@ -11,10 +11,10 @@ define(['jquery', 'xsd', 'init', 'root', 'parser', 'store', 'saved'],
 
 
 if (typeof history.pushState === "function") {
-	console.log('alpha');
+	console.log('alpha push');
         // history.pushState("jibberish", null, null);
         window.onpopstate = function (item) {
-            console.log('bravo', item);
+            console.log('bravo pop', item);
             goBack();
 
             // history.pushState('newjibberish', null, null);

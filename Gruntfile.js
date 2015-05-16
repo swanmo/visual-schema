@@ -95,6 +95,11 @@ module.exports = function (grunt) {
       tasks: ['test']
     },
     copy: {
+      nodemod: {
+        /*src: 'flitapp/**',
+        dest: '<%= meta.dist %>',*/
+        expand: true, cwd: 'node_modules/', src: ['page/**/*.js', 'jquery/**/*.js', 'requirejs/**/*.js'], dest: 'main/node_modules_copy/' // makes all src relative to cwd
+      },
       dist: {
         /*src: 'flitapp/**',
         dest: '<%= meta.dist %>',*/

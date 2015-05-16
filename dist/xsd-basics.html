@@ -37,37 +37,25 @@
                 <a href="">ABOUT</a>
             </div>
         </div>
-        <div class="bottom" style="color:grey"></div>
+        <div class="bottom"></div>
     </div>
 
     <div class="content">
-        
-        <div id="graph"></div>
-        <div id="editor"></div>
-        
-        <div class="perifer">
-            <div class="header">
-                <div>Saved sessions</div>
-            </div>
-            <div class="body">
-                <div>
-                    <div class="session-head"><a href="">The title</a></div>
-                    <div class="session-hint">A few minutes ago edit</div>
-                </div>
-                <div>
-                    <div class="session-head"><a href="">The bad title</a></div>
-                    <div class="session-hint">A few minutes ago edit</div>
-                </div>
+        <p>XML Schemas are use for validation and specification of xml messages. Here are some basic examples that will get you started.</p>
+        <h2>Element</h2>
+        <p>Elements are absolutely essential. You'll need them. [Example 1] shows the most basic xsd you can imagine. It allows for an xml document with only on tag, called name.</p>
 
-            </div>
+        <div class="code">
+        
+            &lt;?xml version="1.0" encoding="UTF-8" ?&gt;<br>
+            &lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"&gt;<br>
+                &lt;xs:element name="name" type="xs:string"/&gt;<br>
+            &lt;/xs:schema&gt;<br>
+        
+        </div>
 
-        </div>
-        <div class="actions">
-            <button id="showXsd" type="button">SHOW</button>
-        </div>
+
 
     </div>
-
-    <script data-main="src/page/main.js" src="lib/static/require.js"></script>
 </body>
 </html>

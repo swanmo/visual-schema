@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>XSD visualization</title>
+    <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css' />
+    <link href='http://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>    
+
+    <!--link rel="stylesheet" type="text/css" href="resources/css/bootstrap.min.css" -->
+    <link rel="stylesheet" type="text/css" href="style/one.css">
+    <link rel="icon" href="favicon.ico">
+
+    <meta name="description" content="Visualize, validate and view XML schemas" />
+    <meta name="keywords" content="XSD, XML schema, visualization tool, free" />
+</head>
+<body>
+    <div id="container">
+        <div id="content">
+            <div id="headRow">
+                <div>
+                    <span class="icon-eye"></span>
+                    <h1>eyeXSD</h1>
+                </div>
+                <label for="xsdContent">Paste XSD content below</label>
+                <a href="what.html" rel="about">
+                    <span id="mm" class="icon-icon-menu"></span>
+                </a>
+            </div>
+
+            <div id="leftCol">
+                <div id="leftie" style="display:none">
+                    <div class="lmenu-top"><span id="logn" class="icon-eye"></span>
+                    </div>
+                    <div class="lmenu" title="Go back"><span id="undo" class="icon-icon-undo"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="centerCol">
+                <form role="form">
+                    <div id="inputRow">
+                        <textarea class="mono ctrl" id="xsdContent" placeholder="Paste here"></textarea>
+                    </div>
+                </form> 
+                <div id="graph"></div>
+            </div>
+
+            <div class="rightCol">
+
+                <div class="container no-items" id="saved-items">
+                    <div class="h">Saved entries (<span id="no"></span>)</div>
+                    <div id="s">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer">
+        <div class="myrow">
+            <div class="leftmost">
+                <div id="aMsg" class="x-messages nomessages">
+                    <div class="res">
+                        <span id="validationPrefix" class="badge"></span> Validation results
+                    </div>
+                    <div class="pull-right"><span class="icon-close" id="iller"></span>
+                    </div>
+                    <ul style="clear:both" id="validationList">
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <span class="buttons">
+            <button type="button" class="action" id="showXsd">Show</button><button type="button" class="option" id="showOptions">&#x25BE;</button>
+
+            <div aria-labelledby="showOptions" id="optMenu" class="option-menu hidden">
+                <ul role="menu">
+                    <li role="presentation"> <a id="saveXsd" role="menuitem" href="#">Save</a></li>
+                   <!-- li role="presentation"><a role="menuitem" href="#">Revert...</a></li -->
+                </ul>
+            </div>
+        </span>
+    </div>
+
+    <!-- build:remove -->
+    <script data-main="src/main.js" src="lib/static/require.js"></script>
+    <!-- /build -->
+
+    <!-- build:template
+    <script src="main.js"></script>
+    /build -->
+
+    <!-- build:template
+    <%= message %>
+    /build -->
+
+    <!-- build:template
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-56781723-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+/build -->
+
+</body>
+
+</html>
