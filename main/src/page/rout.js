@@ -5,6 +5,15 @@ define(['jquery', 'pagejs', 'root', 'xsd', 'page/editor', 'root'],
         function show(ctx) {
             console.log('show', ctx.params.name);
             $root.show();
+            $('#back').show();
+        }
+
+        function showNew(ctx) {
+            $('#saveXsd').hide();
+            $('#cancelSave').show();
+            $('#saveNewForm').show();
+            $('#showXsd').hide();
+            $('.new-input').addClass('show');
         }
 
         function load(ctx, next) {
@@ -14,11 +23,13 @@ define(['jquery', 'pagejs', 'root', 'xsd', 'page/editor', 'root'],
             $('#showXsd').hide();
             $('#saveXsd').hide();
             
-            $('#editor').slideUp(function() {
-                next();
-            });
-            xsd.show(editor.val());
-
+            $('#editor').addClass('ina');
+            setTimeout(
+                function(){
+                    xsd.show(editor.val());
+                    next();
+                },
+                200);
             console.log('load', ctx.params.name);
         }
 
@@ -28,12 +39,16 @@ define(['jquery', 'pagejs', 'root', 'xsd', 'page/editor', 'root'],
 
         function index() {
             $root.hide();
+
             $('.header').removeClass('small');
             $('.perifer').removeClass('small-header');
-          $('#editor').slideDown(function() {
+            $('#editor').removeClass('ina');
+            $('#back').hide();
+            $('#cancelSave').hide();
+            $('#saveNewForm').hide();
             $('#showXsd').show();
             $('#saveXsd').show();
-          });
+            $('.new-input').removeClass('show');
           console.log('index');
         }
 
@@ -45,6 +60,23 @@ define(['jquery', 'pagejs', 'root', 'xsd', 'page/editor', 'root'],
           console.log('about');
         }
 
+        function setupNavigation() {
+            $('#showXsd').on('click', function() {
+                page('/xsd');
+                // $('#headRow').addClass('closed').removeClass('semi-open');
+            }); // on
+
+            $('#saveXsd').on('click', function() {
+                page('/new');
+            }); // on
+
+            $('#cancelSave').on('click', function() {
+                page('/');
+            }); // on
+
+
+        }
+
         return {
             init: function() {
                 page.base('/');
@@ -52,9 +84,12 @@ define(['jquery', 'pagejs', 'root', 'xsd', 'page/editor', 'root'],
                 page('learn', learn);
                 page('about', about);
                 page('xsd/', load, show);
+                page('new/', showNew);
                 page('xsd/:name', load, show);
                 page('*', notfound);
                 page();
+
+                setupNavigation();
             }
         };
 

@@ -98,7 +98,20 @@ module.exports = function (grunt) {
       nodemod: {
         /*src: 'flitapp/**',
         dest: '<%= meta.dist %>',*/
-        expand: true, cwd: 'node_modules/', src: ['page/**/*.js', 'jquery/**/*.js', 'requirejs/**/*.js'], dest: 'main/node_modules_copy/' // makes all src relative to cwd
+        expand: true, cwd: 'node_modules/', src: [
+          'page/**/*.js',
+          'jquery/**/*.js',
+          'requirejs/**/*.js',
+          'hammerjs/**/*.js',
+          'materialize-css/**/*.js'], dest: 'main/node_modules_copy/' // makes all src relative to cwd
+      },
+      font: {
+        /*src: 'flitapp/**',
+        dest: '<%= meta.dist %>',*/
+        expand: true,
+        cwd: 'node_modules/materialize-css',
+        src: ['font/**/*'],
+        dest: 'main/' // makes all src relative to cwd
       },
       dist: {
         /*src: 'flitapp/**',
@@ -134,7 +147,7 @@ module.exports = function (grunt) {
   grunt.registerTask('lint', ['jshint:all']);
   grunt.registerTask('test', ['karma:unit']);
   grunt.registerTask('build', ['copy:dist', 'requirejs:compile']);
-  grunt.registerTask('default', ['less:build', 'watch:style']);
+  grunt.registerTask('default', ['copy:nodemod', 'copy:font', 'less:build', 'watch:style']);
 
   grunt.registerTask('make-dist', [
     'clean:dist',

@@ -45,7 +45,7 @@
         <div id="graph"></div>
         <div id="editor"></div>
         
-        <div class="perifer">
+        <!--div class="perifer">
             <div class="body">
                 <ul>
                     <li>Default collection
@@ -65,17 +65,59 @@
                         </ul>
                     </li>
                 </ul>
-            
             </div>
+        </div -->
 
+
+        <div class="new-input">
+
+          <div id="new-info" class="card blue-grey darken-1">
+            <div class="card-content white-text">
+              <span class="card-title">Save document</span>
+              <p>Enter a document name and the collection, in which it belongs. Documents in the same collection can be referenced in xsd imports</p>
+            </div>
+            <div class="card-action">
+              
+              <a onclick="$('#new-info').addClass('hidden')" href="#">I understand</a>
+            </div>
+          </div>
+
+          <div class="input-field">
+            <input id="docName" type="text" class="validate">
+            <label for="docName">Document name</label>
+          </div>
+          <div class="input-field">
+            <select>
+              <option value="" disabled selected>Collection</option>
+              <option value="1">Option 1</option>
+              <option value="2">Option 2</option>
+            </select>
+            <label>Materialize Select</label>
+          </div>
+          <div class="input-field">
+            <input id="newCollection" type="text" class="validate">
+            <label for="newCollection">Create new collection</label>
+          </div>
+            
+          
         </div>
+
+
         <div class="actions">
             <button id="showXsd" type="button" class="primary">SHOW</button>
+            <button id="saveNewForm" type="button" class="primary" style="display:none">OK</button>
             <button id="saveXsd" type="button">SAVE</button>
+            <button id="cancelSave" type="button" style="display:none">CANCEL</button>
+
+            <button id="back" style="display:none" onclick="history.back()" type="button">BACK</button>
         </div>
 
     </div>
 
     <script data-main="src/page/main.js" src="lib/static/require.js"></script>
+    <script src="lib/materialize/js/materialize.js" type="text/javascript" charset="utf-8"></
+    
+    
+    
 </body>
 </html>
