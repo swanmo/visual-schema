@@ -1,5 +1,5 @@
-define(['jquery', 'pagejs', 'root', 'xsd', 'page/editor', 'root'],
-    function($, page, $root, xsd, editor) {
+define(['jquery', 'pagejs', 'root', 'xsd', 'page/editor', 'services/collectionController'],
+    function($, page, $root, xsd, editor, collectionController) {
         'use strict';
 
         function show(ctx) {
@@ -60,6 +60,13 @@ define(['jquery', 'pagejs', 'root', 'xsd', 'page/editor', 'root'],
           console.log('about');
         }
 
+        function saveNew() {
+          console.log('saveNew');
+          collectionController.create();
+          //store.addItem('Unnamed', $('#xsdContent').val(), 'me');
+        }
+        
+
         function setupNavigation() {
             $('#showXsd').on('click', function() {
                 page('/xsd');
@@ -68,6 +75,10 @@ define(['jquery', 'pagejs', 'root', 'xsd', 'page/editor', 'root'],
 
             $('#saveXsd').on('click', function() {
                 page('/new');
+            }); // on
+            
+            $('#saveNewForm').on('click', function() {
+                page('/xsd/new');
             }); // on
 
             $('#cancelSave').on('click', function() {
@@ -85,6 +96,7 @@ define(['jquery', 'pagejs', 'root', 'xsd', 'page/editor', 'root'],
                 page('about', about);
                 page('xsd/', load, show);
                 page('new/', showNew);
+                page('xsd/new', saveNew, show);
                 page('xsd/:name', load, show);
                 page('*', notfound);
                 page();

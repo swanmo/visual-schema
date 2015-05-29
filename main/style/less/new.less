@@ -5,7 +5,7 @@
 @light-color: #ddd;
 @hint-color: #888;
 @hilight-color: #ef4503;
-
+@form-color: #888;
 @heavy-bg: #2c2c2c;
 @accent-bg: #000;
 @content-pos: 114px;
@@ -54,7 +54,6 @@
 				font-size: 16px;
 			}
 			opacity:0;
-
 			transition: right .2s ease-out, opacity .2s;
 			&.show {
 				opacity:1;
@@ -69,52 +68,30 @@
 		}
 		.perifer {
 			transition: top .2s;
-			&.small-header {
-				top: @content-pos-smallhead;
-			}
-			padding-top:1vw;
+			padding-top:1vh;
+			padding-right:1vw;
 			position: fixed;
             top: @content-pos;
             bottom: 130px;
             right:0;
 			width:19vw;
 
-			
-			.body {
-				width:18vw;
-				background-color: @heavy-bg;
-				font-size: 22px;
-				ul {
-					&>li {
-						color:white;
-						padding: 0;
-						margin: 0;
-					}
-					list-style: none;
-					padding-left: 0;
-					div {
-						padding: 8px 2px 2px px;
-						.session-head {
-							a {
-								color:white;
-								text-decoration: none;
-								transition: color .2s;
-								&:hover {
-									color: @hilight-color;
-								}
-							}
-							
-						}
-						.session-hint {
-							font-size: 16px;
-							color:@hint-color;
-						}
-					}
-
+			ul {
+				box-shadow: none;
+				border:none;
+			}
+			li {
+				box-shadow: none;
+				color: @form-color;
+				.mdi-file-folder {
+					color: @light-color;
 				}
-
-
-				
+				.collapsible-header {
+					transition: color .3s;
+					&:hover{
+						color: darken(@hilight-color, 10%);
+					}
+				}
 			}
 		}
 		.actions {
@@ -144,9 +121,7 @@
 					background-color: @light-color;
 				}
 			}
-			
 		}
-
 	}
 	.header {
 		&.small {

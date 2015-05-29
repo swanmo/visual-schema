@@ -1,28 +1,25 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <title>XSD visualization</title>
     <style type="text/css" media="screen">
-        
     </style>
     <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css' />
-    <link href='http://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>    
-
+    <link href='http://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
     <!--link rel="stylesheet" type="text/css" href="resources/css/bootstrap.min.css" -->
     <link rel="stylesheet" type="text/css" href="style/one.css">
     <link rel="icon" href="favicon.ico">
-
     <script src="lib/ace-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
-
     <meta name="description" content="Visualize, validate and view XML schemas" />
     <meta name="keywords" content="XSD, XML schema, visualization tool, free" />
 </head>
+
 <body class="new">
     <div class="header">
         <div class="top">
             <div class="icon-eye"></div>
-
             <div class="more-xsd">
                 <div class="two">
                     <div>EYE <span>ON</span></div>
@@ -30,94 +27,63 @@
                 </div>
                 <div class="one">XSD</div>
             </div>
-            
-
             <div class="options">
-                  <a href="/learn">SCHEMA BASICS</a>
-                  <a href="/about">ABOUT</a>
+                <a href="/learn">SCHEMA BASICS</a>
+                <a href="/about">ABOUT</a>
             </div>
         </div>
         <div class="bottom"></div>
     </div>
-
     <div class="content">
-        
         <div id="graph"></div>
         <div id="editor"></div>
-        
-        <!--div class="perifer">
-            <div class="body">
-                <ul>
-                    <li>Default collection
-                        <ul>
-                            <li>
-                                <div>
-                                    <div class="session-head"><a href="">The title</a></div>
-                                    <div class="session-hint">A few minutes ago edit</div>
-                                </div>
-                            </li>
-                            <li>
-                                <div>
-                                    <div class="session-head"><a href="">The bad title</a></div>
-                                    <div class="session-hint">A few seconds ago edit</div>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div -->
-
-
-        <div class="new-input">
-
-          <div id="new-info" class="card blue-grey darken-1">
-            <div class="card-content white-text">
-              <span class="card-title">Save document</span>
-              <p>Enter a document name and the collection, in which it belongs. Documents in the same collection can be referenced in xsd imports</p>
-            </div>
-            <div class="card-action">
-              
-              <a onclick="$('#new-info').addClass('hidden')" href="#">I understand</a>
-            </div>
-          </div>
-
-          <div class="input-field">
-            <input id="docName" type="text" class="validate">
-            <label for="docName">Document name</label>
-          </div>
-          <div class="input-field">
-            <select>
-              <option value="" disabled selected>Collection</option>
-              <option value="1">Option 1</option>
-              <option value="2">Option 2</option>
-            </select>
-            <label>Materialize Select</label>
-          </div>
-          <div class="input-field">
-            <input id="newCollection" type="text" class="validate">
-            <label for="newCollection">Create new collection</label>
-          </div>
-            
-          
+        <div class="perifer">
+            <ul class="collapsible" data-collapsible="accordion">
+                <li>
+                    <div class="collapsible-header"><i class="mdi-file-folder"></i>Default collection</div>
+                    <div class="collapsible-body">
+                        <p>Lorem ipsum dolor sit amet.</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header"><i class="mdi-file-folder"></i>Another collection</div>
+                    <div class="collapsible-body">
+                        <p>Whatta.</p>
+                    </div>
+                </li>
+            </ul>
         </div>
-
-
+        <div class="new-input">
+            
+            <div class="input-field">
+                <input id="docName" type="text" class="validate">
+                <label for="docName">New document name</label>
+            </div>
+            <div class="input-field">
+                <select id="collectionName">
+                    <option value="-1" disabled selected>Collection</option>
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                </select>
+                <label>Select</label>
+            </div>
+            <div class="input-field">
+                <input id="newCollectionName" type="text" class="validate">
+                <label for="newCollection">Name of new collection</label>
+            </div>
+        </div>
         <div class="actions">
             <button id="showXsd" type="button" class="primary">SHOW</button>
             <button id="saveNewForm" type="button" class="primary" style="display:none">OK</button>
             <button id="saveXsd" type="button">SAVE</button>
             <button id="cancelSave" type="button" style="display:none">CANCEL</button>
-
             <button id="back" style="display:none" onclick="history.back()" type="button">BACK</button>
         </div>
-
     </div>
-
     <script data-main="src/page/main.js" src="lib/static/require.js"></script>
-    <script src="lib/materialize/js/materialize.js" type="text/javascript" charset="utf-8"></
-    
-    
-    
-</body>
-</html>
+    <script src="lib/materialize/js/materialize.js" type="text/javascript" charset="utf-8">
+    < /
+
+
+
+    < /body> < /html>
