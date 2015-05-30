@@ -6,7 +6,7 @@ define([],
             statusEdited = 2,
             statusDeleted = 3;
 
-        var makeCollection = function(_id, _title, _desc, _documents, initiatedBy) {
+        var makeCollection = function(_id, _title, _desc, initiatedBy) {
             var collectionItem = {
                 id: _id,
                 status: statusCreated,
@@ -15,8 +15,7 @@ define([],
                 saved: JSON.stringify(new Date()),
                 accessed: JSON.stringify(new Date()),
                 type: 'usr',
-                owner: initiatedBy,
-                docs: _documents
+                owner: initiatedBy
             };
             return collectionItem;
         };

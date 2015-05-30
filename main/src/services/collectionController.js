@@ -1,27 +1,30 @@
-define(['jquery', 'services/collectionService'],
-    function($, collectionService) {
+define(['jquery', 'page/editor', 'services/collectionService'],
+    function($, editor, collectionService) {
         'use strict';
+        function createSchema(collection) {
+            var docName = $('#docName').val();
+
+            collectionService.saveNewDocument(
+                docName, collection.id, editor.val(), function() {});
+        }
+
         return {
             init: function() {
             	collectionService.findAll(function(all) {
             		console.log('all', all);
-            	}) ;
-
-            	//var coll = $('#collectionName').val();
+            	});
             },
             create: function() {
                 var coll = $('#collectionName').val();
-                if (coll && parseInt(coll) > 0) {
+                if (!coll || coll == '-1') {
                 	console.log('OK collection', coll);
-                	createCollection();
+                    var newName = $('#newCollectionName').val();
+                    collectionService.saveNewCollection(newName, createSchema);
                 } else {
                 	console.log('NULL collection', coll);
-                	collectionService.saveNewDocument();
+                    
+                	createSchema({id: $('#collection').val()});
                 }
-                
-                // collectionService
-                // collectionName
-                // newCollectionName
             }
         };
     }

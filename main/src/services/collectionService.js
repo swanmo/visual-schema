@@ -1,7 +1,10 @@
-define(['services/store', 'services/model/collectionModel', 'services/model/collectionFactory'],
-    function(store, CollectionModel, collectionFactory) {
+define(['services/store',
+    'services/model/collectionModel',
+    'services/model/collectionFactory',
+    'services/model/schemaFactory'],
+    function(store, CollectionModel, collectionFactory,schemaFactory) {
         'use strict';
-
+        var cStore, sStore;
 
         var assemble = function(collections, schemas) {
             var schemaByCollection = byCollection(schemas);
@@ -39,7 +42,8 @@ define(['services/store', 'services/model/collectionModel', 'services/model/coll
                 collectionStore.findAll(function(allCollections) {
                     console.log('init CHARLIE callback');
                     if (allCollections && allCollections.length > 0) {
-                        fnInited.call(this);
+                        if (fnInited)
+                            fnInited.call(this);
                     } else {
                         collectionStore.create(collectionFactory('Default collection', undefined, 'local'));
                     }
@@ -71,14 +75,18 @@ define(['services/store', 'services/model/collectionModel', 'services/model/coll
                 });
             },
 
-            saveNewCollection: function(coll) {
+            saveNewCollection: function(name, fnDone) {
                 init();
-                collectionStore.create(coll, 'local');
+                store('collection', function(collectionStore) {
+                    collectionStore.create(collectionFactory(name, undefined, 'local'), fnDone);
+                });
             },
 
-            saveNewDocument: function(schemaDoc) {
+            saveNewDocument: function(title, collectionId, xsdStr, fnDone) {
                 init();
-                schemaStore.create(schemaDoc, 'local');
+                store('schema', function(schemaStore) {
+                    schemaStore.create(schemaFactory(title, collectionId, xsdStr, undefined), fnDone);
+                }); 
             }
         };
     }

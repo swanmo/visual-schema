@@ -91,10 +91,11 @@ define(['services/notificationService'], function(notification) {
                 return transaction.objectStore(repoName);
             };
             return {
-                create: function(storeItem, initiatedBy) {
+                create: function(storeItem, doneFn) {
                     var store = objectStore('readwrite');
 
-                    var request = store.add(storeItem, id);
+
+                    var request = store.add(storeItem, storeItem.id);
                     request.onerror = function(e) {
                         notification.error('creation error', e.target.error.name);
                         window.alert('Sorry, its not possible to store this document on your computer\n' + e.target.error.name);
@@ -102,7 +103,7 @@ define(['services/notificationService'], function(notification) {
 
                     request.onsuccess = function(e) {
                         console.debug('OK, item saved', e);
-                        notifySubscribers('created', storeItem);
+                        doneFn.call(this, storeItem);
                     };
                 },
                 find: function(_id, fnFound) {
