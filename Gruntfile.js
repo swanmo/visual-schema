@@ -56,7 +56,7 @@ module.exports = function (grunt) {
           optimization: 2
         },
         files: {
-          "main/style/one.css": "main/style/less/build.less" // destination file and source file
+          'main/style/one.css': 'main/style/less/build.less'
         }
       }
     },
@@ -101,9 +101,8 @@ module.exports = function (grunt) {
         expand: true, cwd: 'node_modules/', src: [
           'page/**/*.js',
           'jquery/**/*.js',
-          'requirejs/**/*.js',
-          'hammerjs/**/*.js',
-          'materialize-css/**/*.js'], dest: 'main/node_modules_copy/' // makes all src relative to cwd
+          'requirejs/**/*.js'],
+        dest: 'main/node_modules_copy/'
       },
       font: {
         /*src: 'flitapp/**',

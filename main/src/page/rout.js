@@ -3,9 +3,13 @@ define(['jquery', 'pagejs', 'root', 'xsd', 'page/editor', 'services/collectionCo
         'use strict';
 
         function show(ctx) {
-            console.log('show', ctx.params.name);
             $root.show();
             $('#back').show();
+        }
+
+        function fromStore(ctx) {
+            console.log('fromStore', ctx.params.name);
+            collectionController.fromStore(ctx.params.name);
         }
 
         function showNew(ctx) {
@@ -30,7 +34,6 @@ define(['jquery', 'pagejs', 'root', 'xsd', 'page/editor', 'services/collectionCo
                     next();
                 },
                 200);
-            console.log('load', ctx.params.name);
         }
 
         function notfound(ctx) {
@@ -69,7 +72,7 @@ define(['jquery', 'pagejs', 'root', 'xsd', 'page/editor', 'services/collectionCo
 
         function setupNavigation() {
             $('#showXsd').on('click', function() {
-                page('/xsd');
+                page('/xsd/');
                 // $('#headRow').addClass('closed').removeClass('semi-open');
             }); // on
 
@@ -84,8 +87,6 @@ define(['jquery', 'pagejs', 'root', 'xsd', 'page/editor', 'services/collectionCo
             $('#cancelSave').on('click', function() {
                 page('/');
             }); // on
-
-
         }
 
         return {
@@ -97,7 +98,7 @@ define(['jquery', 'pagejs', 'root', 'xsd', 'page/editor', 'services/collectionCo
                 page('xsd/', load, show);
                 page('new/', showNew);
                 page('xsd/new', saveNew, show);
-                page('xsd/:name', load, show);
+                page('xsd/:name', fromStore);
                 page('*', notfound);
                 page();
 

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>XSD visualization test</title>
+    <style type="text/css" media="screen">
+    .subheader-top {
+        display: -webkit-flex;
+        display: flex;
+        -webkit-align-items: center;
+        align-items: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        /* You can set flex-wrap and flex-direction individually */
+        
+        -webkit-flex-direction: row;
+        flex-direction: row;
+        /* Or do it all in one line with flex flow */
+        
+        -webkit-flex-flow: row;
+        flex-flow: row;
+        /* tweak the where items line up on the row */
+        /* valid values are: flex-start, flex-end, space-between, space-around, stretch */
+        
+        -webkit-align-content: flex-end;
+        align-content: flex-end;
+    }
+    
+    .flexcontainer div {
+        height: 100px;
+        width: 100px;
+        background-color: #e46119;
+        border: 1px solid #626262;
+        margin: none;
+    }
+    .column-atgarder {
+      flex: 2;
+      min-width: 60px;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    ul ul li{
+        display: flex;
+        flex-direction: row;
+    }
+li.header {
+    flex-direction: row;
+    display: flex;
+}
+      
+    </style>
+    <link href='http://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
+    <link rel="icon" href="favicon.ico">
+</head>
+
+<body>
+    <div class="subheader-top">
+        <ul class="resultat-list">
+            <li class="header">
+                <div class="filter-wrapper">
+                    <input type="text" placeholder="Filter" />
+                </div>
+                <ul>
+                    <li>
+                        <div class="column-skifte">
+                            hej
+                        </div>
+                        <div class="column-areal">
+                            ok
+                        </div>
+                        <div class="column-atgarder"></div>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <div class="category-wrapper">
+                    <div class="flex-wrapper">
+                        <span class="order-number">
+                                        760602
+                        </span>
+                        <div class="title">
+                            <span class="registerblock-id">
+                                           1232132
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <ul>
+                    <li>
+                        <div class="column-skifte">
+                            Bestickning
+                        </div>
+                        <div class="column-areal">
+                            2 ha
+                        </div>
+                        <div class="column-atgarder">
+
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>

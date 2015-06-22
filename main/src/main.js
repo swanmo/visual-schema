@@ -8,4 +8,5 @@ requirejs.config({
 require(['domsetup'],
 function (domSetup) {
     domSetup.setup();
+    alert('sdfsdfsd');
 });

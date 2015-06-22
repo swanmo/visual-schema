@@ -2,6 +2,7 @@
     font-family: 'Oswald';
 }
 
+@main-cyan-hi: #3E8686;
 @light-color: #ddd;
 @hint-color: #888;
 @hilight-color: #ef4503;
@@ -67,12 +68,16 @@
 			position: fixed;
 		}
 		.perifer {
+			&>div {
+				max-height: 50vh;
+				overflow:auto;
+			}
 			transition: top .2s;
 			padding-top:1vh;
 			padding-right:1vw;
 			position: fixed;
             top: @content-pos;
-            bottom: 130px;
+            
             right:0;
 			width:19vw;
 
@@ -81,6 +86,15 @@
 				border:none;
 			}
 			li {
+				div {
+					&.active {
+						i {
+							color:@main-cyan-hi;
+						}
+						color:@main-cyan-hi;
+					}	
+				}
+
 				box-shadow: none;
 				color: @form-color;
 				.mdi-file-folder {
@@ -89,8 +103,13 @@
 				.collapsible-header {
 					transition: color .3s;
 					&:hover{
-						color: darken(@hilight-color, 10%);
+						// color: darken(@hilight-color, 10%);
 					}
+				}
+				ul {
+					padding-left: 20px;
+					padding-top: 8px;
+					padding-bottom: 16px;
 				}
 			}
 		}

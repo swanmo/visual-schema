@@ -3,12 +3,16 @@ define([],
         'use strict';
         var globalEditor;
         return {
-        	val: function() {
+        	val: function(value) {
         		if (globalEditor) {
-        			return globalEditor.getValue();
-        		} else {
-        			return '';
+                    if (value) {
+                        globalEditor.setValue(value);
+                        globalEditor.gotoLine(0);
+                    } else {
+                        return globalEditor.getValue();
+                    }
         		}
+        		return '';
         	},
             init: function() {
                 globalEditor = ace.edit("editor");

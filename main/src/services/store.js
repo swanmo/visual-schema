@@ -1,57 +1,58 @@
 // http://code.tutsplus.com/tutorials/working-with-indexeddb--net-34673
 
 define(['services/notificationService'], function(notification) {
-    var isInitialized = false;
+    
     var stores = ['schema', 'collection'];
     var all = {};
-
-    function initAll(whenDoneFn) {
-        var idbSupported = false;
-        var db;
-        var dbName = 'exs-v1';
-        var dbVer = 3;
-
-        if (!isInitialized) {
-            isInitialized = true;
-            if ('indexedDB' in window) {
-                idbSupported = true;
-                if (idbSupported) {
-                    var openRequest = window.indexedDB.open(dbName, dbVer);
-
-                    openRequest.onupgradeneeded = function(e) {
-                        console.log('onupgradeneeded');
-                        var thisDB = e.target.result;
-                        for (var i = 0; i < stores.length; i++) {
-                            if (!thisDB.objectStoreNames.contains(stores[i])) {
-                                console.log('onupgradeneeded creating', stores[i]);
-                                thisDB.createObjectStore(stores[i]);
-                            }
-                        }
-
-                    };
-
-                    openRequest.onsuccess = function(e) {
-                        db = e.target.result;
-                        whenDoneFn.call(this, db);
-                    };
-
-                    openRequest.onerror = function(e) {
-                        console.log('onerror');
-                        console.dir(e);
-                    };
-                    openRequest.onblocked = function(e) {
-                        console.log('blocked', _repoName, e);
-                    };
-
-                }
-            } else {
-                window.alert('Browser db cannot be initialized');
-            }
-
-        }
-    }
-
     function dbRepository(_repoName, doneFn) {
+        var isInitialized = false;
+
+        function initAll(whenDoneFn) {
+            var idbSupported = false;
+            var db;
+            var dbName = 'exs-v1';
+            var dbVer = 3;
+
+            if (!isInitialized) {
+                isInitialized = true;
+                if ('indexedDB' in window) {
+                    idbSupported = true;
+                    if (idbSupported) {
+                        var openRequest = window.indexedDB.open(dbName, dbVer);
+
+                        openRequest.onupgradeneeded = function(e) {
+                            console.log('onupgradeneeded');
+                            var thisDB = e.target.result;
+                            for (var i = 0; i < stores.length; i++) {
+                                if (!thisDB.objectStoreNames.contains(stores[i])) {
+                                    console.log('onupgradeneeded creating', stores[i]);
+                                    thisDB.createObjectStore(stores[i]);
+                                }
+                            }
+
+                        };
+
+                        openRequest.onsuccess = function(e) {
+                            db = e.target.result;
+                            whenDoneFn.call(this, db);
+                        };
+
+                        openRequest.onerror = function(e) {
+                            console.log('onerror');
+                            console.dir(e);
+                        };
+                        openRequest.onblocked = function(e) {
+                            console.log('blocked', _repoName, e);
+                        };
+
+                    }
+                } else {
+                    window.alert('Browser db cannot be initialized');
+                }
+            }
+        }
+
+    
         if (all[_repoName]) {
             console.log('store 1.a', _repoName, all[_repoName]);
             doneFn.call(this, all[_repoName]);
@@ -64,8 +65,7 @@ define(['services/notificationService'], function(notification) {
                 doneFn.call(this, all[_repoName]);
             });   
         }
-        
-        // var subscribers = [];
+
         var repoName = _repoName;
 
         var notifySubscribers = function(action, item) {
@@ -85,8 +85,6 @@ define(['services/notificationService'], function(notification) {
         function itemStore(db) {
             var xdb = db;
             var objectStore = function(dbMode) {
-                console.log('Using db', xdb);
-                console.log('Creating object store', repoName);
                 var transaction = xdb.transaction([repoName], dbMode);
                 return transaction.objectStore(repoName);
             };
@@ -102,7 +100,7 @@ define(['services/notificationService'], function(notification) {
                     };
 
                     request.onsuccess = function(e) {
-                        console.debug('OK, item saved', e);
+                        console.debug('OK, item saved 22', e);
                         doneFn.call(this, storeItem);
                     };
                 },

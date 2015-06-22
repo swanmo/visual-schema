@@ -9,8 +9,13 @@
     <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css' />
     <link href='http://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="style/one.css">
+
     <link rel="icon" href="favicon.ico">
     <script src="lib/ace-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+    <!-- script src="lib/ace-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script -->
+
+    <!--script src="node_modules_copy/hammerjs/hammer.js" type="text/javascript" charset="utf-8"></script -->
+
     <meta name="description" content="Visualize, validate and view XML schemas" />
     <meta name="keywords" content="XSD, XML schema, visualization tool, free" />
 </head>
@@ -37,52 +42,40 @@
         <div id="graph"></div>
         <div id="editor"></div>
         <div class="perifer">
-            <ul class="collapsible" data-collapsible="accordion">
-                <li>
-                    <div class="collapsible-header"><i class="mdi-file-folder"></i>Default collection</div>
-                    <div class="collapsible-body">
-                        <p>Lorem ipsum dolor sit amet.</p>
-                    </div>
-                </li>
-                <li>
-                    <div class="collapsible-header"><i class="mdi-file-folder"></i>Another collection</div>
-                    <div class="collapsible-body">
-                        <p>Whatta.</p>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <div class="new-input">
-            
-            <div class="input-field">
-                <input id="docName" type="text" class="validate">
-                <label for="docName">New document name</label>
-            </div>
-            <div class="input-field">
-                <select id="collection">
-                    <option value="-1" disabled selected>Collection</option>
-                    <option value="1">Option 1</option>
-                    <option value="2">Option 2</option>
-                </select>
-                <label>Select</label>
-            </div>
-            <div class="input-field">
-                <input id="newCollectionName" type="text" class="validate">
-                <label for="newCollectionName">Name of new collection</label>
+            <div>
+                <ul class="collapsible" data-collapsible="accordion" id="clist">
+                </ul>
             </div>
         </div>
-        <div class="actions">
-            <button id="showXsd" type="button" class="primary">SHOW</button>
-            <button id="saveNewForm" type="button" class="primary" style="display:none">OK</button>
-            <button id="saveXsd" type="button">SAVE</button>
-            <button id="cancelSave" type="button" style="display:none">CANCEL</button>
-            <button id="back" style="display:none" onclick="history.back()" type="button">BACK</button>
-        </div>
+        <form>
+            <div class="new-input">
+                
+                <div class="input-field">
+                    <input id="docName" type="text" required>
+                    <label for="docName">New document name</label>
+                </div>
+                <div>
+                    <select id="collection" class="browser-default">
+                        <option value="-1" disabled selected>Select collection</option>
+                    </select>
+                </div>
+                <div class="input-field">
+                    <input id="newCollectionName" type="text">
+                    <label for="newCollectionName">Or enter name of new collection</label>
+                </div>
+            </div>
+            <div class="actions">
+                <button id="showXsd" type="button" class="primary">SHOW</button>
+                <button id="saveNewForm" type="button" class="primary" style="display:none">OK</button>
+                <button id="saveXsd" type="button">SAVE</button>
+                <button id="cancelSave" type="button" style="display:none">CANCEL</button>
+                <button id="back" style="display:none" onclick="history.back()" type="button">BACK</button>
+            </div>
+        </form>
     </div>
     <script data-main="src/page/main.js" src="lib/static/require.js"></script>
-    <script src="lib/materialize/js/materialize.js" type="text/javascript" charset="utf-8">
-    < /
+    <!-- script src="lib/materialize/js/materialize.js" type="text/javascript" charset="utf-8" -->
+    </script>
 
-
-
-    < /body> < /html>
+    </body>
+</html>

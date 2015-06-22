@@ -89,7 +89,7 @@ define([], function() {
 			};
 			 
 			request.onsuccess = function(e) {
-			    console.log('OK, item saved', e);
+			    console.log('OK, item saved 11', e);
 			    notifySubscribers('created', storeItem);
 			};
 		},
