@@ -1,12 +1,19 @@
-define(['jquery', 'page/editor', 'page/toast', 'services/collectionService'],
-    function($, editor, toast, collectionService) {
+define(['jquery', 'pagejs', 'page/editor', 'page/toast', 'services/collectionService'],
+    function($, page, editor, toast, collectionService) {
         'use strict';
+        function updatePage(collectionId, newSchema) {
+            var $list = $('*[data-collectionid="' + collectionId + '"] .collapsible-body ul');
+            $list.append(schema(newSchema));
+        }
+
         function createSchema(collection) {
             var docName = $('#docName').val();
 
             collectionService.saveNewDocument(
-                docName, collection.id, editor.val(), function() {
+                docName, collection.id, editor.val(), function(newlyCreatedSchema) {
                     toast.done('Saved');
+                    page('/xsd/' + newlyCreatedSchema.id);
+                    updatePage(collection.id, newlyCreatedSchema);
                 });
         }
 
@@ -22,10 +29,11 @@ define(['jquery', 'page/editor', 'page/toast', 'services/collectionService'],
             $select.material_select(); 
         }
         function display(all) {
-            var $list = $("#clist");
+            var $list = $('#clist');
             for(var i = 0; i < all.length; i++) {
-                var title = all[i].store.title || ('Collection ' + (i + 1))
-                var $li = $("<li>");
+                var title = all[i].store.title || ('Collection ' + (i + 1));
+                var $li = $('<li data-collectionid="' + all[i].store.id + '">');
+
                 $list.append($li);
                 $li.append(
                     $("<div class='collapsible-header'><i class='mdi-file-folder'></i>" + title + "</div>"),
@@ -53,18 +61,22 @@ define(['jquery', 'page/editor', 'page/toast', 'services/collectionService'],
             return true;
         }
 
+        function schema(schemaItem) {
+            var $li = $("<li>");
+            var $a = $("<a>", {text: schemaItem.title,
+                href: '/xsd/' + schemaItem.id});
+            $li.append($a);
+            return $li;
+            // var schemaId = schemaItem.id;
+            // $a.click(function() {
+                //alert('open schema' + schemaId);
+            // });
+        }
         function schemas(schemaList) {
             var $ul = $("<ul>");
             for(var i = 0; i < schemaList.length; i++) {
-                var $li = $("<li>" +  + "</li>");
-                var $a = $("<a>", {text: schemaList[i].title,
-                    href: '/xsd/' + schemaList[i].id});
-                $li.append($a);
-                var schemaId = schemaList[i].id;
-                $a.click(function() {
-                    //alert('open schema' + schemaId);
-                });
-                $ul.append($li);
+
+                $ul.append(schema(schemaList[i]));
             }
             return $ul;
         }
