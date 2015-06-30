@@ -1,6 +1,7 @@
 define(['jquery', 'pagejs', 'page/editor', 'page/toast', 'services/collectionService'],
     function($, page, editor, toast, collectionService) {
         'use strict';
+        var xsdOnScreen;
         function updatePage(collectionId, newSchema) {
             var $list = $('*[data-collectionid="' + collectionId + '"] .collapsible-body ul');
             $list.append(schema(newSchema));
@@ -15,6 +16,41 @@ define(['jquery', 'pagejs', 'page/editor', 'page/toast', 'services/collectionSer
                     page('/xsd/' + newlyCreatedSchema.id);
                     updatePage(collection.id, newlyCreatedSchema);
                 });
+        }
+
+        function initActions() {
+            // $('#toolEdit').css('display', 'none');
+            // $('#toolDel').css('display', 'none');
+            $('#nav-icon1').click(function(){
+                var $this = $(this);
+                if ($this.hasClass('open')) {
+                    
+                    
+                    $('#toolEdit').removeClass('reveal');
+                    $('#toolDel').removeClass('reveal');
+                    setTimeout(
+                        function() {
+                            $this.removeClass('open');
+                            $('#toolTitle').removeClass('open');
+                            $('#toolDel').removeClass('open');
+                            $('#toolEdit').removeClass('open');
+                        }, 20);
+                } else {
+                    $this.addClass('open');
+                    $('#toolTitle').addClass('open');
+                    $('#toolEdit').addClass('open');
+                    
+                    $('#toolDel').addClass('open');
+                    setTimeout(
+                        function() {
+                            $('#toolDel').addClass('reveal');
+                            $('#toolEdit').addClass('reveal');
+                        }, 20);
+                    
+                }
+
+            });
+            
         }
 
         function initSelect(all) {
@@ -80,19 +116,37 @@ define(['jquery', 'pagejs', 'page/editor', 'page/toast', 'services/collectionSer
             }
             return $ul;
         }
+        function setToolbar(schemaDoc) {
+            $('#toolTitle').text(schemaDoc.title);
+            $('.tools').addClass('open');
+        }
 
         return {
             init: function() {
                 collectionService.findAll(function(all) {
                     display(all);
                     initSelect(all);
+                    initActions();
                 });
             },
             fromStore: function(schemaId) {
                 collectionService.find(schemaId,
                     function(stored) {
+                        xsdOnScreen = stored;
                         editor.val(stored.xsdData);
+                        setToolbar(stored);
                     });
+
+            },
+            update: function() {
+                if (!xsdOnScreen) {
+                    alert('There is no xsd data to save!');
+                    return;
+                }
+                function done() {
+                    toast.done('Updated');
+                }
+                collectionService.updateDocument(xsdOnScreen.id, done, editor.val());
             },
             create: function() {
                 if (!validateInput()) {

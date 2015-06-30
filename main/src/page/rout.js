@@ -20,12 +20,18 @@ define(['jquery', 'pagejs', 'root', 'xsd', 'page/editor', 'services/collectionCo
             $('.new-input').addClass('show');
         }
 
+        function loadStored(ctx, next) {
+            $('#saveXsd').hide();
+            $('#updateXsd').show();
+            next();
+        }
         function load(ctx, next) {
             $('.header').addClass('small');
             $('.perifer').addClass('small-header');
 
             $('#showXsd').hide();
             $('#saveXsd').hide();
+            $('#updateXsd').hide();
             
             $('#editor').addClass('ina');
             setTimeout(
@@ -44,11 +50,11 @@ define(['jquery', 'pagejs', 'root', 'xsd', 'page/editor', 'services/collectionCo
             $root.hide();
 
             $('.header').removeClass('small');
-            $('.perifer').removeClass('small-header');
-            $('#editor').removeClass('ina');
+            
             $('#back').hide();
             $('#cancelSave').hide();
             $('#saveNewForm').hide();
+            $('#updateXsd').hide();
             $('#showXsd').show();
             $('#saveXsd').show();
             $('.new-input').removeClass('show');
@@ -66,7 +72,6 @@ define(['jquery', 'pagejs', 'root', 'xsd', 'page/editor', 'services/collectionCo
         function saveNew() {
           console.log('saveNew');
           collectionController.create();
-          //store.addItem('Unnamed', $('#xsdContent').val(), 'me');
         }
         
 
@@ -78,6 +83,10 @@ define(['jquery', 'pagejs', 'root', 'xsd', 'page/editor', 'services/collectionCo
 
             $('#saveXsd').on('click', function() {
                 page('/new');
+            }); // on
+
+            $('#updateXsd').on('click', function() {
+                collectionController.update();
             }); // on
             
             $('#saveNewForm').on('click', function() {
@@ -98,7 +107,7 @@ define(['jquery', 'pagejs', 'root', 'xsd', 'page/editor', 'services/collectionCo
                 page('xsd/', load, show);
                 page('new/', showNew);
                 page('xsd/new', saveNew, show);
-                page('xsd/:name', fromStore);
+                page('xsd/:name', loadStored, fromStore);
                 page('*', notfound);
                 page();
 

@@ -95,8 +95,15 @@ define(['services/store',
                 init();
                 store('schema', function(schemaStore) {
                     schemaStore.create(schemaFactory(title, collectionId, xsdStr, undefined), fnDone);
-                }); 
+                });
+            },
+
+            updateDocument:function(id, fnDone, xsdData) {
+                store('schema', function(schemaStore) {
+                    schemaStore.findAndUpdate(id, fnDone, xsdData);
+                });
             }
+
         };
     }
 );

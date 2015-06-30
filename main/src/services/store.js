@@ -134,7 +134,7 @@ define(['services/notificationService'], function(notification) {
                         window.alert('Sorry, its not possible to delete this document from your computer\n' + e.target.error.name);
                     };
                 },
-                findAndUpdate: function(_id, fnFound, initiatedBy) {
+                findAndUpdate: function(_id, fnFound, _xsdData) {
                     var store = objectStore('readwrite');
                     var req = store.get(_id);
 
@@ -142,6 +142,7 @@ define(['services/notificationService'], function(notification) {
                         var results = req.result;
 
                         results.accessed = new Date();
+                        results.xsdData = _xsdData;
                         var request = store.put(results, _id);
                         fnFound.call(this, results);
 
